@@ -245,9 +245,10 @@ header {
     <div class="nav-tab active"  onclick="goTab('home',0)">🏠 होम</div>
     <div class="nav-tab" onclick="goTab('complaints',1)">📝 शिकायत</div>
     <div class="nav-tab" onclick="goTab('news',2)">📢 समाचार</div>
-    <div class="nav-tab" onclick="goTab('budget',3)">💰 बजट</div>
-    <div class="nav-tab" onclick="goTab('schemes',4)">📋 योजनाएं</div>
-    <div class="nav-tab" onclick="goTab('emergency',5)">🆘 आपातकाल</div>
+    <div class="nav-tab" onclick="goTab('kisan',3)">🌾 किसान</div>
+    <div class="nav-tab" onclick="goTab('budget',4)">💰 बजट</div>
+    <div class="nav-tab" onclick="goTab('schemes',5)">📋 योजनाएं</div>
+    <div class="nav-tab" onclick="goTab('emergency',6)">🆘 आपातकाल</div>
   </nav>
 </header>
 
@@ -439,8 +440,10 @@ header {
     <button onclick="showBudgetYear('2526')" id="btn2526" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #1A4D2E;background:#1A4D2E;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2025-26 ✓</button>
     <button onclick="showBudgetYear('2425')" id="btn2425" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2024-25</button>
     <button onclick="showBudgetYear('2223')" id="btn2223" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2022-23</button>
+    <button onclick="showBudgetYear('2324')" id="btn2324" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2023-24</button>
     <button onclick="showBudgetYear('2122')" id="btn2122" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2021-22</button>
-    <button onclick="showBudgetYear('2021')" id="btn2021" style="display:inline-block;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2020-21</button>
+    <button onclick="showBudgetYear('2021')" id="btn2021" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2020-21</button>
+    <button onclick="showBudgetYear('1920')" id="btn1920" style="display:inline-block;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2019-20</button>
   </div>
 
   <div id="budget2526"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
@@ -848,6 +851,129 @@ header {
       </div>
     </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
 
+  <div id="budget2324" style="display:none;"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #00695c;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#00695c;margin-bottom:12px;">📊 कुल सारांश — 2023-24</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#00695c;">₹68,40,270</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹45,75,350</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹63,37,364</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹89,24,913</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769] — Tranche 1</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹29,49,411</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹43,08,831</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹56,33,189</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769] — Tranche 2</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹16,25,939</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹20,28,533</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹32,91,724</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹6,00,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+  <div id="budget1920" style="display:none;"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1565C0;margin-bottom:12px;">📊 कुल सारांश — 2019-20</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#1565C0;">₹1,80,17,281</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹1,73,32,931</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹22,75,550</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹1,76,85,673</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #00897b;">
+      <div style="margin-bottom:8px;"><span style="background:#00897b;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏗️ राज्य सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">HRDF Development Works [1495]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#00897b;">₹81,90,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹53,99,131</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹52,24,575</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #00897b;">
+      <div style="margin-bottom:8px;"><span style="background:#00897b;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏗️ राज्य सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Fifth State Finance Commission [1552]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#00897b;">₹16,50,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹50,00,541</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹40,51,489</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #00897b;">
+      <div style="margin-bottom:8px;"><span style="background:#00897b;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏗️ राज्य सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Surcharge on VAT for PRIs [1425]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#00897b;">₹12,15,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹8,433</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹9,16,685</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #f57c00;">
+      <div style="margin-bottom:8px;"><span style="background:#f57c00;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ अन्य</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Fourteen Finance Commission [1518]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#f57c00;">₹62,40,281</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹61,07,452</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹22,75,550</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹62,50,663</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹7,22,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹8,17,374</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹12,42,261</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+
   <div style="text-align:center;font-size:11px;color:#9ca3af;padding-bottom:10px;">
     📅 अंतिम अपडेट: मार्च 2026 | स्रोत: eGramSwaraj / Meri Panchayat App
   </div>
@@ -855,13 +981,190 @@ header {
 </div>
 
 
+
+<!-- ══ KISAN ══ -->
+<div class="section" id="kisan">
+
+  <!-- HERO -->
+  <div style="background:linear-gradient(135deg,#2e7d32,#558b2f);border-radius:16px;padding:18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
+    <div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:60px;opacity:.2;">🌾</div>
+    <div style="font-size:10px;color:#c8e6c9;font-weight:700;letter-spacing:1px;margin-bottom:4px;">ग्राम पंचायत उमरा</div>
+    <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:20px;font-weight:700;margin-bottom:4px;">किसान सेवा केंद्र</div>
+    <div style="font-size:12px;opacity:.85;">मौसम • मंडी भाव • फसल सलाह</div>
+  </div>
+
+  <!-- ══ WEATHER ══ -->
+  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+    <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;">🌦️</span>
+      <span style="font-size:14px;font-weight:700;">मौसम अपडेट — उमरा, हरियाणा</span>
+      <span id="weatherTime" style="font-size:10px;opacity:.8;margin-left:auto;"></span>
+    </div>
+    <div id="weatherBox" style="padding:16px;">
+      <div style="text-align:center;padding:20px;">
+        <div style="width:30px;height:30px;border:3px solid #e5e7eb;border-top-color:#1565C0;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px;"></div>
+        <div style="font-size:12px;color:#666;">मौसम लोड हो रहा है...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MANDI BHAV ══ -->
+  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+    <div style="background:linear-gradient(90deg,#e65100,#f57c00);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;">💸</span>
+      <span style="font-size:14px;font-weight:700;">मंडी भाव</span>
+      <span style="font-size:10px;opacity:.8;margin-left:auto;">स्रोत: agmarknet.gov.in</span>
+    </div>
+    <div style="padding:14px;">
+
+      <!-- Mandi selector -->
+      <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;">
+        <button onclick="showMandi('hisar')" id="mbtn-hisar" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e65100;background:#e65100;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">हिसार</button>
+        <button onclick="showMandi('fatehabad')" id="mbtn-fatehabad" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">फतेहाबाद</button>
+        <button onclick="showMandi('sirsa')" id="mbtn-sirsa" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">सिरसा</button>
+      </div>
+
+      <div id="mandiBox">
+        <!-- Hisar rates -->
+        <div id="mandi-hisar">
+          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
+            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं। सटीक भाव के लिए Agmarknet देखें।
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>
+              <tr style="background:#fff3e0;">
+                <th style="padding:8px;text-align:left;color:#e65100;font-weight:700;border-bottom:1px solid #ffe0b2;">फसल</th>
+                <th style="padding:8px;text-align:right;color:#2e7d32;font-weight:700;border-bottom:1px solid #ffe0b2;">न्यूनतम</th>
+                <th style="padding:8px;text-align:right;color:#c62828;font-weight:700;border-bottom:1px solid #ffe0b2;">अधिकतम</th>
+                <th style="padding:8px;text-align:right;color:#1565C0;font-weight:700;border-bottom:1px solid #ffe0b2;">औसत</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,150</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,280</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,200</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,450</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,300</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,200</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,600</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,400</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,350</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,200</td></tr>
+              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹800</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,200</td><td style="padding:8px;text-align:right;color:#1565C0;">₹1,000</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
+        </div>
+
+        <!-- Fatehabad rates -->
+        <div id="mandi-fatehabad" style="display:none;">
+          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
+            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं।
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>
+              <tr style="background:#fff3e0;">
+                <th style="padding:8px;text-align:left;color:#e65100;font-weight:700;border-bottom:1px solid #ffe0b2;">फसल</th>
+                <th style="padding:8px;text-align:right;color:#2e7d32;font-weight:700;border-bottom:1px solid #ffe0b2;">न्यूनतम</th>
+                <th style="padding:8px;text-align:right;color:#c62828;font-weight:700;border-bottom:1px solid #ffe0b2;">अधिकतम</th>
+                <th style="padding:8px;text-align:right;color:#1565C0;font-weight:700;border-bottom:1px solid #ffe0b2;">औसत</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,160</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,290</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,210</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,050</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,400</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,250</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,150</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,550</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,350</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,050</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,300</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,180</td></tr>
+              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹750</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,150</td><td style="padding:8px;text-align:right;color:#1565C0;">₹950</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
+        </div>
+
+        <!-- Sirsa rates -->
+        <div id="mandi-sirsa" style="display:none;">
+          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
+            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं।
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>
+              <tr style="background:#fff3e0;">
+                <th style="padding:8px;text-align:left;color:#e65100;font-weight:700;border-bottom:1px solid #ffe0b2;">फसल</th>
+                <th style="padding:8px;text-align:right;color:#2e7d32;font-weight:700;border-bottom:1px solid #ffe0b2;">न्यूनतम</th>
+                <th style="padding:8px;text-align:right;color:#c62828;font-weight:700;border-bottom:1px solid #ffe0b2;">अधिकतम</th>
+                <th style="padding:8px;text-align:right;color:#1565C0;font-weight:700;border-bottom:1px solid #ffe0b2;">औसत</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,140</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,270</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,190</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,000</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,380</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,200</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,500</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,300</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,000</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,280</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,150</td></tr>
+              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹700</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,100</td><td style="padding:8px;text-align:right;color:#1565C0;">₹920</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
+        </div>
+      </div>
+
+      <!-- Agmarknet link -->
+      <a href="https://agmarknet.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff3e0;border:1.5px solid #ffcc80;border-radius:12px;padding:11px;text-decoration:none;color:#e65100;font-size:12px;font-weight:700;margin-top:12px;">
+        🔗 Agmarknet पर सटीक भाव देखें →
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ FASAL SALAH ══ -->
+  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+    <div style="background:linear-gradient(90deg,#2e7d32,#388e3c);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;">🌱</span>
+      <span style="font-size:14px;font-weight:700;">AI फसल सलाह</span>
+      <span style="font-size:10px;background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:10px;margin-left:auto;">कृषि विशेषज्ञ AI</span>
+    </div>
+
+    <div id="fasalMsgs" style="padding:12px;min-height:120px;max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:14px;border-bottom-left-radius:3px;padding:10px 13px;font-size:12.5px;line-height:1.5;max-width:85%;align-self:flex-start;">
+        🙏 नमस्ते किसान भाई! मैं आपका AI कृषि सलाहकार हूं। फसल की बीमारी, खाद, सिंचाई, या कोई भी खेती से जुड़ा सवाल पूछें — मैं हिंदी में जवाब दूंगा।
+      </div>
+    </div>
+
+    <!-- Quick questions -->
+    <div style="display:flex;gap:6px;padding:0 10px 8px;overflow-x:auto;scrollbar-width:none;">
+      <div onclick="askFasal('गेहूं में पीलापन क्यों आता है?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌾 गेहूं में पीलापन</div>
+      <div onclick="askFasal('सरसों की फसल में कौन सी खाद डालें?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌱 सरसों में खाद</div>
+      <div onclick="askFasal('धान की रोपाई का सही समय क्या है?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌾 धान रोपाई</div>
+      <div onclick="askFasal('फसल बीमा कैसे करवाएं?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🛡️ फसल बीमा</div>
+    </div>
+
+    <div style="display:flex;gap:7px;padding:8px 10px;border-top:1px solid #e5e7eb;background:#fafafa;">
+      <input id="fasalInp" style="flex:1;border:1.5px solid #d1d5db;border-radius:24px;padding:9px 14px;font-size:12.5px;font-family:'Noto Sans Devanagari',sans-serif;background:#fff;outline:none;" placeholder="खेती से जुड़ा सवाल पूछें..." />
+      <button onclick="sendFasal()" style="width:40px;height:40px;background:#2e7d32;border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">➤</button>
+    </div>
+  </div>
+
+  <!-- Kisan Yojana links -->
+  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:14px;margin-bottom:14px;">
+    <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:15px;font-weight:700;color:#2e7d32;margin-bottom:12px;">📋 किसान योजनाएं</div>
+    <a href="https://pmkisan.gov.in" target="_blank" style="display:flex;align-items:center;gap:10px;padding:10px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;">
+      <span style="font-size:22px;">🌾</span>
+      <div><div style="font-size:13px;font-weight:700;color:#166534;">पीएम किसान सम्मान निधि</div><div style="font-size:11px;color:#666;">₹6,000 प्रति वर्ष — pmkisan.gov.in</div></div>
+      <span style="margin-left:auto;color:#166534;">→</span>
+    </a>
+    <a href="https://pmfby.gov.in" target="_blank" style="display:flex;align-items:center;gap:10px;padding:10px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;">
+      <span style="font-size:22px;">🛡️</span>
+      <div><div style="font-size:13px;font-weight:700;color:#e65100;">प्रधानमंत्री फसल बीमा</div><div style="font-size:11px;color:#666;">फसल सुरक्षा — pmfby.gov.in</div></div>
+      <span style="margin-left:auto;color:#e65100;">→</span>
+    </a>
+    <a href="https://www.kisansuvidha.gov.in" target="_blank" style="display:flex;align-items:center;gap:10px;padding:10px;background:#e8f5e9;border-radius:10px;text-decoration:none;">
+      <span style="font-size:22px;">📱</span>
+      <div><div style="font-size:13px;font-weight:700;color:#2e7d32;">किसान सुविधा App</div><div style="font-size:11px;color:#666;">मौसम, सलाह, मंडी — kisansuvidha.gov.in</div></div>
+      <span style="margin-left:auto;color:#2e7d32;">→</span>
+    </a>
+  </div>
+
+</div>
+
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <div class="bn-item active" id="bn0" onclick="goTab('home',0)"><span class="bni">🏠</span>होम</div>
   <div class="bn-item" id="bn1" onclick="goTab('complaints',1)"><span class="bni">📝</span>शिकायत</div>
-  <div class="bn-item" id="bn2" onclick="goTab('emergency',5)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
-  <div class="bn-item" id="bn3" onclick="goTab('budget',3)"><span class="bni">💰</span>बजट</div>
-  <div class="bn-item" id="bn4" onclick="goTab('schemes',4)"><span class="bni">📋</span>योजनाएं</div>
+  <div class="bn-item" id="bn2" onclick="goTab('emergency',6)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
+  <div class="bn-item" id="bn3" onclick="goTab('kisan',3)"><span class="bni">🌾</span>किसान</div>
+  <div class="bn-item" id="bn4" onclick="goTab('schemes',5)"><span class="bni">📋</span>योजनाएं</div>
 </nav>
 
 <!-- MODAL -->
@@ -929,8 +1232,8 @@ const nd = new Date();
 document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
 
 // ── NAV ──
-const SECTIONS = ['home','complaints','news','budget','schemes','emergency'];
-const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn3',4:'bn4',5:'bn2'};
+const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency'];
+const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn3',4:'bn3',5:'bn4',6:'bn2'};
 
 function goTab(id, idx) {
   SECTIONS.forEach(s => document.getElementById(s).classList.remove('active'));
@@ -1127,8 +1430,8 @@ function removeLoading(id) { const el = document.getElementById(id); if (el) el.
 
 
 // ── BUDGET YEAR TOGGLE ──
-var budgetYears = ['2526','2425','2223','2122','2021'];
-var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2'};
+var budgetYears = ['2526','2425','2324','2223','2122','2021','1920'];
+var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2324':'#00695c','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2','1920':'#1565C0'};
 function showBudgetYear(year) {
   budgetYears.forEach(function(y) {
     var d = document.getElementById('budget'+y);
@@ -1155,3 +1458,95 @@ function escHtml(str) {
 </script>
 </body>
 </html>
+<script>
+// ══ KISAN SECTION JS ══
+const WEATHER_API_KEY = '8601c9cec63be4007ab98dfc410aeef0';
+const WEATHER_CITY = 'Fatehabad,IN';
+
+async function loadWeather() {
+  const box = document.getElementById('weatherBox');
+  const timeEl = document.getElementById('weatherTime');
+  if (!box) return;
+  try {
+    const res = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + WEATHER_CITY + '&appid=' + WEATHER_API_KEY + '&units=metric&lang=hi&cnt=5');
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    const cur = data.list[0];
+    const temp = Math.round(cur.main.temp);
+    const feels = Math.round(cur.main.feels_like);
+    const humidity = cur.main.humidity;
+    const desc = cur.weather[0].description;
+    const wind = Math.round(cur.wind.speed * 3.6);
+    const icon = cur.weather[0].main;
+    const iconMap = {'Clear':'☀️','Clouds':'⛅','Rain':'🌧️','Drizzle':'🌦️','Thunderstorm':'⛈️','Snow':'❄️','Mist':'🌫️','Fog':'🌫️','Haze':'🌫️','Smoke':'🌫️','Dust':'🌪️'};
+    const wIcon = iconMap[icon] || '🌤️';
+    const forecasts = data.list.slice(1,5).map(function(f) {
+      const fTime = new Date(f.dt * 1000);
+      const fHour = fTime.getHours();
+      const fIcon = iconMap[f.weather[0].main] || '🌤️';
+      const fAmPm = fHour >= 12 ? 'PM' : 'AM';
+      const fHour12 = fHour % 12 || 12;
+      return '<div style="text-align:center;flex:1;"><div style="font-size:10px;color:#666;">' + fHour12 + fAmPm + '</div><div style="font-size:18px;">' + fIcon + '</div><div style="font-size:12px;font-weight:700;color:#1565C0;">' + Math.round(f.main.temp) + '°</div></div>';
+    }).join('');
+    var kisanTip = '';
+    if (icon === 'Rain' || icon === 'Drizzle') kisanTip = '⚠️ बारिश है — खेत में पानी न भरने दें।';
+    else if (icon === 'Clear' && temp > 35) kisanTip = '🌡️ तेज गर्मी — सुबह या शाम सिंचाई करें।';
+    else if (icon === 'Thunderstorm') kisanTip = '⛈️ तूफान की संभावना — फसल सुरक्षित करें।';
+    else kisanTip = '✅ मौसम सामान्य — खेती कार्य जारी रखें।';
+    const now = new Date();
+    if (timeEl) timeEl.textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:#1565C0;line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:#555;margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:#888;margin-top:2px;">फतेहाबाद, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:#e3f2fd;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:#1565C0;">' + humidity + '%</div><div style="font-size:10px;color:#666;">नमी</div></div><div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:#2e7d32;">' + wind + ' km/h</div><div style="font-size:10px;color:#666;">हवा</div></div><div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:#e65100;">' + feels + '°C</div><div style="font-size:10px;color:#666;">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;font-size:12px;color:#166534;"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
+  } catch(e) {
+    console.error(e);
+    box.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:32px;margin-bottom:8px;">⚠️</div><div style="font-size:13px;color:#666;">मौसम लोड नहीं हुआ।<br>इंटरनेट जांचें।</div><button onclick="loadWeather()" style="margin-top:10px;background:#1565C0;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:sans-serif;">🔄 दोबारा कोशिश</button></div>';
+  }
+}
+
+// Override goTab to load weather when kisan opens
+var _origGoTab = goTab;
+goTab = function(id, idx) {
+  _origGoTab(id, idx);
+  if (id === 'kisan') loadWeather();
+};
+
+// Mandi toggle
+function showMandi(name) {
+  ['hisar','fatehabad','sirsa'].forEach(function(m) {
+    var d = document.getElementById('mandi-' + m);
+    var b = document.getElementById('mbtn-' + m);
+    if (d) d.style.display = m === name ? 'block' : 'none';
+    if (b) { b.style.background = m === name ? '#e65100' : '#fff'; b.style.color = m === name ? '#fff' : '#666'; b.style.borderColor = m === name ? '#e65100' : '#e0e0e0'; }
+  });
+}
+
+// Fasal Salah AI
+function askFasal(q) { document.getElementById('fasalInp').value = q; sendFasal(); }
+async function sendFasal() {
+  const inp = document.getElementById('fasalInp');
+  const msg = inp.value.trim(); if (!msg) return;
+  inp.value = '';
+  appendFasalMsg(msg, 'user');
+  const lid = appendFasalLoading();
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।",messages:[{role:"user",content:msg}]})});
+    const data = await res.json();
+    removeFasalLoading(lid);
+    appendFasalMsg(data.content?.[0]?.text || "माफ करें, जवाब नहीं मिला।", 'bot');
+  } catch(e) { removeFasalLoading(lid); appendFasalMsg("❌ इंटरनेट समस्या। दोबारा कोशिश करें।", 'bot'); }
+}
+function appendFasalMsg(text, type) {
+  const box = document.getElementById('fasalMsgs');
+  const div = document.createElement('div');
+  div.style.cssText = 'max-width:85%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;' + (type==='bot' ? 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;align-self:flex-start;border-bottom-left-radius:3px;' : 'background:#2e7d32;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;');
+  div.textContent = text; box.appendChild(div); box.scrollTop = box.scrollHeight;
+}
+function appendFasalLoading() {
+  const box = document.getElementById('fasalMsgs'); const id = 'fl' + Date.now();
+  const div = document.createElement('div'); div.id = id;
+  div.style.cssText = 'background:#f0fdf4;border:1px solid #bbf7d0;align-self:flex-start;padding:10px 14px;border-radius:14px;border-bottom-left-radius:3px;';
+  div.innerHTML = '<div class="ldots"><span></span><span></span><span></span></div>';
+  box.appendChild(div); box.scrollTop = box.scrollHeight; return id;
+}
+function removeFasalLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
+document.getElementById('fasalInp') && document.getElementById('fasalInp').addEventListener('keypress', function(e) { if (e.key === 'Enter') sendFasal(); });
+</script>
