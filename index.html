@@ -245,8 +245,9 @@ header {
     <div class="nav-tab active"  onclick="goTab('home',0)">🏠 होम</div>
     <div class="nav-tab" onclick="goTab('complaints',1)">📝 शिकायत</div>
     <div class="nav-tab" onclick="goTab('news',2)">📢 समाचार</div>
-    <div class="nav-tab" onclick="goTab('schemes',3)">📋 योजनाएं</div>
-    <div class="nav-tab" onclick="goTab('emergency',4)">🆘 आपातकाल</div>
+    <div class="nav-tab" onclick="goTab('budget',3)">💰 बजट</div>
+    <div class="nav-tab" onclick="goTab('schemes',4)">📋 योजनाएं</div>
+    <div class="nav-tab" onclick="goTab('emergency',5)">🆘 आपातकाल</div>
   </nav>
 </header>
 
@@ -417,13 +418,236 @@ header {
   </div>
 </div>
 
+
+<!-- ══ BUDGET ══ -->
+<div class="section" id="budget">
+
+  <div style="background:linear-gradient(135deg,#1A4D2E,#2d6a4f);border-radius:16px;padding:18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
+    <div style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:52px;opacity:.2;">💰</div>
+    <div style="font-size:10px;color:#F4C430;font-weight:700;letter-spacing:1px;margin-bottom:4px;">ग्राम पंचायत उमरा • LGD: 29816</div>
+    <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:19px;font-weight:700;margin-bottom:4px;">पंचायत बजट एवं निधि</div>
+    <div style="font-size:12px;opacity:.85;">eGramSwaraj के अनुसार — सरकारी आंकड़े</div>
+  </div>
+
+  <div style="background:#fff8e1;border:1.5px solid #ffe082;border-radius:14px;padding:14px;margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:#e65100;margin-bottom:6px;">💡 यह क्या है?</div>
+    <div style="font-size:12px;color:#5d4037;line-height:1.7;">सरकार हमारे गांव को हर साल पैसे देती है — सड़क, पानी, बिजली और अन्य कामों के लिए। यहाँ आप देख सकते हैं कि <b>कितने पैसे आए, कितने खर्च हुए</b> और कितने बचे।</div>
+  </div>
+
+  <!-- YEAR SELECTOR -->
+  <div style="overflow-x:auto;white-space:nowrap;margin-bottom:14px;padding-bottom:4px;">
+    <button onclick="showBudgetYear('2526')" id="btn2526" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #1A4D2E;background:#1A4D2E;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2025-26 ✓</button>
+    <button onclick="showBudgetYear('2425')" id="btn2425" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2024-25</button>
+    <button onclick="showBudgetYear('2223')" id="btn2223" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2022-23</button>
+    <button onclick="showBudgetYear('aur')" id="btnaur" style="display:inline-block;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">पुराने वर्ष ▼</button>
+  </div>
+
+  <div id="budget2526"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1A4D2E;margin-bottom:12px;">📊 कुल सारांश — 2025-26</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#1A4D2E;">₹65,54,270</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹14,86,051</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,38,418</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹31,95,278</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission — Center Schemes</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹14,86,051</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,78,216</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹27,35,082</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹2,60,202</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹4,60,196</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹3,14,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+  <div id="budget2425" style="display:none;"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #2e7d32;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;">📊 कुल सारांश — 2024-25</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹77,40,270</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹95,33,196</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,87,801</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹1,00,82,579</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Center Schemes / Grants</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹54,62,749</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,25,053</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹59,09,586</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹40,70,447</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹3,62,748</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹41,72,993</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹15,00,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+  <div id="budget2223" style="display:none;"><div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1565C0;margin-bottom:12px;">📊 कुल सारांश — 2022-23</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#1565C0;">₹96,70,270</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹35,82,770</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹32,45,986</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹4,29,697</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Center Schemes / Grants</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹14,25,342</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹28,83,489</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹20,28,020</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹3,49,992</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹3,49,479</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #e53935;">
+      <div style="margin-bottom:8px;"><span style="background:#e53935;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🚿 स्वच्छता मिशन</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Swachh Bharat Mission [34]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#e53935;">₹19,30,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #00897b;">
+      <div style="margin-bottom:8px;"><span style="background:#00897b;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏗️ राज्य सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">HRDF Development Works [1495]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#00897b;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹1,280</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #f57c00;">
+      <div style="margin-bottom:8px;"><span style="background:#f57c00;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ अन्य</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Fourteen Finance Commission [1518]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#f57c00;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹11,505</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹11,505</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹15,00,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹1,28,128</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹69,213</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+  <div id="budgetaur" style="display:none;">
+    <div style="background:#fff;border-radius:14px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.07);">
+      <div style="font-size:32px;margin-bottom:8px;">📋</div>
+      <div style="font-size:14px;font-weight:700;color:#1A4D2E;margin-bottom:6px;">2019-20, 2020-21, 2021-22 का डेटा</div>
+      <div style="font-size:12px;color:#666;line-height:1.7;">यह डेटा जल्द जोड़ा जाएगा।<br>eGramSwaraj पर अभी देखें:</div>
+      <a href="https://egramswaraj.gov.in" target="_blank" style="display:inline-block;margin-top:12px;background:#1A4D2E;color:#fff;padding:10px 20px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;">🔗 eGramSwaraj खोलें</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#9ca3af;padding-bottom:10px;">
+    📅 अंतिम अपडेट: मार्च 2026 | स्रोत: eGramSwaraj / Meri Panchayat App
+  </div>
+
+</div>
+
+
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <div class="bn-item active" id="bn0" onclick="goTab('home',0)"><span class="bni">🏠</span>होम</div>
   <div class="bn-item" id="bn1" onclick="goTab('complaints',1)"><span class="bni">📝</span>शिकायत</div>
-  <div class="bn-item" id="bn2" onclick="goTab('emergency',4)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
-  <div class="bn-item" id="bn3" onclick="goTab('news',2)"><span class="bni">📢</span>समाचार</div>
-  <div class="bn-item" id="bn4" onclick="goTab('schemes',3)"><span class="bni">📋</span>योजनाएं</div>
+  <div class="bn-item" id="bn2" onclick="goTab('emergency',5)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
+  <div class="bn-item" id="bn3" onclick="goTab('budget',3)"><span class="bni">💰</span>बजट</div>
+  <div class="bn-item" id="bn4" onclick="goTab('schemes',4)"><span class="bni">📋</span>योजनाएं</div>
 </nav>
 
 <!-- MODAL -->
@@ -491,8 +715,8 @@ const nd = new Date();
 document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
 
 // ── NAV ──
-const SECTIONS = ['home','complaints','news','schemes','emergency'];
-const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn4',4:'bn2'};
+const SECTIONS = ['home','complaints','news','budget','schemes','emergency'];
+const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn3',4:'bn4',5:'bn2'};
 
 function goTab(id, idx) {
   SECTIONS.forEach(s => document.getElementById(s).classList.remove('active'));
@@ -686,6 +910,25 @@ function appendLoading() {
   box.scrollTop = box.scrollHeight; return id;
 }
 function removeLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+
+// ── BUDGET YEAR TOGGLE ──
+var budgetYears = ['2526','2425','2223','aur'];
+var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2223':'#1565C0','aur':'#666'};
+function showBudgetYear(year) {
+  budgetYears.forEach(function(y) {
+    var d = document.getElementById('budget'+y);
+    var b = document.getElementById('btn'+y);
+    if (d) d.style.display = (y===year) ? 'block' : 'none';
+    if (b) {
+      if (y===year) {
+        b.style.background=budgetColors[y]; b.style.color='#fff'; b.style.borderColor=budgetColors[y];
+      } else {
+        b.style.background='#fff'; b.style.color='#666'; b.style.borderColor='#e0e0e0';
+      }
+    }
+  });
+}
 
 document.getElementById('aiInp').addEventListener('keypress', e => { if (e.key === 'Enter') sendAI(); });
 
