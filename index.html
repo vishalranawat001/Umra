@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>उमरा गांव — डिजिटल सेवा</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8650A;
+  --green: #1A4D2E;
+  --green2: #2d6a4f;
+  --gold: #F4C430;
+  --cream: #FFF9F2;
+  --red: #C0392B;
+  --blue: #1565C0;
+  --card-bg: #ffffff;
+  --border: #E8E0D8;
+  --text: #1a1109;
+  --muted: #6b5e52;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, var(--green) 0%, #2d6a4f 100%);
+  color: #fff;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.2);
+}
+.hdr-top { display:flex; align-items:center; justify-content:space-between; padding:12px 16px 8px; }
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-circle {
+  width:46px; height:46px; border-radius:50%;
+  background:var(--gold); display:flex; align-items:center;
+  justify-content:center; font-size:24px; flex-shrink:0;
+  box-shadow:0 2px 8px rgba(244,196,48,0.5);
+}
+.logo-text h1 { font-family:'Tiro Devanagari Hindi',serif; font-size:20px; line-height:1.1; }
+.logo-text small { font-size:10px; color:var(--gold); letter-spacing:1px; font-weight:600; }
+.hdr-date { font-size:11px; background:rgba(255,255,255,0.15); padding:4px 10px; border-radius:20px; }
+
+/* NAV TABS */
+.nav-tabs { display:flex; overflow-x:auto; scrollbar-width:none; background:rgba(0,0,0,0.18); }
+.nav-tabs::-webkit-scrollbar { display:none; }
+.nav-tab {
+  flex:1; min-width:72px; padding:9px 4px;
+  text-align:center; font-size:11px; font-weight:700;
+  color:rgba(255,255,255,0.6);
+  border-bottom:3px solid transparent;
+  cursor:pointer; transition:all .2s; white-space:nowrap;
+  font-family:'Noto Sans Devanagari',sans-serif;
+}
+.nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); background:rgba(255,255,255,0.07); }
+
+/* SECTIONS */
+.section { display:none; padding:14px 14px 90px; animation:fadeIn .25s ease; }
+.section.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* SEC TITLE */
+.sec-title {
+  font-family:'Tiro Devanagari Hindi',serif;
+  font-size:16px; font-weight:700; color:var(--green);
+  margin:14px 0 10px; display:flex; align-items:center; gap:8px;
+}
+.sec-title::after { content:''; flex:1; height:2px; background:linear-gradient(90deg,var(--green),transparent); border-radius:2px; }
+
+/* HERO */
+.hero {
+  background:linear-gradient(135deg,var(--saffron),#f59342);
+  border-radius:16px; padding:18px; color:#fff;
+  margin-bottom:14px; position:relative; overflow:hidden;
+}
+.hero::after { content:'🌾'; position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:56px; opacity:.25; }
+.hero h2 { font-family:'Tiro Devanagari Hindi',serif; font-size:19px; margin-bottom:5px; }
+.hero p { font-size:12px; opacity:.9; }
+
+/* QUICK GRID */
+.quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+.qcard {
+  background:var(--card-bg); border-radius:14px; padding:14px 10px;
+  text-align:center; cursor:pointer; box-shadow:var(--shadow);
+  border:1.5px solid transparent; transition:transform .2s, box-shadow .2s;
+}
+.qcard:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.13); }
+.qcard.g { border-color:#86efac; background:#f0fdf4; }
+.qcard.o { border-color:#fdba74; background:#fff7ed; }
+.qcard.r { border-color:#fca5a5; background:#fef2f2; }
+.qcard.b { border-color:#93c5fd; background:#eff6ff; }
+.qcard-icon { font-size:28px; margin-bottom:5px; }
+.qcard-title { font-size:12px; font-weight:700; }
+.qcard-sub { font-size:10px; color:var(--muted); margin-top:2px; }
+
+/* AI BOX */
+.ai-box { background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow); margin-bottom:14px; border:1px solid rgba(26,77,46,.1); overflow:hidden; }
+.ai-hdr { background:linear-gradient(90deg,var(--green),var(--green2)); color:#fff; padding:11px 14px; display:flex; align-items:center; gap:8px; }
+.ai-dot { width:9px; height:9px; background:#4ade80; border-radius:50%; animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.ai-hdr span { font-size:13px; font-weight:700; }
+.ai-hdr small { font-size:10px; opacity:.8; margin-left:auto; }
+.ai-msgs { padding:10px; min-height:130px; max-height:200px; overflow-y:auto; display:flex; flex-direction:column; gap:7px; }
+.msg { max-width:85%; padding:9px 13px; border-radius:14px; font-size:12.5px; line-height:1.5; animation:msgIn .2s ease; }
+@keyframes msgIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
+.msg.bot { background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; align-self:flex-start; border-bottom-left-radius:3px; }
+.msg.user { background:var(--green); color:#fff; align-self:flex-end; border-bottom-right-radius:3px; }
+.msg.loading { background:#f0fdf4; border:1px solid #bbf7d0; align-self:flex-start; }
+.ldots span { display:inline-block; width:7px; height:7px; background:var(--green); border-radius:50%; margin:0 2px; animation:bounce 1s infinite; }
+.ldots span:nth-child(2){animation-delay:.2s} .ldots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.ai-quick { display:flex; gap:6px; padding:0 10px 8px; overflow-x:auto; scrollbar-width:none; }
+.ai-quick::-webkit-scrollbar { display:none; }
+.aq { white-space:nowrap; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:20px; padding:4px 11px; font-size:10.5px; color:var(--green); cursor:pointer; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; transition:all .2s; flex-shrink:0; }
+.aq:hover { background:var(--green); color:#fff; }
+.ai-inp-area { display:flex; gap:7px; padding:8px 10px; border-top:1px solid #e5e7eb; background:#fafafa; }
+.ai-inp { flex:1; border:1.5px solid #d1d5db; border-radius:24px; padding:9px 14px; font-size:12.5px; font-family:'Noto Sans Devanagari',sans-serif; background:#fff; outline:none; transition:border .2s; }
+.ai-inp:focus { border-color:var(--green); }
+.send-btn { width:40px; height:40px; background:var(--saffron); border:none; border-radius:50%; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
+.send-btn:hover { background:#c05200; }
+.send-btn:disabled { background:#9ca3af; cursor:not-allowed; }
+
+/* CONTACT CARDS */
+.contact-strip { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+.contact-card { background:var(--card-bg); border-radius:14px; padding:14px 10px; box-shadow:var(--shadow); text-align:center; border-top:4px solid var(--green); }
+.contact-card.sarpanch { border-top-color:var(--saffron); }
+.cc-icon { font-size:28px; margin-bottom:5px; }
+.cc-role { font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.5px; text-transform:uppercase; }
+.cc-name { font-size:13px; font-weight:700; margin:3px 0; }
+.cc-num { font-size:16px; font-weight:900; color:var(--green); letter-spacing:.5px; margin-bottom:7px; }
+.contact-card.sarpanch .cc-num { color:var(--saffron); }
+.call-btn { display:block; background:var(--green); color:#fff; border:none; border-radius:50px; padding:8px; width:100%; font-size:12px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; text-decoration:none; transition:background .2s; }
+.contact-card.sarpanch .call-btn { background:var(--saffron); }
+.call-btn:hover { filter:brightness(.88); }
+
+/* COMPLAINT FORM */
+.complaint-form { background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow); padding:16px; margin-bottom:14px; border:1px solid var(--border); }
+.form-label { font-size:12px; font-weight:700; color:var(--green); margin-bottom:5px; display:block; }
+.form-input, .form-select, .form-textarea { width:100%; border:1.5px solid var(--border); border-radius:10px; padding:10px 12px; font-size:13px; font-family:'Noto Sans Devanagari',sans-serif; background:#fff; outline:none; color:var(--text); margin-bottom:11px; transition:border .2s; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--green); }
+.form-textarea { min-height:90px; resize:vertical; }
+.submit-btn { width:100%; background:var(--green); color:#fff; border:none; border-radius:50px; padding:13px; font-size:14px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; transition:background .2s; }
+.submit-btn:hover { background:#0f3d22; }
+.submit-btn:disabled { background:#9ca3af; cursor:not-allowed; }
+
+/* COMPLAINT CARD */
+.complaint-card { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); margin-bottom:10px; border-left:4px solid var(--saffron); animation:fadeIn .3s ease; }
+.complaint-card.solved { border-left-color:#16a34a; opacity:.75; }
+.cc-top { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.cc-cat { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:var(--saffron); color:#fff; }
+.cc-cat.road{background:#b45309} .cc-cat.water{background:#1d4ed8} .cc-cat.light{background:#b45309} .cc-cat.school{background:#7c3aed} .cc-cat.health{background:#dc2626} .cc-cat.other{background:#374151}
+.cc-status { margin-left:auto; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; }
+.cc-status.pending { background:#fff7ed; color:#9a3412; }
+.cc-status.solved { background:#dcfce7; color:#166534; }
+.cc-name-txt { font-size:11px; color:var(--muted); }
+.cc-text { font-size:13px; line-height:1.5; margin-bottom:4px; }
+.cc-time { font-size:10px; color:#9ca3af; }
+
+/* NEWS CARD */
+.news-card { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); margin-bottom:10px; border-left:4px solid var(--saffron); animation:fadeIn .3s ease; }
+.news-tag { display:inline-block; background:var(--saffron); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-bottom:6px; }
+.news-tag.green{background:var(--green)} .news-tag.red{background:var(--red)} .news-tag.blue{background:var(--blue)}
+.news-title { font-size:14px; font-weight:700; margin-bottom:4px; line-height:1.4; }
+.news-body { font-size:12px; color:#4b5563; line-height:1.5; }
+.news-time { font-size:10px; color:#9ca3af; margin-top:5px; }
+
+/* SCHEME CARD */
+.scheme-card { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); margin-bottom:10px; display:flex; align-items:flex-start; gap:11px; cursor:pointer; transition:transform .2s; border:1.5px solid var(--border); }
+.scheme-card:hover { transform:translateX(3px); border-color:var(--green); }
+.sc-icon { width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.sc-info h3 { font-size:13px; font-weight:700; margin-bottom:3px; }
+.sc-info p { font-size:11px; color:var(--muted); line-height:1.4; }
+.sc-badge { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:8px; margin-top:4px; }
+
+/* EMERGENCY */
+.emergency-banner { background:linear-gradient(135deg,#dc2626,#991b1b); color:#fff; border-radius:16px; padding:16px; margin-bottom:14px; text-align:center; }
+.emergency-banner h2 { font-family:'Tiro Devanagari Hindi',serif; font-size:19px; margin-bottom:4px; }
+.emergency-banner p { font-size:12px; opacity:.85; }
+.helpline-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+.hcard { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); text-align:center; text-decoration:none; display:block; transition:transform .2s; }
+.hcard:hover { transform:scale(1.03); }
+.hcard-icon { font-size:26px; margin-bottom:4px; }
+.hcard-num { font-size:20px; font-weight:900; letter-spacing:1px; }
+.hcard-name { font-size:11px; color:var(--text); font-weight:600; margin-top:2px; }
+.hcall { background:var(--red); color:#fff; border:none; border-radius:50px; padding:7px; width:100%; font-size:11px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; margin-top:6px; }
+
+/* LOADING & EMPTY STATES */
+.loading-state { text-align:center; padding:30px 16px; }
+.spinner { width:36px; height:36px; border:3px solid #e5e7eb; border-top-color:var(--green); border-radius:50%; animation:spin .7s linear infinite; margin:0 auto 12px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.loading-state p { font-size:13px; color:var(--muted); }
+.no-data { text-align:center; padding:30px 16px; color:var(--muted); font-size:13px; line-height:1.7; }
+.no-data span { font-size:36px; display:block; margin-bottom:8px; }
+
+/* LIVE BADGE */
+.live-badge { display:inline-flex; align-items:center; gap:5px; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:20px; padding:3px 10px; font-size:10px; font-weight:700; color:var(--green); margin-left:auto; }
+.live-dot { width:7px; height:7px; background:#16a34a; border-radius:50%; animation:pulse 1.5s infinite; }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; display:none; align-items:flex-end; }
+.modal-overlay.open { display:flex; }
+.modal-sheet { background:#fff; border-radius:20px 20px 0 0; padding:18px; width:100%; animation:slideUp .3s ease; max-height:82vh; overflow-y:auto; }
+@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+.modal-handle { width:38px; height:4px; background:#d1d5db; border-radius:2px; margin:0 auto 14px; }
+.modal-title { font-family:'Tiro Devanagari Hindi',serif; font-size:17px; font-weight:700; color:var(--green); margin-bottom:10px; }
+.modal-body { font-size:13px; color:#374151; line-height:1.7; }
+.close-modal { background:var(--saffron); color:#fff; border:none; border-radius:50px; padding:11px; width:100%; font-size:13px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; margin-top:14px; }
+
+/* TOAST */
+.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:#1a1a1a; color:#fff; padding:10px 20px; border-radius:50px; font-size:12px; font-weight:600; opacity:0; transition:all .3s; z-index:300; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* BOTTOM NAV */
+.bnav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; display:flex; box-shadow:0 -3px 14px rgba(0,0,0,0.07); z-index:100; }
+.bn-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:9px 4px 7px; cursor:pointer; font-size:10px; color:#9ca3af; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; gap:2px; transition:color .2s; }
+.bn-item .bni { font-size:20px; transition:transform .2s; }
+.bn-item.active { color:var(--green); }
+.bn-item.active .bni { transform:scale(1.15); }
+.sos-btn { background:var(--red); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; margin-top:-18px; border:3px solid #fff; box-shadow:0 3px 14px rgba(192,57,43,.5); animation:sosG 2s infinite; }
+@keyframes sosG { 0%,100%{box-shadow:0 3px 14px rgba(192,57,43,.5)} 50%{box-shadow:0 3px 22px rgba(192,57,43,.85)} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr-top">
+    <div class="logo">
+      <div class="logo-circle">🏡</div>
+      <div class="logo-text">
+        <h1>उमरा गांव</h1>
+        <small>डिजिटल सेवा केंद्र</small>
+      </div>
+    </div>
+    <div class="hdr-date" id="dateChip">...</div>
+  </div>
+  <nav class="nav-tabs">
+    <div class="nav-tab active"  onclick="goTab('home',0)">🏠 होम</div>
+    <div class="nav-tab" onclick="goTab('complaints',1)">📝 शिकायत</div>
+    <div class="nav-tab" onclick="goTab('news',2)">📢 समाचार</div>
+    <div class="nav-tab" onclick="goTab('schemes',3)">📋 योजनाएं</div>
+    <div class="nav-tab" onclick="goTab('emergency',4)">🆘 आपातकाल</div>
+  </nav>
+</header>
+
+<!-- ══ HOME ══ -->
+<div class="section active" id="home">
+  <div class="hero">
+    <h2>नमस्ते, उमरा वासियों! 🙏</h2>
+    <p>गांव की सेवाएं, योजनाएं और शिकायतें — सब एक जगह।</p>
+  </div>
+
+  <div class="sec-title">📞 पंचायत संपर्क</div>
+  <div class="contact-strip">
+    <div class="contact-card sarpanch">
+      <div class="cc-icon">👨‍💼</div>
+      <div class="cc-role">सरपंच</div>
+      <div class="cc-name">श्री रामकुमार</div>
+      <div class="cc-num">98765-XXXXX</div>
+      <a class="call-btn" href="tel:9876500000">📞 कॉल करें</a>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">📋</div>
+      <div class="cc-role">सचिव</div>
+      <div class="cc-name">श्री महेश कुमार</div>
+      <div class="cc-num">87654-XXXXX</div>
+      <a class="call-btn" href="tel:8765400000">📞 कॉल करें</a>
+    </div>
+  </div>
+
+  <div class="sec-title">⚡ त्वरित सेवाएं</div>
+  <div class="quick-grid">
+    <div class="qcard o" onclick="goTab('complaints',1)">
+      <div class="qcard-icon">📝</div>
+      <div class="qcard-title">शिकायत दर्ज</div>
+      <div class="qcard-sub" id="complaintCount">लोड हो रहा है...</div>
+    </div>
+    <div class="qcard b" onclick="goTab('news',2)">
+      <div class="qcard-icon">📢</div>
+      <div class="qcard-title">गांव समाचार</div>
+      <div class="qcard-sub" id="newsCount">लोड हो रहा है...</div>
+    </div>
+    <div class="qcard g" onclick="goTab('schemes',3)">
+      <div class="qcard-icon">📋</div>
+      <div class="qcard-title">सरकारी योजनाएं</div>
+      <div class="qcard-sub">7 योजनाएं</div>
+    </div>
+    <div class="qcard r" onclick="goTab('emergency',4)">
+      <div class="qcard-icon">🆘</div>
+      <div class="qcard-title">आपातकाल</div>
+      <div class="qcard-sub">हेल्पलाइन</div>
+    </div>
+  </div>
+
+  <div class="sec-title">🤖 AI सहायक</div>
+  <div class="ai-box">
+    <div class="ai-hdr">
+      <div class="ai-dot"></div>
+      <span>उमरा AI सहायक</span>
+      <small>ऑनलाइन</small>
+    </div>
+    <div class="ai-msgs" id="aiMsgs">
+      <div class="msg bot">🙏 नमस्ते! मैं उमरा गांव का AI सहायक हूं। सरकारी योजनाओं, दस्तावेज़ों या किसी भी सरकारी काम के बारे में पूछें।</div>
+    </div>
+    <div class="ai-quick">
+      <div class="aq" onclick="askQ('पीएम किसान योजना क्या है?')">🌾 पीएम किसान</div>
+      <div class="aq" onclick="askQ('राशन कार्ड कैसे बनाएं?')">🍚 राशन कार्ड</div>
+      <div class="aq" onclick="askQ('आयुष्मान भारत का लाभ कैसे मिलेगा?')">🏥 आयुष्मान</div>
+      <div class="aq" onclick="askQ('आधार कार्ड अपडेट कैसे करें?')">🪪 आधार</div>
+    </div>
+    <div class="ai-inp-area">
+      <input class="ai-inp" id="aiInp" placeholder="यहाँ सवाल लिखें..." />
+      <button class="send-btn" id="sendBtn" onclick="sendAI()">➤</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COMPLAINTS ══ -->
+<div class="section" id="complaints">
+  <div class="sec-title">📝 नई शिकायत दर्ज करें</div>
+  <div class="complaint-form">
+    <label class="form-label">आपका नाम *</label>
+    <input class="form-input" id="cName" placeholder="जैसे: रामलाल शर्मा" />
+    <label class="form-label">शिकायत की श्रेणी *</label>
+    <select class="form-select" id="cCat">
+      <option value="">— श्रेणी चुनें —</option>
+      <option value="road">🛣️ सड़क / रास्ता</option>
+      <option value="water">💧 पानी / नाली</option>
+      <option value="light">💡 बिजली / लाइट</option>
+      <option value="school">🏫 स्कूल / शिक्षा</option>
+      <option value="health">🏥 स्वास्थ्य</option>
+      <option value="other">📌 अन्य</option>
+    </select>
+    <label class="form-label">शिकायत का विवरण *</label>
+    <textarea class="form-textarea" id="cText" placeholder="अपनी शिकायत यहाँ लिखें..."></textarea>
+    <button class="submit-btn" id="complaintBtn" onclick="submitComplaint()">✅ शिकायत दर्ज करें</button>
+  </div>
+
+  <div class="sec-title">📋 सभी शिकायतें</div>
+  <div id="complaintList">
+    <div class="loading-state"><div class="spinner"></div><p>शिकायतें लोड हो रही हैं...</p></div>
+  </div>
+</div>
+
+<!-- ══ NEWS ══ -->
+<div class="section" id="news">
+  <div class="sec-title">
+    📢 गांव समाचार
+    <span class="live-badge"><span class="live-dot"></span>लाइव</span>
+  </div>
+  <div id="newsList">
+    <div class="loading-state"><div class="spinner"></div><p>समाचार लोड हो रहे हैं...</p></div>
+  </div>
+</div>
+
+<!-- ══ SCHEMES ══ -->
+<div class="section" id="schemes">
+  <div class="sec-title">📋 सरकारी योजनाएं</div>
+  <div class="scheme-card" onclick="openModal('pmkisan')">
+    <div class="sc-icon" style="background:#dcfce7">🌾</div>
+    <div class="sc-info"><h3>पीएम किसान सम्मान निधि</h3><p>हर साल ₹6,000 सीधे किसान के खाते में</p><span class="sc-badge" style="background:#dcfce7;color:#166534">कृषि योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('ayushman')">
+    <div class="sc-icon" style="background:#fef3c7">🏥</div>
+    <div class="sc-info"><h3>आयुष्मान भारत योजना</h3><p>₹5 लाख तक का मुफ्त इलाज</p><span class="sc-badge" style="background:#fef3c7;color:#92400e">स्वास्थ्य योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('ration')">
+    <div class="sc-icon" style="background:#ffe4e6">🍚</div>
+    <div class="sc-info"><h3>राशन कार्ड / मुफ्त अनाज</h3><p>PMGKAY – गरीब परिवारों को मुफ्त राशन</p><span class="sc-badge" style="background:#ffe4e6;color:#9f1239">खाद्य योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('ujjwala')">
+    <div class="sc-icon" style="background:#fff7ed">🔥</div>
+    <div class="sc-info"><h3>उज्ज्वला योजना</h3><p>BPL परिवारों को मुफ्त LPG कनेक्शन</p><span class="sc-badge" style="background:#fff7ed;color:#9a3412">ऊर्जा योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('awas')">
+    <div class="sc-icon" style="background:#eff6ff">🏠</div>
+    <div class="sc-info"><h3>प्रधानमंत्री आवास योजना</h3><p>गरीबों को पक्का मकान बनाने के लिए सहायता</p><span class="sc-badge" style="background:#eff6ff;color:#1e40af">आवास योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('beti')">
+    <div class="sc-icon" style="background:#fdf4ff">👧</div>
+    <div class="sc-info"><h3>बेटी बचाओ, बेटी पढ़ाओ</h3><p>बेटियों की शिक्षा और सुरक्षा के लिए</p><span class="sc-badge" style="background:#fdf4ff;color:#7e22ce">महिला योजना</span></div>
+  </div>
+  <div class="scheme-card" onclick="openModal('mudra')">
+    <div class="sc-icon" style="background:#ecfdf5">💼</div>
+    <div class="sc-info"><h3>पीएम मुद्रा योजना</h3><p>छोटे व्यापार के लिए ₹10 लाख तक का लोन</p><span class="sc-badge" style="background:#ecfdf5;color:#065f46">रोजगार योजना</span></div>
+  </div>
+</div>
+
+<!-- ══ EMERGENCY ══ -->
+<div class="section" id="emergency">
+  <div class="emergency-banner">
+    <h2>🆘 आपातकालीन सेवाएं</h2>
+    <p>किसी भी आपात स्थिति में तुरंत कॉल करें</p>
+  </div>
+  <div class="sec-title">🚨 तत्काल हेल्पलाइन</div>
+  <div class="helpline-grid">
+    <a class="hcard" href="tel:112"><div class="hcard-icon">🚔</div><div class="hcard-num" style="color:var(--red)">112</div><div class="hcard-name">पुलिस / SOS</div><button class="hcall">📞 कॉल</button></a>
+    <a class="hcard" href="tel:108"><div class="hcard-icon">🚑</div><div class="hcard-num" style="color:var(--red)">108</div><div class="hcard-name">एम्बुलेंस</div><button class="hcall">📞 कॉल</button></a>
+    <a class="hcard" href="tel:101"><div class="hcard-icon">🚒</div><div class="hcard-num" style="color:var(--saffron)">101</div><div class="hcard-name">अग्निशमन</div><button class="hcall" style="background:var(--saffron)">📞 कॉल</button></a>
+    <a class="hcard" href="tel:181"><div class="hcard-icon">👩</div><div class="hcard-num" style="color:#7c3aed">181</div><div class="hcard-name">महिला हेल्पलाइन</div><button class="hcall" style="background:#7c3aed">📞 कॉल</button></a>
+    <a class="hcard" href="tel:1098"><div class="hcard-icon">👦</div><div class="hcard-num" style="color:var(--saffron)">1098</div><div class="hcard-name">बाल हेल्पलाइन</div><button class="hcall" style="background:var(--saffron)">📞 कॉल</button></a>
+    <a class="hcard" href="tel:104"><div class="hcard-icon">🏥</div><div class="hcard-num" style="color:var(--blue)">104</div><div class="hcard-name">स्वास्थ्य सेवा</div><button class="hcall" style="background:var(--blue)">📞 कॉल</button></a>
+  </div>
+  <div class="sec-title">📍 नजदीकी सेवाएं</div>
+  <div class="news-card" style="cursor:default"><div class="news-title">🏥 प्राथमिक स्वास्थ्य केंद्र</div><div class="news-body">पंचायत के पास, उमरा | सोम–शनि 9AM–5PM</div></div>
+  <div class="news-card" style="cursor:default;border-left-color:var(--green)"><div class="news-title">🚔 पुलिस चौकी</div><div class="news-body">मुख्य सड़क, उमरा | 24×7</div></div>
+  <div class="news-card" style="cursor:default;border-left-color:var(--blue)"><div class="news-title">🏢 CSC केंद्र, उमरा</div><div class="news-body">गांव चौक | सोम–शनि 9AM–6PM</div></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <div class="bn-item active" id="bn0" onclick="goTab('home',0)"><span class="bni">🏠</span>होम</div>
+  <div class="bn-item" id="bn1" onclick="goTab('complaints',1)"><span class="bni">📝</span>शिकायत</div>
+  <div class="bn-item" id="bn2" onclick="goTab('emergency',4)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
+  <div class="bn-item" id="bn3" onclick="goTab('news',2)"><span class="bni">📢</span>समाचार</div>
+  <div class="bn-item" id="bn4" onclick="goTab('schemes',3)"><span class="bni">📋</span>योजनाएं</div>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <button class="close-modal" onclick="closeModal()">✕ बंद करें</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// FIRESTORE REST API — No CDN needed!
+// ══════════════════════════════════════════
+const PROJECT_ID = "village-umra";
+const API_KEY    = "AIzaSyApqlpXxd647XDdn8y2G_JX0oF5LcaM0no";
+const BASE_URL   = "https://firestore.googleapis.com/v1/projects/" + PROJECT_ID + "/databases/(default)/documents";
+
+async function fsGet(col) {
+  const url = BASE_URL + "/" + col + "?key=" + API_KEY + "&pageSize=100";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("GET " + res.status);
+  const data = await res.json();
+  return (data.documents || []).map(parseDoc).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+}
+
+async function fsAdd(col, obj) {
+  const url = BASE_URL + "/" + col + "?key=" + API_KEY;
+  obj.createdAt = Date.now();
+  const res = await fetch(url, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:toFields(obj)})});
+  if (!res.ok) throw new Error("ADD " + await res.text());
+}
+
+function parseDoc(doc) {
+  const id = doc.name.split("/").pop();
+  const obj = {_id: id};
+  for (const [k,v] of Object.entries(doc.fields||{})) {
+    if (v.stringValue!==undefined) obj[k]=v.stringValue;
+    else if (v.integerValue!==undefined) obj[k]=parseInt(v.integerValue);
+    else if (v.timestampValue!==undefined) obj[k]=new Date(v.timestampValue).getTime();
+    else if (v.booleanValue!==undefined) obj[k]=v.booleanValue;
+  }
+  return obj;
+}
+
+function toFields(obj) {
+  const f = {};
+  for (const [k,v] of Object.entries(obj)) {
+    if (typeof v==="string") f[k]={stringValue:v};
+    else if (typeof v==="number") f[k]={integerValue:String(v)};
+    else if (typeof v==="boolean") f[k]={booleanValue:v};
+  }
+  return f;
+}
+
+// ── DATE ──
+const DAYS=['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+const MONTHS=['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+const nd = new Date();
+document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
+
+// ── NAV ──
+const SECTIONS = ['home','complaints','news','schemes','emergency'];
+const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn4',4:'bn2'};
+
+function goTab(id, idx) {
+  SECTIONS.forEach(s => document.getElementById(s).classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+  const bn = document.getElementById(BN_MAP[idx]);
+  if (bn) bn.classList.add('active');
+  if (id === 'news') loadNews();
+  if (id === 'complaints') loadComplaints();
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmtTime(ts) {
+  if (!ts) return 'अभी';
+  return new Date(Number(ts)).toLocaleString('hi-IN');
+}
+
+// ══════════════════════════════
+// NEWS — REST API polling
+// ══════════════════════════════
+const NEWS_CATS = {ghoshna:'📢 घोषणा',krishi:'🌾 कृषि',swasthya:'🏥 स्वास्थ्य',shiksha:'🏫 शिक्षा',vikas:'🏗️ विकास',other:'📌 अन्य'};
+const NEWS_TAG_CLASS = {ghoshna:'',krishi:'green',swasthya:'red',shiksha:'blue',vikas:'',other:''};
+
+async function loadNews() {
+  const newsList = document.getElementById('newsList');
+  const newsCount = document.getElementById('newsCount');
+  newsList.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>समाचार लोड हो रहे हैं...</p></div>';
+  try {
+    const docs = await fsGet('news');
+    newsCount.textContent = docs.length + ' खबरें';
+    if (!docs.length) {
+      newsList.innerHTML = '<div class="no-data"><span>📰</span>अभी कोई समाचार नहीं है।<br>जल्द ही गांव की खबरें यहाँ आएंगी।</div>';
+      return;
+    }
+    newsList.innerHTML = docs.map(n =>
+      '<div class="news-card">' +
+        '<span class="news-tag ' + (NEWS_TAG_CLASS[n.category]||'') + '">' + (NEWS_CATS[n.category]||n.category) + '</span>' +
+        '<div class="news-title">' + escHtml(n.title) + '</div>' +
+        '<div class="news-body">' + escHtml(n.description) + '</div>' +
+        '<div class="news-time">🕐 ' + fmtTime(n.createdAt) + '</div>' +
+      '</div>'
+    ).join('');
+  } catch(e) {
+    console.error(e);
+    newsList.innerHTML = '<div class="no-data"><span>⚠️</span>समाचार लोड करने में समस्या हुई।<br>इंटरनेट जांचें।</div>';
+    newsCount.textContent = '— खबरें';
+  }
+}
+
+// Auto-refresh news every 30 seconds
+loadNews();
+setInterval(loadNews, 30000);
+
+// ══════════════════════════════
+// COMPLAINTS — REST API
+// ══════════════════════════════
+const CAT_LABELS = {road:'🛣️ सड़क',water:'💧 पानी',light:'💡 बिजली',school:'🏫 स्कूल',health:'🏥 स्वास्थ्य',other:'📌 अन्य'};
+
+async function loadComplaints() {
+  const list = document.getElementById('complaintList');
+  const countEl = document.getElementById('complaintCount');
+  list.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>शिकायतें लोड हो रही हैं...</p></div>';
+  try {
+    const docs = await fsGet('complaints');
+    countEl.textContent = docs.length + ' शिकायतें';
+    if (!docs.length) {
+      list.innerHTML = '<div class="no-data"><span>📋</span>अभी कोई शिकायत नहीं है।<br>ऊपर फॉर्म भरकर शिकायत दर्ज करें।</div>';
+      return;
+    }
+    list.innerHTML = docs.map(c => {
+      const solved = c.status === 'solved';
+      return '<div class="complaint-card ' + (solved?'solved':'') + '">' +
+        '<div class="cc-top">' +
+          '<span class="cc-cat ' + c.category + '">' + (CAT_LABELS[c.category]||c.category) + '</span>' +
+          '<span class="cc-status ' + (c.status||'pending') + '">' + (solved?'✅ हल हुई':'⏳ लंबित') + '</span>' +
+        '</div>' +
+        '<div class="cc-name-txt">👤 ' + escHtml(c.name) + '</div>' +
+        '<div class="cc-text">' + escHtml(c.description) + '</div>' +
+        '<div class="cc-time">🕐 ' + fmtTime(c.createdAt) + '</div>' +
+      '</div>';
+    }).join('');
+  } catch(e) {
+    console.error(e);
+    list.innerHTML = '<div class="no-data"><span>⚠️</span>शिकायतें लोड करने में समस्या हुई।</div>';
+  }
+}
+
+loadComplaints();
+
+async function submitComplaint() {
+  const name = document.getElementById('cName').value.trim();
+  const cat  = document.getElementById('cCat').value;
+  const text = document.getElementById('cText').value.trim();
+  if (!name) { showToast('❌ नाम जरूर भरें'); return; }
+  if (!cat)  { showToast('❌ श्रेणी चुनें'); return; }
+  if (!text) { showToast('❌ शिकायत लिखें'); return; }
+  const btn = document.getElementById('complaintBtn');
+  btn.disabled = true; btn.textContent = '⏳ दर्ज हो रही है...';
+  try {
+    await fsAdd('complaints', {name, category:cat, description:text, status:'pending'});
+    document.getElementById('cName').value = '';
+    document.getElementById('cCat').value  = '';
+    document.getElementById('cText').value = '';
+    showToast('✅ शिकायत दर्ज हो गई!');
+    await loadComplaints();
+  } catch(e) {
+    console.error(e);
+    showToast('❌ शिकायत दर्ज नहीं हुई। दोबारा कोशिश करें।');
+  }
+  btn.disabled = false; btn.textContent = '✅ शिकायत दर्ज करें';
+}
+
+// ══════════════════════════════
+// SCHEME MODALS
+// ══════════════════════════════
+const SCHEMES = {
+  pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, जमीन के कागज़<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
+  ayushman:{ title:'🏥 आयुष्मान भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> SECC-2011 सूची में शामिल परिवार, BPL कार्डधारक।<br><br><b>दस्तावेज़:</b> राशन कार्ड, आधार<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल` },
+  ration:  { title:'🍚 राशन कार्ड / मुफ्त अनाज', body:`<b>लाभ:</b> 5 किलो मुफ्त अनाज प्रति व्यक्ति प्रति माह।<br><br><b>पात्रता:</b> BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, निवास प्रमाण, परिवार फोटो<br><br><b>आवेदन:</b> जिला खाद्य कार्यालय या CSC केंद्र` },
+  ujjwala: { title:'🔥 उज्ज्वला योजना',           body:`<b>लाभ:</b> मुफ्त LPG कनेक्शन + पहला सिलेंडर मुफ्त।<br><br><b>पात्रता:</b> BPL राशन कार्डधारी महिला (18+)।<br><br><b>दस्तावेज़:</b> BPL राशन कार्ड, आधार, बैंक पासबुक<br><br><b>आवेदन:</b> नज़दीकी LPG डीलर या CSC` },
+  awas:    { title:'🏠 पीएम आवास योजना',           body:`<b>लाभ:</b> पक्का मकान बनाने के लिए ₹1.20 लाख।<br><br><b>पात्रता:</b> बेघर या कच्चे मकान में रहने वाले BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, बैंक खाता, जमीन के कागज़<br><br><b>आवेदन:</b> ग्राम पंचायत या pmayg.nic.in` },
+  beti:    { title:'👧 बेटी बचाओ, बेटी पढ़ाओ',   body:`<b>लाभ:</b> बेटियों की पढ़ाई और सुरक्षा के लिए सहायता।<br><br><b>सुकन्या समृद्धि:</b> 8.2% ब्याज दर।<br><br><b>दस्तावेज़:</b> जन्म प्रमाण, आधार, अभिभावक ID<br><br><b>आवेदन:</b> नज़दीकी बैंक या पोस्ट ऑफिस` },
+  mudra:   { title:'💼 पीएम मुद्रा योजना',          body:`<b>लाभ:</b> ₹10 लाख तक का लोन — बिना गारंटी।<br><br><b>प्रकार:</b> शिशु (₹50K), किशोर (₹5L), तरुण (₹10L)।<br><br><b>दस्तावेज़:</b> आधार, PAN, व्यापार प्रमाण, बैंक पासबुक<br><br><b>आवेदन:</b> नज़दीकी बैंक या CSC` }
+};
+
+function openModal(key) {
+  const d = SCHEMES[key]; if (!d) return;
+  document.getElementById('modalTitle').innerHTML = d.title;
+  document.getElementById('modalBody').innerHTML  = d.body;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal'))
+    document.getElementById('modal').classList.remove('open');
+}
+
+// ══════════════════════════════
+// AI ASSISTANT
+// ══════════════════════════════
+function askQ(q) { document.getElementById('aiInp').value = q; sendAI(); }
+
+async function sendAI() {
+  const inp = document.getElementById('aiInp');
+  const msg = inp.value.trim(); if (!msg) return;
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true; inp.value = '';
+  appendMsg(msg, 'user');
+  const lid = appendLoading();
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: `तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।`,
+        messages: [{ role: "user", content: msg }]
+      })
+    });
+    const data = await res.json();
+    removeLoading(lid);
+    appendMsg(data.content?.[0]?.text || "माफ करें, जवाब नहीं मिला।", 'bot');
+  } catch {
+    removeLoading(lid);
+    appendMsg("❌ नेटवर्क समस्या है। इंटरनेट जांचें।", 'bot');
+  }
+  btn.disabled = false;
+}
+
+function appendMsg(text, type) {
+  const box = document.getElementById('aiMsgs');
+  const div = document.createElement('div');
+  div.className = `msg ${type}`; div.textContent = text;
+  box.appendChild(div); box.scrollTop = box.scrollHeight;
+}
+function appendLoading() {
+  const box = document.getElementById('aiMsgs');
+  const id = 'l' + Date.now();
+  box.innerHTML += `<div class="msg loading" id="${id}"><div class="ldots"><span></span><span></span><span></span></div></div>`;
+  box.scrollTop = box.scrollHeight; return id;
+}
+function removeLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+document.getElementById('aiInp').addEventListener('keypress', e => { if (e.key === 'Enter') sendAI(); });
+
+// ── HELPER ──
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
