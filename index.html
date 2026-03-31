@@ -1343,19 +1343,18 @@ async function sendAI() {
   appendMsg(msg, 'user');
   const lid = appendLoading();
   try {
-    const res = await fetch("/.netlify/functions/ai", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        system: `तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।`,
-        messages: [{ role: "user", content: msg }]
+        system_instruction: {parts:[{text:"तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।"}]},
+        contents:[{parts:[{text:msg}]}]
       })
     });
     const data = await res.json();
     removeLoading(lid);
-    appendMsg(data.content?.[0]?.text || "माफ करें, जवाब नहीं मिला।", 'bot');
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करें, जवाब नहीं मिला।";
+    appendMsg(reply, 'bot');
   } catch {
     removeLoading(lid);
     appendMsg("❌ नेटवर्क समस्या है। इंटरनेट जांचें।", 'bot');
@@ -1477,11 +1476,22 @@ async function sendFasal() {
   appendFasalMsg(msg, 'user');
   const lid = appendFasalLoading();
   try {
-    const res = await fetch("/.netlify/functions/ai", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।",messages:[{role:"user",content:msg}]})});
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        system_instruction: {parts:[{text:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।"}]},
+        contents:[{parts:[{text:msg}]}]
+      })
+    });
     const data = await res.json();
     removeFasalLoading(lid);
-    appendFasalMsg(data.content?.[0]?.text || "माफ करें, जवाब नहीं मिला।", 'bot');
-  } catch(e) { removeFasalLoading(lid); appendFasalMsg("❌ इंटरनेट समस्या। दोबारा कोशिश करें।", 'bot'); }
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करें, जवाब नहीं मिला।";
+    appendFasalMsg(reply, 'bot');
+  } catch(e) {
+    removeFasalLoading(lid);
+    appendFasalMsg("❌ इंटरनेट समस्या। दोबारा कोशिश करें।", 'bot');
+  }
 }
 function appendFasalMsg(text, type) {
   const box = document.getElementById('fasalMsgs');
