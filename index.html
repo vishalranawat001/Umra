@@ -1347,15 +1347,17 @@ async function sendAI() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        system_instruction: {parts:[{text:"तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।"}]},
+        system_instruction:{parts:[{text:"तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।"}]},
         contents:[{parts:[{text:msg}]}]
       })
     });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     removeLoading(lid);
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करें, जवाब नहीं मिला।";
-    appendMsg(reply, 'bot');
-  } catch {
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    appendMsg(reply || "माफ करें, जवाब नहीं मिला।", 'bot');
+  } catch(e) {
+    console.error('AI error:', e);
     removeLoading(lid);
     appendMsg("❌ नेटवर्क समस्या है। इंटरनेट जांचें।", 'bot');
   }
@@ -1403,6 +1405,74 @@ function escHtml(str) {
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+// AUTO NEWS using Gemini
+async function loadAutoNews() {
+  var box = document.getElementById('autoNewsList');
+  var timeEl = document.getElementById('autoNewsTime');
+  if (!box) return;
+
+  var cacheKey = 'autoNews_v1';
+  var cacheTimeKey = 'autoNews_time_v1';
+  var cached = localStorage.getItem(cacheKey);
+  var cachedTime = parseInt(localStorage.getItem(cacheTimeKey) || '0');
+  var now = Date.now();
+
+  if (cached && (now - cachedTime) < 6 * 60 * 60 * 1000) {
+    box.innerHTML = cached;
+    if (timeEl) timeEl.textContent = new Date(cachedTime).toLocaleTimeString('hi-IN', {hour:'2-digit',minute:'2-digit'});
+    return;
+  }
+
+  box.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>समाचार तैयार हो रहे हैं...</p></div>';
+
+  try {
+    var today = new Date().toLocaleDateString('hi-IN', {day:'numeric',month:'long',year:'numeric'});
+    var prompt = 'आज ' + today + ' के लिए हरियाणा और भारत की 4 महत्वपूर्ण खबरें लिखो। हर खबर में एक शीर्षक और 2 लाइन विवरण हो। हर खबर को --- से अलग करो। विषय: खेती, सरकारी योजनाएं, हरियाणा, किसान, ग्रामीण विकास। केवल हिंदी में।';
+
+    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA';
+    var res = await fetch(GURL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+    });
+    if (!res.ok) throw new Error('API ' + res.status);
+    var data = await res.json();
+    var text = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) || '';
+    if (!text) throw new Error('empty');
+
+    var colors = ['var(--saffron)','#1565C0','#2e7d32','#7b1fa2'];
+    var items = text.split('---').filter(function(s){ return s.trim().length > 20; });
+    var html = items.slice(0,4).map(function(item, i) {
+      var lines = item.trim().split('
+').filter(function(l){ return l.trim(); });
+      var title = lines[0].replace(/\*\*/g,'').replace(/^[0-9]+\.\s*/,'').trim();
+      var body = lines.slice(1).join(' ').replace(/\*\*/g,'').trim();
+      return '<div style="border-left:3px solid ' + colors[i%4] + ';padding:10px 12px;margin-bottom:10px;border-radius:0 10px 10px 0;background:#fafafa;">' +
+        '<div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:4px;">' + title + '</div>' +
+        '<div style="font-size:12px;color:#555;line-height:1.5;">' + body + '</div>' +
+      '</div>';
+    }).join('');
+
+    var finalHtml = html + '<div style="font-size:10px;color:#9ca3af;text-align:center;margin-top:8px;">🤖 AI द्वारा तैयार | हर 6 घंटे में अपडेट</div>';
+    box.innerHTML = finalHtml;
+    localStorage.setItem(cacheKey, finalHtml);
+    localStorage.setItem(cacheTimeKey, now.toString());
+    if (timeEl) timeEl.textContent = new Date().toLocaleTimeString('hi-IN', {hour:'2-digit',minute:'2-digit'});
+
+  } catch(e) {
+    console.error('Auto news error:', e);
+    box.innerHTML = '<div class="no-data"><span>📡</span>समाचार लोड नहीं हुए।<br>इंटरनेट जांचें।</div>';
+  }
+}
+
+// Load auto news when news tab opens
+var _goTabNews = goTab;
+goTab = function(id, idx) {
+  _goTabNews(id, idx);
+  if (id === 'news') { loadAutoNews(); }
+};
+
 </script>
 </body>
 </html>
@@ -1480,15 +1550,18 @@ async function sendFasal() {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        system_instruction: {parts:[{text:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।"}]},
-        contents:[{parts:[{text:msg}]}]
+        contents:[{
+          parts:[{text:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। सरल हिंदी में व्यावहारिक सलाह दो।\n\nKisan ka sawal: "+msg}]
+        }]
       })
     });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     removeFasalLoading(lid);
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करें, जवाब नहीं मिला।";
-    appendFasalMsg(reply, 'bot');
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    appendFasalMsg(reply || "माफ करें, जवाब नहीं मिला।", 'bot');
   } catch(e) {
+    console.error('Fasal AI error:', e);
     removeFasalLoading(lid);
     appendFasalMsg("❌ इंटरनेट समस्या। दोबारा कोशिश करें।", 'bot');
   }
@@ -1507,5 +1580,63 @@ function appendFasalLoading() {
   box.appendChild(div); box.scrollTop = box.scrollHeight; return id;
 }
 function removeFasalLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+// ══════════════════════════════
+// AUTO NEWS — Google RSS Feed
+// ══════════════════════════════
+async function loadAutoNews() {
+  const list = document.getElementById('autoNewsList');
+  if (!list) return;
+  try {
+    // Use RSS2JSON to fetch Google News RSS for Haryana
+    const rssUrl = encodeURIComponent('https://news.google.com/rss/search?q=haryana+village+panchayat&hl=hi&gl=IN&ceid=IN:hi');
+    const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + rssUrl + '&count=6';
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error('RSS fetch failed');
+    const data = await res.json();
+    
+    if (!data.items || !data.items.length) throw new Error('No items');
+    
+    list.innerHTML = data.items.map(function(item) {
+      const date = new Date(item.pubDate);
+      const dateStr = date.toLocaleDateString('hi-IN', {day:'numeric', month:'short'});
+      // Clean title
+      const title = item.title.replace(/ - .*$/, '').trim();
+      return '<a href="' + item.link + '" target="_blank" style="display:block;text-decoration:none;padding:10px 0;border-bottom:1px solid #f0f0f0;">' +
+        '<div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.4;margin-bottom:4px;">' + title + '</div>' +
+        '<div style="font-size:10px;color:#9ca3af;">📅 ' + dateStr + ' • ' + (item.source || 'Google News') + ' →</div>' +
+      '</a>';
+    }).join('').replace(/border-bottom:1px solid #f0f0f0;">(?!.*border-bottom)/, 'border-bottom:none;">');
+    
+  } catch(e) {
+    console.error('Auto news error:', e);
+    // Fallback - show static news links
+    list.innerHTML = 
+      '<div style="font-size:12px;color:#666;padding:8px 0;margin-bottom:8px;">ताज़ा हरियाणा समाचार के लिए:</div>' +
+      '<a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;">' +
+        '<span style="font-size:20px;">📰</span>' +
+        '<div><div style="font-size:13px;font-weight:700;color:#1A4D2E;">दैनिक भास्कर — हरियाणा</div><div style="font-size:11px;color:#666;">bhaskar.com/haryana</div></div>' +
+        '<span style="margin-left:auto;color:#1A4D2E;font-size:16px;">→</span>' +
+      '</a>' +
+      '<a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;">' +
+        '<span style="font-size:20px;">📰</span>' +
+        '<div><div style="font-size:13px;font-weight:700;color:#e65100;">दैनिक जागरण — हरियाणा</div><div style="font-size:11px;color:#666;">jagran.com/haryana</div></div>' +
+        '<span style="margin-left:auto;color:#e65100;font-size:16px;">→</span>' +
+      '</a>' +
+      '<a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px;background:#eff6ff;border-radius:10px;text-decoration:none;">' +
+        '<span style="font-size:20px;">📰</span>' +
+        '<div><div style="font-size:13px;font-weight:700;color:#1565C0;">अमर उजाला — हरियाणा</div><div style="font-size:11px;color:#666;">amarujala.com/haryana</div></div>' +
+        '<span style="margin-left:auto;color:#1565C0;font-size:16px;">→</span>' +
+      '</a>';
+  }
+}
+
+// Load auto news when news tab opens
+var _prevGoTab = goTab;
+goTab = function(id, idx) {
+  _prevGoTab(id, idx);
+  if (id === 'news') loadAutoNews();
+};
+
 document.getElementById('fasalInp') && document.getElementById('fasalInp').addEventListener('keypress', function(e) { if (e.key === 'Enter') sendFasal(); });
 </script>
