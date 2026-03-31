@@ -997,7 +997,7 @@ header {
   <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">🌦️</span>
-      <span style="font-size:14px;font-weight:700;">मौसम अपडेट — उमरा, हरियाणा</span>
+      <span style="font-size:14px;font-weight:700;">मौसम अपडेट — उमरा (हांसी), हरियाणा</span>
       <span id="weatherTime" style="font-size:10px;opacity:.8;margin-left:auto;"></span>
     </div>
     <div id="weatherBox" style="padding:16px;">
@@ -1012,23 +1012,22 @@ header {
   <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#e65100,#f57c00);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">💸</span>
-      <span style="font-size:14px;font-weight:700;">मंडी भाव</span>
+      <span style="font-size:14px;font-weight:700;">हांसी मंडी भाव</span>
       <span style="font-size:10px;opacity:.8;margin-left:auto;">स्रोत: agmarknet.gov.in</span>
     </div>
     <div style="padding:14px;">
 
-      <!-- Mandi selector -->
-      <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;">
-        <button onclick="showMandi('hisar')" id="mbtn-hisar" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e65100;background:#e65100;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">हिसार</button>
-        <button onclick="showMandi('fatehabad')" id="mbtn-fatehabad" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">फतेहाबाद</button>
-        <button onclick="showMandi('sirsa')" id="mbtn-sirsa" style="flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">सिरसा</button>
+      <div style="background:#e8f5e9;border-radius:10px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span style="font-size:16px;">📍</span>
+        <span style="font-size:13px;font-weight:700;color:#1b5e20;">हांसी APMC मंडी</span>
+        <span style="font-size:10px;color:#666;margin-left:auto;">हिसार जिला, हरियाणा</span>
       </div>
 
       <div id="mandiBox">
-        <!-- Hisar rates -->
-        <div id="mandi-hisar">
-          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
-            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं। सटीक भाव के लिए Agmarknet देखें।
+        <!-- Hansi mandi real rates -->
+        <div id="mandi-hansi">
+          <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#1b5e20;">
+            ✅ ये भाव हांसी APMC मंडी के हैं। स्रोत: agmarknet.gov.in | मार्च 2026
           </div>
           <table style="width:100%;border-collapse:collapse;font-size:13px;">
             <thead>
@@ -1040,64 +1039,14 @@ header {
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,150</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,280</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,200</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,450</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,300</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,200</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,600</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,400</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,350</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,200</td></tr>
-              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹800</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,200</td><td style="padding:8px;text-align:right;color:#1565C0;">₹1,000</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,250</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,300</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,275</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌻 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,650</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,650</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,650</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 धान (सामान्य)</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,203</td><td style="padding:8px;text-align:right;color:#c62828;">₹3,521</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,800</td></tr>
+              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🍌 केला</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹1,500</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,500</td><td style="padding:8px;text-align:right;color:#1565C0;">₹1,500</td></tr>
+              <tr style=""><td style="padding:8px;">🫚 सरसों (हरियाणा औसत)</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,900</td><td style="padding:8px;text-align:right;color:#c62828;">₹6,819</td><td style="padding:8px;text-align:right;color:#1565C0;">₹6,323</td></tr>
             </tbody>
           </table>
-          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
-        </div>
-
-        <!-- Fatehabad rates -->
-        <div id="mandi-fatehabad" style="display:none;">
-          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
-            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं।
-          </div>
-          <table style="width:100%;border-collapse:collapse;font-size:13px;">
-            <thead>
-              <tr style="background:#fff3e0;">
-                <th style="padding:8px;text-align:left;color:#e65100;font-weight:700;border-bottom:1px solid #ffe0b2;">फसल</th>
-                <th style="padding:8px;text-align:right;color:#2e7d32;font-weight:700;border-bottom:1px solid #ffe0b2;">न्यूनतम</th>
-                <th style="padding:8px;text-align:right;color:#c62828;font-weight:700;border-bottom:1px solid #ffe0b2;">अधिकतम</th>
-                <th style="padding:8px;text-align:right;color:#1565C0;font-weight:700;border-bottom:1px solid #ffe0b2;">औसत</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,160</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,290</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,210</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,050</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,400</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,250</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,150</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,550</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,350</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,050</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,300</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,180</td></tr>
-              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹750</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,150</td><td style="padding:8px;text-align:right;color:#1565C0;">₹950</td></tr>
-            </tbody>
-          </table>
-          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
-        </div>
-
-        <!-- Sirsa rates -->
-        <div id="mandi-sirsa" style="display:none;">
-          <div style="background:#fff8e1;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#e65100;">
-            ⚠️ मंडी भाव सरकारी पोर्टल पर उपलब्ध हैं — नीचे दिए गए भाव अनुमानित हैं।
-          </div>
-          <table style="width:100%;border-collapse:collapse;font-size:13px;">
-            <thead>
-              <tr style="background:#fff3e0;">
-                <th style="padding:8px;text-align:left;color:#e65100;font-weight:700;border-bottom:1px solid #ffe0b2;">फसल</th>
-                <th style="padding:8px;text-align:right;color:#2e7d32;font-weight:700;border-bottom:1px solid #ffe0b2;">न्यूनतम</th>
-                <th style="padding:8px;text-align:right;color:#c62828;font-weight:700;border-bottom:1px solid #ffe0b2;">अधिकतम</th>
-                <th style="padding:8px;text-align:right;color:#1565C0;font-weight:700;border-bottom:1px solid #ffe0b2;">औसत</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌾 गेहूं</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,140</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,270</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,190</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌽 सरसों</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,000</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,380</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,200</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:8px;">🌿 चना</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹5,100</td><td style="padding:8px;text-align:right;color:#c62828;">₹5,500</td><td style="padding:8px;text-align:right;color:#1565C0;">₹5,300</td></tr>
-              <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa;"><td style="padding:8px;">🌾 धान</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹2,000</td><td style="padding:8px;text-align:right;color:#c62828;">₹2,280</td><td style="padding:8px;text-align:right;color:#1565C0;">₹2,150</td></tr>
-              <tr style=""><td style="padding:8px;">🧅 प्याज</td><td style="padding:8px;text-align:right;color:#2e7d32;">₹700</td><td style="padding:8px;text-align:right;color:#c62828;">₹1,100</td><td style="padding:8px;text-align:right;color:#1565C0;">₹920</td></tr>
-            </tbody>
-          </table>
-          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | साप्ताहिक अपडेट</div>
+          <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | स्रोत: Agmarknet / Kisandeals</div>
         </div>
       </div>
 
@@ -1363,7 +1312,7 @@ async function submitComplaint() {
 const SCHEMES = {
   pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, जमीन के कागज़<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
   ayushman:{ title:'🏥 आयुष्मान भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> SECC-2011 सूची में शामिल परिवार, BPL कार्डधारक।<br><br><b>दस्तावेज़:</b> राशन कार्ड, आधार<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल` },
-  ration:  { title:'🍚 राशन कार्ड / मुफ्त अनाज', body:`<b>लाभ:</b> 5 किलो मुफ्त अनाज प्रति व्यक्ति प्रति माह।<br><br><b>पात्रता:</b> BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, निवास प्रमाण, परिवार फोटो<br><br><b>आवेदन:</b>CSC केंद्र` },
+  ration:  { title:'🍚 राशन कार्ड / मुफ्त अनाज', body:`<b>लाभ:</b> 5 किलो मुफ्त अनाज प्रति व्यक्ति प्रति माह।<br><br><b>पात्रता:</b> BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, निवास प्रमाण, परिवार फोटो<br><br><b>आवेदन:</b> जिला खाद्य कार्यालय या CSC केंद्र` },
   ujjwala: { title:'🔥 उज्ज्वला योजना',           body:`<b>लाभ:</b> मुफ्त LPG कनेक्शन + पहला सिलेंडर मुफ्त।<br><br><b>पात्रता:</b> BPL राशन कार्डधारी महिला (18+)।<br><br><b>दस्तावेज़:</b> BPL राशन कार्ड, आधार, बैंक पासबुक<br><br><b>आवेदन:</b> नज़दीकी LPG डीलर या CSC` },
   awas:    { title:'🏠 पीएम आवास योजना',           body:`<b>लाभ:</b> पक्का मकान बनाने के लिए ₹1.20 लाख।<br><br><b>पात्रता:</b> बेघर या कच्चे मकान में रहने वाले BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, बैंक खाता, जमीन के कागज़<br><br><b>आवेदन:</b> ग्राम पंचायत या pmayg.nic.in` },
   beti:    { title:'👧 बेटी बचाओ, बेटी पढ़ाओ',   body:`<b>लाभ:</b> बेटियों की पढ़ाई और सुरक्षा के लिए सहायता।<br><br><b>सुकन्या समृद्धि:</b> 8.2% ब्याज दर।<br><br><b>दस्तावेज़:</b> जन्म प्रमाण, आधार, अभिभावक ID<br><br><b>आवेदन:</b> नज़दीकी बैंक या पोस्ट ऑफिस` },
@@ -1394,7 +1343,7 @@ async function sendAI() {
   appendMsg(msg, 'user');
   const lid = appendLoading();
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("/.netlify/functions/ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1461,7 +1410,7 @@ function escHtml(str) {
 <script>
 // ══ KISAN SECTION JS ══
 const WEATHER_API_KEY = '8601c9cec63be4007ab98dfc410aeef0';
-const WEATHER_CITY = 'Fatehabad,IN';
+const WEATHER_CITY = 'Hansi,IN';
 
 async function loadWeather() {
   const box = document.getElementById('weatherBox');
@@ -1495,7 +1444,7 @@ async function loadWeather() {
     else kisanTip = '✅ मौसम सामान्य — खेती कार्य जारी रखें।';
     const now = new Date();
     if (timeEl) timeEl.textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
-    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:#1565C0;line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:#555;margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:#888;margin-top:2px;">फतेहाबाद, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:#e3f2fd;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:#1565C0;">' + humidity + '%</div><div style="font-size:10px;color:#666;">नमी</div></div><div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:#2e7d32;">' + wind + ' km/h</div><div style="font-size:10px;color:#666;">हवा</div></div><div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:#e65100;">' + feels + '°C</div><div style="font-size:10px;color:#666;">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;font-size:12px;color:#166534;"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
+    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:#1565C0;line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:#555;margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:#888;margin-top:2px;">हांसी, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:#e3f2fd;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:#1565C0;">' + humidity + '%</div><div style="font-size:10px;color:#666;">नमी</div></div><div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:#2e7d32;">' + wind + ' km/h</div><div style="font-size:10px;color:#666;">हवा</div></div><div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:#e65100;">' + feels + '°C</div><div style="font-size:10px;color:#666;">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;font-size:12px;color:#166534;"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
   } catch(e) {
     console.error(e);
     box.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:32px;margin-bottom:8px;">⚠️</div><div style="font-size:13px;color:#666;">मौसम लोड नहीं हुआ।<br>इंटरनेट जांचें।</div><button onclick="loadWeather()" style="margin-top:10px;background:#1565C0;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:sans-serif;">🔄 दोबारा कोशिश</button></div>';
@@ -1528,7 +1477,7 @@ async function sendFasal() {
   appendFasalMsg(msg, 'user');
   const lid = appendFasalLoading();
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।",messages:[{role:"user",content:msg}]})});
+    const res = await fetch("/.netlify/functions/ai", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:"तुम एक अनुभवी कृषि विशेषज्ञ हो जो हरियाणा के किसानों को सलाह देते हो। हमेशा सरल हिंदी में जवाब दो। फसल की बीमारी, खाद, सिंचाई, कीटनाशक, सरकारी योजनाएं — सब पर व्यावहारिक सलाह दो। जवाब संक्षिप्त और उपयोगी हो।",messages:[{role:"user",content:msg}]})});
     const data = await res.json();
     removeFasalLoading(lid);
     appendFasalMsg(data.content?.[0]?.text || "माफ करें, जवाब नहीं मिला।", 'bot');
