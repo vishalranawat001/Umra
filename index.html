@@ -301,7 +301,7 @@ header {
       <div class="qcard-title">सरकारी योजनाएं</div>
       <div class="qcard-sub">7 योजनाएं</div>
     </div>
-    <div class="qcard r" onclick="goTab('emergency',4)">
+    <div class="qcard r" onclick="goTab('emergency',6)">
       <div class="qcard-icon">🆘</div>
       <div class="qcard-title">आपातकाल</div>
       <div class="qcard-sub">हेल्पलाइन</div>
@@ -420,8 +420,6 @@ header {
 <!-- ══ EMERGENCY ══ -->
 <div class="section" id="emergency">
   <div class="emergency-banner">
-    background:linear-gradient(135deg,#dc2626,#991b1b); color:#fff; border-radius:16px; padding:16px; margin-bottom:14px; text-align:center; }
-  <div class="emergency-banner h2">
     <h2>🆘 आपातकालीन सेवाएं</h2>
     <p>किसी भी आपात स्थिति में तुरंत कॉल करें</p>
   </div>
@@ -435,7 +433,6 @@ header {
     <a class="hcard" href="tel:104"><div class="hcard-icon">🏥</div><div class="hcard-num" style="color:var(--blue)">104</div><div class="hcard-name">स्वास्थ्य सेवा</div><button class="hcall" style="background:var(--blue)">📞 कॉल</button></a>
   </div>
 </div>
-
 
 <!-- ══ BUDGET ══ -->
 <div class="section" id="budget">
@@ -1588,215 +1585,4 @@ function getLocalAIResponse(msg) {
   return "माफ़ करें, मैं अभी एक साधारण AI सहायक हूँ। कृपया अपनी योजना का मुख्य नाम लिखें (जैसे: राशन, फैमिली ID, मकान, पेंशन) या अधिक जानकारी के लिए 'शिकायत' सेक्शन में जाएं।";
 }
 
-function askQ(q) { document.getElementById('aiInp').value = q; sendAI(); }
-
-function sendAI() {
-  const inp = document.getElementById('aiInp');
-  const msg = inp.value.trim(); if (!msg) return;
-  const btn = document.getElementById('sendBtn');
-  btn.disabled = true; inp.value = '';
-  
-  appendMsg(msg, 'user');
-  const lid = appendLoading();
-  
-  // Simulate AI Thinking Delay (1.5 seconds)
-  setTimeout(() => {
-    removeLoading(lid);
-    const reply = getLocalAIResponse(msg);
-    appendMsg(reply, 'bot');
-    btn.disabled = false;
-  }, 1500);
-}
-
-function appendMsg(text, type) {
-  const box = document.getElementById('aiMsgs');
-  const div = document.createElement('div');
-  div.className = `msg ${type}`; div.innerHTML = text; // Changed to innerHTML to support bolding ✅
-  box.appendChild(div); box.scrollTop = box.scrollHeight;
-}
-function appendLoading() {
-  const box = document.getElementById('aiMsgs');
-  const id = 'l' + Date.now();
-  box.innerHTML += `<div class="msg loading" id="${id}"><div class="ldots"><span></span><span></span><span></span></div></div>`;
-  box.scrollTop = box.scrollHeight; return id;
-}
-function removeLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
-document.getElementById('aiInp').addEventListener('keypress', e => { if (e.key === 'Enter') sendAI(); });
-
-// ── BUDGET YEAR TOGGLE ──
-var budgetYears = ['2526','2425','2324','2223','2122','2021','1920'];
-var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2324':'#00695c','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2','1920':'#1565C0'};
-function showBudgetYear(year) {
-  budgetYears.forEach(function(y) {
-    var d = document.getElementById('budget'+y);
-    var b = document.getElementById('btn'+y);
-    if (d) d.style.display = (y===year) ? 'block' : 'none';
-    if (b) {
-      if (y===year) {
-        b.style.background=budgetColors[y]; b.style.color='#fff'; b.style.borderColor=budgetColors[y];
-      } else {
-        b.style.background='#fff'; b.style.color='#666'; b.style.borderColor='#e0e0e0';
-      }
-    }
-  });
-}
-
-// ── HELPER ──
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// STATIC NEWS LINKS (Replaced AI API for now)
-function loadAutoNews() {
-  var box = document.getElementById('autoNewsList');
-  if (!box) return;
-
-  var html = `
-    <div style="font-size:12px;color:#666;padding:0 0 10px 0;margin-bottom:4px;">ताज़ा हरियाणा समाचार पढ़ने के लिए नीचे क्लिक करें:</div>
-    <a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bbf7d0;">
-      <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#1A4D2E;">दैनिक भास्कर</div><div style="font-size:11px;color:#666;">हरियाणा की ताज़ा खबरें</div></div>
-      <span style="margin-left:auto;color:#1A4D2E;font-size:18px;">→</span>
-    </a>
-    <a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #fed7aa;">
-      <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#e65100;">दैनिक जागरण</div><div style="font-size:11px;color:#666;">हरियाणा न्यूज़</div></div>
-      <span style="margin-left:auto;color:#e65100;font-size:18px;">→</span>
-    </a>
-    <a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#eff6ff;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bfdbfe;">
-      <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#1565C0;">अमर उजाला</div><div style="font-size:11px;color:#666;">हरियाणा और देश की खबरें</div></div>
-      <span style="margin-left:auto;color:#1565C0;font-size:18px;">→</span>
-    </a>
-    <a href="https://www.punjabkesari.in/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fce4ec;border-radius:10px;text-decoration:none;border:1px solid #fbcfe8;">
-      <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#c2185b;">पंजाब केसरी</div><div style="font-size:11px;color:#666;">हिसार और हरियाणा</div></div>
-      <span style="margin-left:auto;color:#c2185b;font-size:18px;">→</span>
-    </a>
-  `;
-  
-  box.innerHTML = html;
-}
-
-// ══════════════════════════════
-// KISAN SECTION (WEATHER, MANDI, OFFLINE FASAL AI)
-// ══════════════════════════════
-const WEATHER_API_KEY = '8601c9cec63be4007ab98dfc410aeef0';
-const WEATHER_CITY = 'Hansi,IN';
-
-async function loadWeather() {
-  const box = document.getElementById('weatherBox');
-  const timeEl = document.getElementById('weatherTime');
-  if (!box) return;
-  try {
-    const res = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + WEATHER_CITY + '&appid=' + WEATHER_API_KEY + '&units=metric&lang=hi&cnt=5');
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    const cur = data.list[0];
-    const temp = Math.round(cur.main.temp);
-    const feels = Math.round(cur.main.feels_like);
-    const humidity = cur.main.humidity;
-    const desc = cur.weather[0].description;
-    const wind = Math.round(cur.wind.speed * 3.6);
-    const icon = cur.weather[0].main;
-    const iconMap = {'Clear':'☀️','Clouds':'⛅','Rain':'🌧️','Drizzle':'🌦️','Thunderstorm':'⛈️','Snow':'❄️','Mist':'🌫️','Fog':'🌫️','Haze':'🌫️','Smoke':'🌫️','Dust':'🌪️'};
-    const wIcon = iconMap[icon] || '🌤️';
-    const forecasts = data.list.slice(1,5).map(function(f) {
-      const fTime = new Date(f.dt * 1000);
-      const fHour = fTime.getHours();
-      const fIcon = iconMap[f.weather[0].main] || '🌤️';
-      const fAmPm = fHour >= 12 ? 'PM' : 'AM';
-      const fHour12 = fHour % 12 || 12;
-      return '<div style="text-align:center;flex:1;"><div style="font-size:10px;color:#666;">' + fHour12 + fAmPm + '</div><div style="font-size:18px;">' + fIcon + '</div><div style="font-size:12px;font-weight:700;color:#1565C0;">' + Math.round(f.main.temp) + '°</div></div>';
-    }).join('');
-    var kisanTip = '';
-    if (icon === 'Rain' || icon === 'Drizzle') kisanTip = '⚠️ बारिश है — खेत में पानी न भरने दें।';
-    else if (icon === 'Clear' && temp > 35) kisanTip = '🌡️ तेज गर्मी — सुबह या शाम सिंचाई करें।';
-    else if (icon === 'Thunderstorm') kisanTip = '⛈️ तूफान की संभावना — फसल सुरक्षित करें।';
-    else kisanTip = '✅ मौसम सामान्य — खेती कार्य जारी रखें।';
-    const now = new Date();
-    if (timeEl) timeEl.textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
-    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:#1565C0;line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:#555;margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:#888;margin-top:2px;">हांसी, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:#e3f2fd;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:#1565C0;">' + humidity + '%</div><div style="font-size:10px;color:#666;">नमी</div></div><div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:#2e7d32;">' + wind + ' km/h</div><div style="font-size:10px;color:#666;">हवा</div></div><div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:#e65100;">' + feels + '°C</div><div style="font-size:10px;color:#666;">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;font-size:12px;color:#166534;"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
-  } catch(e) {
-    console.error(e);
-    box.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:32px;margin-bottom:8px;">⚠️</div><div style="font-size:13px;color:#666;">मौसम लोड नहीं हुआ।<br>इंटरनेट जांचें।</div><button onclick="loadWeather()" style="margin-top:10px;background:#1565C0;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:sans-serif;">🔄 दोबारा कोशिश</button></div>';
-  }
-}
-
-function showMandi(name) {
-  ['hisar','fatehabad','sirsa'].forEach(function(m) {
-    var d = document.getElementById('mandi-' + m);
-    var b = document.getElementById('mbtn-' + m);
-    if (d) d.style.display = m === name ? 'block' : 'none';
-    if (b) { b.style.background = m === name ? '#e65100' : '#fff'; b.style.color = m === name ? '#fff' : '#666'; b.style.borderColor = m === name ? '#e65100' : '#e0e0e0'; }
-  });
-}
-
-function getLocalFasalResponse(msg) {
-  const lowerMsg = msg.toLowerCase();
-  
-  if (lowerMsg.includes('गेहूं') || lowerMsg.includes('gehu') || lowerMsg.includes('पीलापन') || lowerMsg.includes('pila')) {
-    return "✅ गेहूं में पीलापन यूरिया की कमी या अधिक नमी के कारण हो सकता है। उचित मात्रा में जिंक (Zinc) और यूरिया का स्प्रे करें।";
-  }
-  if (lowerMsg.includes('सरसों') || lowerMsg.includes('sarso') || lowerMsg.includes('खाद') || lowerMsg.includes('khad')) {
-    return "✅ सरसों की अच्छी पैदावार के लिए बिजाई के समय डीएपी (DAP) और सल्फर का उपयोग करें। पहली सिंचाई के बाद यूरिया डालें।";
-  }
-  if (lowerMsg.includes('धान') || lowerMsg.includes('dhaan') || lowerMsg.includes('रोपाई') || lowerMsg.includes('ropai')) {
-    return "✅ धान की रोपाई के लिए 25-30 दिन की पौध सबसे अच्छी होती है। खेत में पानी का स्तर बनाए रखें और जिंक का प्रयोग ज़रूर करें।";
-  }
-  if (lowerMsg.includes('बीमा') || lowerMsg.includes('beema') || lowerMsg.includes('bima') || lowerMsg.includes('pmfby')) {
-    return "✅ प्रधानमंत्री फसल बीमा योजना (PMFBY) के तहत अपनी फसल का बीमा करवाने के लिए ज़रूरी दस्तावेज़: आधार कार्ड, बैंक कॉपी, ज़मीन की जमाबंदी (फर्द) और फसल बुवाई प्रमाण पत्र। अंतिम तिथि से पहले बैंक या CSC सेंटर जाएं।";
-  }
-  if (lowerMsg.includes('ब्यौरा') || lowerMsg.includes('byora') || lowerMsg.includes('रजिस्ट्रेशन') || lowerMsg.includes('मंडी')) {
-    return "✅ मंडी में अपनी फसल (गेहूं, सरसों, धान आदि) सरकारी रेट पर बेचने के लिए 'मेरी फसल मेरा ब्यौरा' पोर्टल पर रजिस्ट्रेशन ज़रूरी है। ज़रूरी दस्तावेज़: फैमिली ID (PPP), आधार कार्ड, बैंक पासबुक और ज़मीन की फर्द (जमाबंदी)।";
-  }
-  if (lowerMsg.includes('मिट्टी') || lowerMsg.includes('mitti') || lowerMsg.includes('जांच')) {
-    return "✅ खेत की मिट्टी जांच (Soil Testing) के लिए अपने खेत से मिट्टी का सैंपल लें और उसे नज़दीकी कृषि विज्ञान केंद्र (KVK) या कृषि विभाग के कार्यालय में जमा करवाएं। इससे पता चलेगा कि खेत में कौन सी खाद चाहिए।";
-  }
-  if (lowerMsg.includes('मौसम') || lowerMsg.includes('mausam') || lowerMsg.includes('बारिश') || lowerMsg.includes('barish')) {
-    return "✅ मौसम की ताज़ा जानकारी के लिए आप इसी पेज पर ऊपर दिए गए 'मौसम अपडेट' सेक्शन को देख सकते हैं। यह हर दिन अपडेट होता है।";
-  }
-
-  return "मैं अभी नया कृषि सहायक हूँ। कृपया फसल (जैसे: गेहूं, सरसों), खाद, बीमा या ब्यौरा के बारे में अपना सवाल स्पष्ट रूप से लिखें।";
-}
-
-function askFasal(q) { document.getElementById('fasalInp').value = q; sendFasal(); }
-
-function sendFasal() {
-  const inp = document.getElementById('fasalInp');
-  const msg = inp.value.trim(); if (!msg) return;
-  inp.value = '';
-  
-  appendFasalMsg(msg, 'user');
-  const lid = appendFasalLoading();
-  
-  // Simulate AI Thinking Delay (1.5 seconds)
-  setTimeout(() => {
-    removeFasalLoading(lid);
-    const reply = getLocalFasalResponse(msg);
-    appendFasalMsg(reply, 'bot');
-  }, 1500);
-}
-
-function appendFasalMsg(text, type) {
-  const box = document.getElementById('fasalMsgs');
-  const div = document.createElement('div');
-  div.style.cssText = 'max-width:85%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;' + (type==='bot' ? 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;align-self:flex-start;border-bottom-left-radius:3px;' : 'background:#2e7d32;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;');
-  div.innerHTML = text; // Changed to innerHTML to support bolding ✅
-  box.appendChild(div); box.scrollTop = box.scrollHeight;
-}
-function appendFasalLoading() {
-  const box = document.getElementById('fasalMsgs'); const id = 'fl' + Date.now();
-  const div = document.createElement('div'); div.id = id;
-  div.style.cssText = 'background:#f0fdf4;border:1px solid #bbf7d0;align-self:flex-start;padding:10px 14px;border-radius:14px;border-bottom-left-radius:3px;';
-  div.innerHTML = '<div class="ldots"><span></span><span></span><span></span></div>';
-  box.appendChild(div); box.scrollTop = box.scrollHeight; return id;
-}
-function removeFasalLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
-document.getElementById('fasalInp') && document.getElementById('fasalInp').addEventListener('keypress', function(e) { if (e.key === 'Enter') sendFasal(); });
-
-</script>
-</body>
-</html>
+function askQ(q) { document.getElementById('aiInp').
