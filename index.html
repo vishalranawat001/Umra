@@ -360,6 +360,21 @@ header {
 
 <!-- ══ NEWS ══ -->
 <div class="section" id="news">
+
+  <!-- Haryana AI News -->
+  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+    <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:15px;">📡</span>
+      <span style="font-size:14px;font-weight:700;">हरियाणा समाचार</span>
+      <button onclick="loadAutoNews()" style="margin-left:auto;background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:15px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;">🔄 लोड करें</button>
+    </div>
+    <div id="autoNewsList" style="padding:12px;">
+      <div style="text-align:center;padding:16px;font-size:12px;color:#666;">
+        📡 ऊपर "लोड करें" दबाएं — AI हरियाणा की ताज़ा खबरें तैयार करेगा
+      </div>
+    </div>
+  </div>
+
   <div class="sec-title">
     📢 गांव समाचार
     <span class="live-badge"><span class="live-dot"></span>लाइव</span>
@@ -1344,7 +1359,7 @@ async function sendAI() {
   appendMsg(msg, 'user');
   const lid = appendLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -1352,7 +1367,7 @@ async function sendAI() {
         contents:[{parts:[{text:msg}]}]
       })
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    if (!res.ok) { var errTxt = await res.text(); throw new Error('HTTP ' + res.status + ' ' + errTxt); }
     const data = await res.json();
     removeLoading(lid);
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -1360,7 +1375,11 @@ async function sendAI() {
   } catch(e) {
     console.error('AI error:', e);
     removeLoading(lid);
-    appendMsg("❌ नेटवर्क समस्या है। इंटरनेट जांचें।", 'bot');
+    if (e.message && e.message.includes('429')) {
+      appendMsg("⏳ AI व्यस्त है, 30 सेकंड बाद दोबारा कोशिश करें।", 'bot');
+    } else {
+      appendMsg("❌ नेटवर्क समस्या है। इंटरनेट जांचें।", 'bot');
+    }
   }
   btn.disabled = false;
 }
@@ -1431,13 +1450,13 @@ async function loadAutoNews() {
     var today = new Date().toLocaleDateString('hi-IN', {day:'numeric',month:'long',year:'numeric'});
     var prompt = 'आज ' + today + ' के लिए हरियाणा और भारत की 4 महत्वपूर्ण खबरें लिखो। हर खबर में एक शीर्षक और 2 लाइन विवरण हो। हर खबर को --- से अलग करो। विषय: खेती, सरकारी योजनाएं, हरियाणा, किसान, ग्रामीण विकास। केवल हिंदी में।';
 
-    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA';
+    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA';
     var res = await fetch(GURL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({contents:[{parts:[{text:prompt}]}]})
     });
-    if (!res.ok) throw new Error('API ' + res.status);
+    if (!res.ok) { var errData = await res.text(); throw new Error('HTTP ' + res.status + ' ' + errData); }
     var data = await res.json();
     var text = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) || '';
     if (!text) throw new Error('empty');
@@ -1536,7 +1555,7 @@ async function sendFasal() {
   appendFasalMsg(msg, 'user');
   const lid = appendFasalLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
@@ -1545,7 +1564,7 @@ async function sendFasal() {
         }]
       })
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    if (!res.ok) { var errTxt = await res.text(); throw new Error('HTTP ' + res.status + ' ' + errTxt); }
     const data = await res.json();
     removeFasalLoading(lid);
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
