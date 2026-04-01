@@ -218,7 +218,7 @@ header {
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
 /* BOTTOM NAV */
-.bnav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; display:flex; box-shadow:0 -3px 14px rgba(0,0,0,0.07); z-index:100; }
+.bnav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; display:flex; box-shadow:0 -3px 14px rgba(0,0,0,0.07); z-index:100; justify-content:space-around; }
 .bn-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:9px 4px 7px; cursor:pointer; font-size:10px; color:#9ca3af; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; gap:2px; transition:color .2s; }
 .bn-item .bni { font-size:20px; transition:transform .2s; }
 .bn-item.active { color:var(--green); }
@@ -364,13 +364,12 @@ header {
   <!-- Haryana AI News -->
   <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
-      <span style="font-size:15px;">📡</span>
-      <span style="font-size:14px;font-weight:700;">हरियाणा समाचार</span>
-      <button onclick="loadAutoNews()" style="margin-left:auto;background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:15px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;">🔄 लोड करें</button>
+      <span style="font-size:15px;">📰</span>
+      <span style="font-size:14px;font-weight:700;">हरियाणा के प्रमुख अखबार</span>
     </div>
     <div id="autoNewsList" style="padding:12px;">
       <div style="text-align:center;padding:16px;font-size:12px;color:#666;">
-        📡 ऊपर "लोड करें" दबाएं — AI हरियाणा की ताज़ा खबरें तैयार करेगा
+        लोड हो रहा है...
       </div>
     </div>
   </div>
@@ -1289,10 +1288,10 @@ header {
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <div class="bn-item active" id="bn0" onclick="goTab('home',0)"><span class="bni">🏠</span>होम</div>
-  <div class="bn-item" id="bn1" onclick="goTab('complaints',1)"><span class="bni">📝</span>शिकायत</div>
-  <div class="bn-item" id="bn2" onclick="goTab('emergency',6)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
+  <div class="bn-item" id="bn4" onclick="goTab('budget',4)"><span class="bni">💰</span>बजट</div>
+  <div class="bn-item" id="bn6" onclick="goTab('emergency',6)"><div class="sos-btn">SOS</div><span style="margin-top:2px;font-size:9px">आपातकाल</span></div>
+  <div class="bn-item" id="bn2" onclick="goTab('news',2)"><span class="bni">📢</span>समाचार</div>
   <div class="bn-item" id="bn3" onclick="goTab('kisan',3)"><span class="bni">🌾</span>किसान</div>
-  <div class="bn-item" id="bn4" onclick="goTab('schemes',5)"><span class="bni">📋</span>योजनाएं</div>
 </nav>
 
 <!-- MODAL -->
@@ -1361,7 +1360,7 @@ document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.
 
 // ── NAV ──
 const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency'];
-const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn3',4:'bn3',5:'bn4',6:'bn2'};
+const BN_MAP = {0:'bn0',2:'bn2',3:'bn3',4:'bn4',6:'bn6'};
 
 function goTab(id, idx) {
   SECTIONS.forEach(s => document.getElementById(s).classList.remove('active'));
@@ -1590,42 +1589,43 @@ function escHtml(str) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// AUTO NEWS using Gemini
-async function loadAutoNews() {
+// STATIC NEWS LINKS (Replaced AI API for now)
+function loadAutoNews() {
   var box = document.getElementById('autoNewsList');
-  var timeEl = document.getElementById('autoNewsTime');
   if (!box) return;
 
-  var cacheKey = 'autoNews_v1';
-  var cacheTimeKey = 'autoNews_time_v1';
-  var cached = localStorage.getItem(cacheKey);
-  var cachedTime = parseInt(localStorage.getItem(cacheTimeKey) || '0');
-  var now = Date.now();
+  var html = `
+    <div style="font-size:12px;color:#666;padding:0 0 10px 0;margin-bottom:4px;">ताज़ा हरियाणा समाचार पढ़ने के लिए नीचे क्लिक करें:</div>
+    <a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bbf7d0;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#1A4D2E;">दैनिक भास्कर</div><div style="font-size:11px;color:#666;">हरियाणा की ताज़ा खबरें</div></div>
+      <span style="margin-left:auto;color:#1A4D2E;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #fed7aa;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#e65100;">दैनिक जागरण</div><div style="font-size:11px;color:#666;">हरियाणा न्यूज़</div></div>
+      <span style="margin-left:auto;color:#e65100;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#eff6ff;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bfdbfe;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#1565C0;">अमर उजाला</div><div style="font-size:11px;color:#666;">हरियाणा और देश की खबरें</div></div>
+      <span style="margin-left:auto;color:#1565C0;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.punjabkesari.in/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fce4ec;border-radius:10px;text-decoration:none;border:1px solid #fbcfe8;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#c2185b;">पंजाब केसरी</div><div style="font-size:11px;color:#666;">हिसार और हरियाणा</div></div>
+      <span style="margin-left:auto;color:#c2185b;font-size:18px;">→</span>
+    </a>
+  `;
+  
+  box.innerHTML = html;
+}
 
-  if (cached && (now - cachedTime) < 6 * 60 * 60 * 1000) {
-    box.innerHTML = cached;
-    if (timeEl) timeEl.textContent = new Date(cachedTime).toLocaleTimeString('hi-IN', {hour:'2-digit',minute:'2-digit'});
-    return;
-  }
+// Auto news loads via goTab
 
-  box.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>समाचार तैयार हो रहे हैं...</p></div>';
-
-  try {
-    var today = new Date().toLocaleDateString('hi-IN', {day:'numeric',month:'long',year:'numeric'});
-    var prompt = 'आज ' + today + ' के लिए हरियाणा और भारत की 4 महत्वपूर्ण खबरें लिखो। हर खबर में एक शीर्षक और 2 लाइन विवरण हो। हर खबर को --- से अलग करो। विषय: खेती, सरकारी योजनाएं, हरियाणा, किसान, ग्रामीण विकास। केवल हिंदी में।';
-
-    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_NEW_GEMINI_API_KEY';
-    var res = await fetch(GURL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-    });
-    if (!res.ok) { var errData = await res.text(); throw new Error('HTTP ' + res.status + ' ' + errData); }
-    var data = await res.json();
-    var text = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) || '';
-    if (!text) throw new Error('empty');
-
-    var colors = ['var(--saffron)','#1565C0','#2e7d32','#7b1fa2'];
+</script>
+</body>
+</html>
     var items = text.split('---').filter(function(s){ return s.trim().length > 20; });
     var html = items.slice(0,4).map(function(item, i) {
       var lines = item.trim().split('\n').filter(function(l){ return l.trim(); });
@@ -1645,41 +1645,11 @@ async function loadAutoNews() {
 
   } catch(e) {
     console.error('Auto news error:', e);
-    box.innerHTML = '<div class="no-data"><span>📡</span>समाचार लोड नहीं हुए।<br>इंटरनेट जांचें।</div>';
+    box.innerHTML = '<div class="no-data"><span>📡</span>समाचार लोड नहीं हुए।<br>कृपया कोड में नई Gemini API Key डालें।</div>';
   }
 }
 
-// Auto news loads via goTab
+// goTab handles all tab logic centrally
 
+document.getElementById('fasalInp') && document.getElementById('fasalInp').addEventListener('keypress', function(e) { if (e.key === 'Enter') sendFasal(); });
 </script>
-</body>
-</html>
-<script>
-// ══ KISAN SECTION JS ══
-const WEATHER_API_KEY = '8601c9cec63be4007ab98dfc410aeef0';
-const WEATHER_CITY = 'Hansi,IN';
-
-async function loadWeather() {
-  const box = document.getElementById('weatherBox');
-  const timeEl = document.getElementById('weatherTime');
-  if (!box) return;
-  try {
-    const res = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + WEATHER_CITY + '&appid=' + WEATHER_API_KEY + '&units=metric&lang=hi&cnt=5');
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    const cur = data.list[0];
-    const temp = Math.round(cur.main.temp);
-    const feels = Math.round(cur.main.feels_like);
-    const humidity = cur.main.humidity;
-    const desc = cur.weather[0].description;
-    const wind = Math.round(cur.wind.speed * 3.6);
-    const icon = cur.weather[0].main;
-    const iconMap = {'Clear':'☀️','Clouds':'⛅','Rain':'🌧️','Drizzle':'🌦️','Thunderstorm':'⛈️','Snow':'❄️','Mist':'🌫️','Fog':'🌫️','Haze':'🌫️','Smoke':'🌫️','Dust':'🌪️'};
-    const wIcon = iconMap[icon] || '🌤️';
-    const forecasts = data.list.slice(1,5).map(function(f) {
-      const fTime = new Date(f.dt * 1000);
-      const fHour = fTime.getHours();
-      const fIcon = iconMap[f.weather[0].main] || '🌤️';
-      const fAmPm = fHour >= 12 ? 'PM' : 'AM';
-      const fHour12 = fHour % 12 || 12;
-      return '<div style="text-align:center;
