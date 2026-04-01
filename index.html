@@ -254,7 +254,7 @@ header {
 <div class="section active" id="home">
   <div class="hero">
     <h2>नमस्ते, उमरा वासियों! 🙏</h2>
-    <p>गांव की सेवाएं, योजनाएं और शिकायतें — सब एक जगह।</p>
+    <p>गांव की सेवाएं, योजनाएं और शिकायतें — सब एक जगह。</p>
   </div>
 
   <div class="sec-title">📞 पंचायत संपर्क</div>
@@ -427,7 +427,6 @@ header {
   </div>
 </div>
 
-
 <div class="section" id="budget">
   <div style="background:linear-gradient(135deg,#1A4D2E,#2d6a4f);border-radius:16px;padding:18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
     <div style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:52px;opacity:.2;">💰</div>
@@ -437,10 +436,7 @@ header {
   </div>
 </div>
 
-
-
 <div class="section" id="kisan">
-
   <div style="background:linear-gradient(135deg,#2e7d32,#558b2f);border-radius:16px;padding:18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
     <div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:60px;opacity:.2;">🌾</div>
     <div style="font-size:10px;color:#c8e6c9;font-weight:700;letter-spacing:1px;margin-bottom:4px;">ग्राम पंचायत उमरा</div>
@@ -469,13 +465,11 @@ header {
       <span style="font-size:10px;opacity:.8;margin-left:auto;">स्रोत: agmarknet.gov.in</span>
     </div>
     <div style="padding:14px;">
-
       <div style="background:#e8f5e9;border-radius:10px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
         <span style="font-size:16px;">📍</span>
         <span style="font-size:13px;font-weight:700;color:#1b5e20;">हांसी APMC मंडी</span>
         <span style="font-size:10px;color:#666;margin-left:auto;">हिसार जिला, हरियाणा</span>
       </div>
-
       <div id="mandiBox">
         <div id="mandi-hansi">
           <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:#1b5e20;">
@@ -501,7 +495,6 @@ header {
           <div style="font-size:10px;color:#9ca3af;margin-top:8px;text-align:center;">भाव ₹/क्विंटल में | स्रोत: Agmarknet / Kisandeals</div>
         </div>
       </div>
-
       <a href="https://agmarknet.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff3e0;border:1.5px solid #ffcc80;border-radius:12px;padding:11px;text-decoration:none;color:#e65100;font-size:12px;font-weight:700;margin-top:12px;">
         🔗 Agmarknet पर सटीक भाव देखें →
       </a>
@@ -552,7 +545,6 @@ header {
       <span style="margin-left:auto;color:#2e7d32;">→</span>
     </a>
   </div>
-
 </div>
 
 <nav class="bnav">
@@ -575,9 +567,7 @@ header {
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════════
-// FIRESTORE REST API — No CDN needed!
-// ══════════════════════════════════════════
+// FIRESTORE API
 const PROJECT_ID = "village-umra";
 const API_KEY    = "AIzaSyApqlpXxd647XDdn8y2G_JX0oF5LcaM0no";
 const BASE_URL   = "https://firestore.googleapis.com/v1/projects/" + PROJECT_ID + "/databases/(default)/documents";
@@ -619,13 +609,12 @@ function toFields(obj) {
   return f;
 }
 
-// ── DATE ──
+// DATE & NAV
 const DAYS=['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
 const MONTHS=['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
 const nd = new Date();
 document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
 
-// ── NAV ──
 const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency'];
 const BN_MAP = {0:'bn0',1:'bn1',2:'bn3',3:'bn3',4:'bn3',5:'bn4',6:'bn2'};
 
@@ -642,7 +631,6 @@ function goTab(id, idx) {
   if (id === 'kisan') setTimeout(loadWeather, 100);
 }
 
-// ── TOAST ──
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -657,9 +645,7 @@ function fmtTime(ts) {
   return new Date(Number(ts)).toLocaleString('hi-IN');
 }
 
-// ══════════════════════════════
-// NEWS — REST API polling
-// ══════════════════════════════
+// NEWS API
 const NEWS_CATS = {ghoshna:'📢 घोषणा',krishi:'🌾 कृषि',swasthya:'🏥 स्वास्थ्य',shiksha:'🏫 शिक्षा',vikas:'🏗️ विकास',other:'📌 अन्य'};
 const NEWS_TAG_CLASS = {ghoshna:'',krishi:'green',swasthya:'red',shiksha:'blue',vikas:'',other:''};
 
@@ -688,14 +674,10 @@ async function loadNews() {
     newsCount.textContent = '— खबरें';
   }
 }
-
-// Auto-refresh news every 30 seconds
 loadNews();
 setInterval(loadNews, 30000);
 
-// ══════════════════════════════
-// COMPLAINTS — REST API
-// ══════════════════════════════
+// COMPLAINTS API
 const CAT_LABELS = {road:'🛣️ सड़क',water:'💧 पानी',light:'💡 बिजली',school:'🏫 स्कूल',health:'🏥 स्वास्थ्य',other:'📌 अन्य'};
 
 async function loadComplaints() {
@@ -726,7 +708,6 @@ async function loadComplaints() {
     list.innerHTML = '<div class="no-data"><span>⚠️</span>शिकायतें लोड करने में समस्या हुई।</div>';
   }
 }
-
 loadComplaints();
 
 async function submitComplaint() {
@@ -752,9 +733,7 @@ async function submitComplaint() {
   btn.disabled = false; btn.textContent = '✅ शिकायत दर्ज करें';
 }
 
-// ══════════════════════════════
 // SCHEME MODALS
-// ══════════════════════════════
 const SCHEMES = {
   pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, जमीन के कागज़<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
   ayushman:{ title:'🏥 आयुष्मान भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> SECC-2011 सूची में शामिल परिवार, BPL कार्डधारक।<br><br><b>दस्तावेज़:</b> राशन कार्ड, आधार<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल` },
@@ -776,9 +755,7 @@ function closeModal(e) {
     document.getElementById('modal').classList.remove('open');
 }
 
-// ══════════════════════════════
-// AI ASSISTANT
-// ══════════════════════════════
+// ═════ MAIN AI ASSISTANT ═════
 function askQ(q) { document.getElementById('aiInp').value = q; sendAI(); }
 
 async function sendAI() {
@@ -789,7 +766,7 @@ async function sendAI() {
   appendMsg(msg, 'user');
   const lid = appendLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -827,36 +804,10 @@ function appendLoading() {
   box.scrollTop = box.scrollHeight; return id;
 }
 function removeLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
-
-
-// ── BUDGET YEAR TOGGLE ──
-var budgetYears = ['2526','2425','2324','2223','2122','2021','1920'];
-var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2324':'#00695c','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2','1920':'#1565C0'};
-function showBudgetYear(year) {
-  budgetYears.forEach(function(y) {
-    var d = document.getElementById('budget'+y);
-    var b = document.getElementById('btn'+y);
-    if (d) d.style.display = (y===year) ? 'block' : 'none';
-    if (b) {
-      if (y===year) {
-        b.style.background=budgetColors[y]; b.style.color='#fff'; b.style.borderColor=budgetColors[y];
-      } else {
-        b.style.background='#fff'; b.style.color='#666'; b.style.borderColor='#e0e0e0';
-      }
-    }
-  });
-}
-
 document.getElementById('aiInp').addEventListener('keypress', e => { if (e.key === 'Enter') sendAI(); });
 
-// ── HELPER ──
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
 
-// AUTO NEWS using Gemini
+// ═════ AUTO NEWS (GEMINI 3 API) ═════
 async function loadAutoNews() {
   var box = document.getElementById('autoNewsList');
   var timeEl = document.getElementById('autoNewsTime');
@@ -880,7 +831,7 @@ async function loadAutoNews() {
     var today = new Date().toLocaleDateString('hi-IN', {day:'numeric',month:'long',year:'numeric'});
     var prompt = 'आज ' + today + ' के लिए हरियाणा और भारत की 4 महत्वपूर्ण खबरें लिखो। हर खबर में एक शीर्षक और 2 लाइन विवरण हो। हर खबर को --- से अलग करो। विषय: खेती, सरकारी योजनाएं, हरियाणा, किसान, ग्रामीण विकास। केवल हिंदी में।';
 
-    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU';
+    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU';
     var res = await fetch(GURL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -915,13 +866,7 @@ async function loadAutoNews() {
   }
 }
 
-// Auto news loads via goTab
-
-</script>
-</body>
-</html>
-<script>
-// ══ KISAN SECTION JS ══
+// ═════ WEATHER & MANDI ═════
 const WEATHER_API_KEY = '8601c9cec63be4007ab98dfc410aeef0';
 const WEATHER_CITY = 'Hansi,IN';
 
@@ -964,9 +909,6 @@ async function loadWeather() {
   }
 }
 
-// Weather loads via goTab
-
-// Mandi toggle
 function showMandi(name) {
   ['hisar','fatehabad','sirsa'].forEach(function(m) {
     var d = document.getElementById('mandi-' + m);
@@ -976,7 +918,7 @@ function showMandi(name) {
   });
 }
 
-// Fasal Salah AI
+// ═════ FASAL SALAH AI ═════
 function askFasal(q) { document.getElementById('fasalInp').value = q; sendFasal(); }
 async function sendFasal() {
   const inp = document.getElementById('fasalInp');
@@ -985,7 +927,7 @@ async function sendFasal() {
   appendFasalMsg(msg, 'user');
   const lid = appendFasalLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
@@ -1019,8 +961,8 @@ function appendFasalLoading() {
   box.appendChild(div); box.scrollTop = box.scrollHeight; return id;
 }
 function removeFasalLoading(id) { const el = document.getElementById(id); if (el) el.remove(); }
-
-// goTab handles all tab logic centrally
-
 document.getElementById('fasalInp') && document.getElementById('fasalInp').addEventListener('keypress', function(e) { if (e.key === 'Enter') sendFasal(); });
+
 </script>
+</body>
+</html>
