@@ -1149,7 +1149,7 @@ header {
 // FIRESTORE REST API — No CDN needed!
 // ══════════════════════════════════════════
 const PROJECT_ID = "village-umra";
-const API_KEY    = "AIzaSyAhbUF4yjYz8NebhaJPuyZYsSBnUNV__BA";
+const API_KEY    = "AIzaSyApqlpXxd647XDdn8y2G_JX0oF5LcaM0no";
 const BASE_URL   = "https://firestore.googleapis.com/v1/projects/" + PROJECT_ID + "/databases/(default)/documents";
 
 async function fsGet(col) {
@@ -1359,11 +1359,11 @@ async function sendAI() {
   appendMsg(msg, 'user');
   const lid = appendLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        system_instruction:{parts:[{text:"तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं, दस्तावेज़ों, हेल्पलाइन और सरकारी सेवाओं की जानकारी सरल हिंदी में दो। छोटे और उपयोगी जवाब दो।"}]},
+        system_instruction:{parts:[{text:"तुम उमरा गांव के CSC केंद्र के AI सहायक हो। गांव के लोगों को सरकारी योजनाओं की जानकारी सरल हिंदी में दो। जवाब 3-4 लाइन से ज़्यादा न हो।"}]},
         contents:[{parts:[{text:msg}]}]
       })
     });
@@ -1450,7 +1450,7 @@ async function loadAutoNews() {
     var today = new Date().toLocaleDateString('hi-IN', {day:'numeric',month:'long',year:'numeric'});
     var prompt = 'आज ' + today + ' के लिए हरियाणा और भारत की 4 महत्वपूर्ण खबरें लिखो। हर खबर में एक शीर्षक और 2 लाइन विवरण हो। हर खबर को --- से अलग करो। विषय: खेती, सरकारी योजनाएं, हरियाणा, किसान, ग्रामीण विकास। केवल हिंदी में।';
 
-    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA';
+    var GURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU';
     var res = await fetch(GURL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -1555,7 +1555,7 @@ async function sendFasal() {
   appendFasalMsg(msg, 'user');
   const lid = appendFasalLoading();
   try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFH9s189OyrGNCudRV0P9dgbRyuTmh2GA", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDfq0ZIFJmY8_3epQytIfA2vu69j3MG9ZU", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
