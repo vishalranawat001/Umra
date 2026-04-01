@@ -316,16 +316,17 @@ header {
       <small>ऑनलाइन</small>
     </div>
     <div class="ai-msgs" id="aiMsgs">
-      <div class="msg bot">🙏 नमस्ते! मैं उमरा गांव का सहायक हूं। सरकारी योजनाओं, दस्तावेज़ों या किसी भी सरकारी काम के बारे में पूछें।</div>
+      <div class="msg bot">🙏 नमस्ते! मैं उमरा गांव का सहायक हूं। किसी भी सरकारी योजना या ज़रूरी दस्तावेज़ों के बारे में नीचे पूछें।</div>
     </div>
     <div class="ai-quick">
-      <div class="aq" onclick="askQ('पीएम किसान योजना क्या है?')">🌾 पीएम किसान</div>
-      <div class="aq" onclick="askQ('राशन कार्ड कैसे बनाएं?')">🍚 राशन कार्ड</div>
-      <div class="aq" onclick="askQ('आयुष्मान भारत का लाभ कैसे मिलेगा?')">🏥 आयुष्मान</div>
-      <div class="aq" onclick="askQ('आधार कार्ड अपडेट कैसे करें?')">🪪 आधार</div>
+      <div class="aq" onclick="askQ('फैमिली ID कैसे बनाएं?')">👨‍👩‍👧‍👦 फैमिली ID</div>
+      <div class="aq" onclick="askQ('राशन कार्ड के दस्तावेज़?')">🍚 राशन कार्ड</div>
+      <div class="aq" onclick="askQ('पेंशन कैसे बनेगी?')">👴 पेंशन</div>
+      <div class="aq" onclick="askQ('पीएम आवास योजना')">🏠 मकान योजना</div>
+      <div class="aq" onclick="askQ('जाति प्रमाण पत्र')">📜 जाति प्रमाण पत्र</div>
     </div>
     <div class="ai-inp-area">
-      <input class="ai-inp" id="aiInp" placeholder="यहाँ सवाल लिखें..." />
+      <input class="ai-inp" id="aiInp" placeholder="योजना का नाम लिखें..." />
       <button class="send-btn" id="sendBtn" onclick="sendAI()">➤</button>
     </div>
   </div>
@@ -1262,7 +1263,7 @@ header {
     <div style="display:flex;gap:6px;padding:0 10px 8px;overflow-x:auto;scrollbar-width:none;">
       <div onclick="askFasal('गेहूं में पीलापन क्यों आता है?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌾 गेहूं में पीलापन</div>
       <div onclick="askFasal('सरसों की फसल में कौन सी खाद डालें?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌱 सरसों में खाद</div>
-      <div onclick="askFasal('धान की रोपाई का सही समय क्या है?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌾 धान रोपाई</div>
+      <div onclick="askFasal('मेरी फसल मेरा ब्यौरा कैसे भरें?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">📝 फसल ब्यौरा</div>
       <div onclick="askFasal('फसल बीमा कैसे करवाएं?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🛡️ फसल बीमा</div>
     </div>
 
@@ -1498,13 +1499,13 @@ async function submitComplaint() {
 // SCHEME MODALS
 // ══════════════════════════════
 const SCHEMES = {
-  pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, जमीन के कागज़<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
-  ayushman:{ title:'🏥 आयुष्मान भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> SECC-2011 सूची में शामिल परिवार, BPL कार्डधारक।<br><br><b>दस्तावेज़:</b> राशन कार्ड, आधार<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल` },
-  ration:  { title:'🍚 राशन कार्ड / मुफ्त अनाज', body:`<b>लाभ:</b> 5 किलो मुफ्त अनाज प्रति व्यक्ति प्रति माह।<br><br><b>पात्रता:</b> BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, निवास प्रमाण, परिवार फोटो<br><br><b>आवेदन:</b> जिला खाद्य कार्यालय या CSC केंद्र` },
-  ujjwala: { title:'🔥 उज्ज्वला योजना',           body:`<b>लाभ:</b> मुफ्त LPG कनेक्शन + पहला सिलेंडर मुफ्त।<br><br><b>पात्रता:</b> BPL राशन कार्डधारी महिला (18+)।<br><br><b>दस्तावेज़:</b> BPL राशन कार्ड, आधार, बैंक पासबुक<br><br><b>आवेदन:</b> नज़दीकी LPG डीलर या CSC` },
-  awas:    { title:'🏠 पीएम आवास योजना',           body:`<b>लाभ:</b> पक्का मकान बनाने के लिए ₹1.20 लाख।<br><br><b>पात्रता:</b> बेघर या कच्चे मकान में रहने वाले BPL परिवार।<br><br><b>दस्तावेज़:</b> आधार, बैंक खाता, जमीन के कागज़<br><br><b>आवेदन:</b> ग्राम पंचायत या pmayg.nic.in` },
-  beti:    { title:'👧 बेटी बचाओ, बेटी पढ़ाओ',   body:`<b>लाभ:</b> बेटियों की पढ़ाई और सुरक्षा के लिए सहायता।<br><br><b>सुकन्या समृद्धि:</b> 8.2% ब्याज दर।<br><br><b>दस्तावेज़:</b> जन्म प्रमाण, आधार, अभिभावक ID<br><br><b>आवेदन:</b> नज़दीकी बैंक या पोस्ट ऑफिस` },
-  mudra:   { title:'💼 पीएम मुद्रा योजना',          body:`<b>लाभ:</b> ₹10 लाख तक का लोन — बिना गारंटी।<br><br><b>प्रकार:</b> शिशु (₹50K), किशोर (₹5L), तरुण (₹10L)।<br><br><b>दस्तावेज़:</b> आधार, PAN, व्यापार प्रमाण, बैंक पासबुक<br><br><b>आवेदन:</b> नज़दीकी बैंक या CSC` }
+  pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, ज़मीन की फर्द (जमाबंदी), मोबाइल नंबर।<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
+  ayushman:{ title:'🏥 आयुष्मान / चिरायु भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> जिनकी फैमिली ID में आय 1.80 लाख (या चिरायु के लिए 3 लाख) से कम है।<br><br><b>दस्तावेज़:</b> फैमिली ID (PPP), आधार कार्ड।<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल / CSC` },
+  ration:  { title:'🍚 राशन कार्ड / मुफ्त अनाज', body:`<b>लाभ:</b> 5 किलो मुफ्त अनाज प्रति व्यक्ति प्रति माह।<br><br><b>पात्रता:</b> जिनकी फैमिली ID में आय 1.80 लाख से कम है।<br><br><b>दस्तावेज़:</b> फैमिली ID (PPP), आधार कार्ड। (राशन कार्ड अब फैमिली ID से ऑटोमैटिक बनते हैं)<br><br><b>आवेदन:</b> पोर्टल पर आय वेरीफाई करवाएं।` },
+  ujjwala: { title:'🔥 उज्ज्वला योजना',           body:`<b>लाभ:</b> मुफ्त LPG गैस कनेक्शन + पहला सिलेंडर मुफ्त।<br><br><b>पात्रता:</b> BPL कार्ड वाली महिलाएं।<br><br><b>दस्तावेज़:</b> BPL राशन कार्ड, फैमिली ID, आधार, बैंक पासबुक, 2 पासपोर्ट फोटो।<br><br><b>आवेदन:</b> नज़दीकी गैस एजेंसी या CSC` },
+  awas:    { title:'🏠 पीएम आवास योजना',           body:`<b>लाभ:</b> पक्का मकान बनाने के लिए ₹1.20 लाख।<br><br><b>पात्रता:</b> बेघर या कच्चे मकान में रहने वाले BPL परिवार।<br><br><b>दस्तावेज़:</b> फैमिली ID, आधार, बैंक खाता, ज़मीन के कागज़, नरेगा जॉब कार्ड।<br><br><b>आवेदन:</b> ग्राम पंचायत (सरपंच/सचिव) या pmayg.nic.in` },
+  beti:    { title:'👧 बेटी बचाओ, बेटी पढ़ाओ / सुकन्या',   body:`<b>लाभ:</b> बेटियों की पढ़ाई और शादी के लिए आर्थिक मदद। सुकन्या समृद्धि में 8.2% ब्याज।<br><br><b>दस्तावेज़:</b> बेटी का जन्म प्रमाण पत्र, फैमिली ID, माता-पिता का आधार और फोटो।<br><br><b>आवेदन:</b> नज़दीकी बैंक या पोस्ट ऑफिस` },
+  mudra:   { title:'💼 पीएम मुद्रा योजना',          body:`<b>लाभ:</b> छोटे व्यापार के लिए ₹10 लाख तक का लोन — बिना गारंटी।<br><br><b>प्रकार:</b> शिशु (₹50K), किशोर (₹5L), तरुण (₹10L)।<br><br><b>दस्तावेज़:</b> आधार, PAN कार्ड, व्यापार का प्रमाण, बैंक पासबुक।<br><br><b>आवेदन:</b> नज़दीकी बैंक शाखा या udyamimitra.in` }
 };
 
 function openModal(key) {
@@ -1524,26 +1525,60 @@ function closeModal(e) {
 function getLocalAIResponse(msg) {
   const lowerMsg = msg.toLowerCase();
   
-  if (lowerMsg.includes('पीएम किसान') || lowerMsg.includes('pm kisan') || lowerMsg.includes('kisan samman')) {
-    return "पीएम किसान सम्मान निधि योजना के तहत किसानों को हर साल ₹6,000 मिलते हैं। इसके लिए आप pmkisan.gov.in या नज़दीकी CSC सेंटर से आवेदन कर सकते हैं।";
+  // 1. Family ID (Parivar Pehchan Patra)
+  if (lowerMsg.includes('फैमिली') || lowerMsg.includes('family') || lowerMsg.includes('ppp') || lowerMsg.includes('पहचान')) {
+    return "✅ परिवार पहचान पत्र (Family ID) हरियाणा में सभी योजनाओं के लिए ज़रूरी है। इसके लिए परिवार के सभी सदस्यों के आधार कार्ड, बैंक पासबुक, और चालू मोबाइल नंबर की ज़रूरत होती है। इसे आप नज़दीकी CSC सेंटर से बनवा या अपडेट करा सकते हैं।";
   }
+  // 2. Ration Card
   if (lowerMsg.includes('राशन') || lowerMsg.includes('ration') || lowerMsg.includes('bpl')) {
-    return "राशन कार्ड के लिए आपको परिवार पहचान पत्र (Family ID), आधार कार्ड और आय प्रमाण पत्र की आवश्यकता होती है। इसे CSC केंद्र से बनवाया जा सकता है।";
+    return "✅ BPL या AAY राशन कार्ड अब फैमिली ID (PPP) के आधार पर अपने आप (Automatic) बनते हैं। यदि आपकी फैमिली ID में सत्यापित आय 1.80 लाख से कम है, तो आपका राशन कार्ड बन जाएगा। कोई अलग फॉर्म भरने की ज़रूरत नहीं है।";
   }
-  if (lowerMsg.includes('आयुष्मान') || lowerMsg.includes('ayushman') || lowerMsg.includes('इलाज') || lowerMsg.includes('ilaj')) {
-    return "आयुष्मान भारत योजना के तहत ₹5 लाख तक का मुफ्त इलाज मिलता है। यदि आपकी आय 1.80 लाख से कम है, तो आप इसका लाभ ले सकते हैं।";
+  // 3. PM Kisan
+  if (lowerMsg.includes('किसान') || lowerMsg.includes('pm kisan') || lowerMsg.includes('सम्मान')) {
+    return "✅ पीएम किसान सम्मान निधि के तहत हर साल ₹6,000 मिलते हैं। ज़रूरी दस्तावेज़: आधार कार्ड, बैंक पासबुक, ज़मीन की फर्द (जमाबंदी) और मोबाइल नंबर। आवेदन के लिए pmkisan.gov.in या CSC पर जाएं।";
   }
+  // 4. Ayushman / Chirayu
+  if (lowerMsg.includes('आयुष्मान') || lowerMsg.includes('ayushman') || lowerMsg.includes('चिरायु') || lowerMsg.includes('chirayu') || lowerMsg.includes('इलाज')) {
+    return "✅ आयुष्मान/चिरायु योजना में ₹5 लाख तक का मुफ्त इलाज मिलता है। ज़रूरी दस्तावेज़: फैमिली ID (आय 1.80 लाख या 3 लाख से कम होनी चाहिए) और आधार कार्ड। इसे CSC या सरकारी अस्पताल से बनवाएं।";
+  }
+  // 5. Pension (Old age, Widow, Divyang)
+  if (lowerMsg.includes('पेंशन') || lowerMsg.includes('pension') || lowerMsg.includes('बुढ़ापा') || lowerMsg.includes('विधवा') || lowerMsg.includes('विकलांग')) {
+    return "✅ बुढ़ापा, विधवा या दिव्यांग पेंशन अब सीधे फैमिली ID (PPP) से डेटा उठाकर अपने आप (Proactive) बन जाती है। बस अपनी फैमिली ID में उम्र (60+ साल) और आय (3 लाख से कम) सही करवाएं।";
+  }
+  // 6. PM Awas Yojana (House)
+  if (lowerMsg.includes('आवास') || lowerMsg.includes('awas') || lowerMsg.includes('मकान') || lowerMsg.includes('घर')) {
+    return "✅ पीएम आवास योजना (मकान बनाने के लिए पैसे) के लिए ज़रूरी कागज़: फैमिली ID, आधार कार्ड, बैंक पासबुक, नरेगा जॉब कार्ड और ज़मीन की फर्द। अधिक जानकारी के लिए गांव के सरपंच या सचिव से मिलें।";
+  }
+  // 7. Ujjwala Yojana (Free Gas)
+  if (lowerMsg.includes('उज्ज्वला') || lowerMsg.includes('ujjwala') || lowerMsg.includes('गैस') || lowerMsg.includes('gas')) {
+    return "✅ उज्ज्वला योजना (मुफ्त गैस कनेक्शन) के लिए ज़रूरी दस्तावेज़: महिलाओं का BPL राशन कार्ड, फैमिली ID, आधार कार्ड, बैंक खाता और 2 फोटो। आवेदन अपने नज़दीकी गैस एजेंसी में करें।";
+  }
+  // 8. Sukanya / Beti Bachao
+  if (lowerMsg.includes('सुकन्या') || lowerMsg.includes('sukanya') || lowerMsg.includes('बेटी') || lowerMsg.includes('beti')) {
+    return "✅ सुकन्या समृद्धि योजना (बेटी की पढ़ाई और शादी के लिए) में 8.2% ब्याज मिलता है। ज़रूरी दस्तावेज़: बेटी का जन्म प्रमाण पत्र, माता-पिता का आधार कार्ड और फोटो। खाता नज़दीकी बैंक या पोस्ट ऑफिस में खुलेगा।";
+  }
+  // 9. Vivah Shagun Yojana (Marriage Grant)
+  if (lowerMsg.includes('शगुन') || lowerMsg.includes('shagun') || lowerMsg.includes('शादी') || lowerMsg.includes('विवाह')) {
+    return "✅ मुख्यमंत्री विवाह शगुन योजना (बेटी की शादी में ₹71,000 तक की मदद)। ज़रूरी कागज़: फैमिली ID, शादी का कार्ड, दूल्हा-दुल्हन का आधार और बैंक खाता। शादी से पहले या 6 महीने के अंदर shaadi.edisha.gov.in पर ऑनलाइन आवेदन करें।";
+  }
+  // 10. e-Shram / Labour Card
+  if (lowerMsg.includes('श्रम') || lowerMsg.includes('shram') || lowerMsg.includes('मज़दूर') || lowerMsg.includes('लेबर') || lowerMsg.includes('labour')) {
+    return "✅ ई-श्रम (e-Shram) कार्ड या लेबर कॉपी के लिए ज़रूरी दस्तावेज़: आधार कार्ड (मोबाइल नंबर से लिंक होना ज़रूरी है), बैंक पासबुक और फैमिली ID। यह असंगठित मज़दूरों के लिए है और CSC सेंटर पर फ्री बनता है।";
+  }
+  // 11. Caste / Domicile Certificate
+  if (lowerMsg.includes('जाति') || lowerMsg.includes('caste') || lowerMsg.includes('मूल निवास') || lowerMsg.includes('domicile') || lowerMsg.includes('प्रमाण पत्र')) {
+    return "✅ जाति (Caste) या मूल निवास (Domicile) प्रमाण पत्र के लिए ज़रूरी दस्तावेज़: फैमिली ID (PPP), आधार कार्ड, पटवारी/सरपंच की रिपोर्ट और एक फोटो। इसे saralharyana.gov.in या CSC के माध्यम से बनवाएं।";
+  }
+  // 12. Aadhar Card
   if (lowerMsg.includes('आधार') || lowerMsg.includes('aadhar')) {
-    return "आधार कार्ड अपडेट करने के लिए आपको नज़दीकी आधार केंद्र या पोस्ट ऑफिस जाना होगा। साथ में पुराना आधार और पहचान पत्र ले जाएं।";
+    return "✅ आधार कार्ड अपडेट (नाम, पता, मोबाइल या फोटो) करने के लिए आपको नज़दीकी आधार केंद्र, बैंक या पोस्ट ऑफिस जाना होगा। साथ में पुराना आधार और कोई एक पहचान पत्र (जैसे वोटर ID) ले जाएं।";
   }
-  if (lowerMsg.includes('पेंशन') || lowerMsg.includes('pension') || lowerMsg.includes('budhapa')) {
-    return "बुढ़ापा, विधवा या विकलांग पेंशन के लिए आपकी Family ID में आय और आयु सही होनी चाहिए। पेंशन अब Family ID से अपने आप बन जाती है।";
-  }
-  if (lowerMsg.includes('शिकायत') || lowerMsg.includes('complain')) {
-    return "आप 'शिकायत' सेक्शन में जाकर अपनी समस्या ऑनलाइन दर्ज कर सकते हैं। यह सीधे पंचायत सदस्यों तक पहुंच जाएगी।";
+  // 13. Complaints
+  if (lowerMsg.includes('शिकायत') || lowerMsg.includes('complain') || lowerMsg.includes('समस्या')) {
+    return "✅ आप नीचे 'शिकायत' बटन पर क्लिक करके अपनी समस्या ऑनलाइन दर्ज कर सकते हैं (जैसे: पानी, सड़क, बिजली)। यह सीधे सरपंच और सचिव तक पहुंच जाएगी।";
   }
   
-  return "माफ़ करें, मैं अभी एक साधारण सहायक हूँ और सीख रहा हूँ। आप अपनी समस्या 'शिकायत' सेक्शन में दर्ज कर सकते हैं या सरपंच/सचिव से संपर्क कर सकते हैं।";
+  return "माफ़ करें, मैं अभी एक साधारण AI सहायक हूँ। कृपया अपनी योजना का मुख्य नाम लिखें (जैसे: राशन, फैमिली ID, मकान, पेंशन) या अधिक जानकारी के लिए 'शिकायत' सेक्शन में जाएं।";
 }
 
 function askQ(q) { document.getElementById('aiInp').value = q; sendAI(); }
@@ -1569,7 +1604,7 @@ function sendAI() {
 function appendMsg(text, type) {
   const box = document.getElementById('aiMsgs');
   const div = document.createElement('div');
-  div.className = `msg ${type}`; div.textContent = text;
+  div.className = `msg ${type}`; div.innerHTML = text; // Changed to innerHTML to support bolding ✅
   box.appendChild(div); box.scrollTop = box.scrollHeight;
 }
 function appendLoading() {
@@ -1696,22 +1731,28 @@ function getLocalFasalResponse(msg) {
   const lowerMsg = msg.toLowerCase();
   
   if (lowerMsg.includes('गेहूं') || lowerMsg.includes('gehu') || lowerMsg.includes('पीलापन') || lowerMsg.includes('pila')) {
-    return "गेहूं में पीलापन यूरिया की कमी या अधिक नमी के कारण हो सकता है। उचित मात्रा में जिंक और यूरिया का स्प्रे करें।";
+    return "✅ गेहूं में पीलापन यूरिया की कमी या अधिक नमी के कारण हो सकता है। उचित मात्रा में जिंक (Zinc) और यूरिया का स्प्रे करें।";
   }
   if (lowerMsg.includes('सरसों') || lowerMsg.includes('sarso') || lowerMsg.includes('खाद') || lowerMsg.includes('khad')) {
-    return "सरसों की अच्छी पैदावार के लिए बिजाई के समय डीएपी (DAP) और सल्फर का उपयोग करें। पहली सिंचाई के बाद यूरिया डालें।";
+    return "✅ सरसों की अच्छी पैदावार के लिए बिजाई के समय डीएपी (DAP) और सल्फर का उपयोग करें। पहली सिंचाई के बाद यूरिया डालें।";
   }
   if (lowerMsg.includes('धान') || lowerMsg.includes('dhaan') || lowerMsg.includes('रोपाई') || lowerMsg.includes('ropai')) {
-    return "धान की रोपाई के लिए 25-30 दिन की पौध सबसे अच्छी होती है। खेत में पानी का स्तर बनाए रखें और जिंक का प्रयोग ज़रूर करें।";
+    return "✅ धान की रोपाई के लिए 25-30 दिन की पौध सबसे अच्छी होती है। खेत में पानी का स्तर बनाए रखें और जिंक का प्रयोग ज़रूर करें।";
   }
   if (lowerMsg.includes('बीमा') || lowerMsg.includes('beema') || lowerMsg.includes('bima') || lowerMsg.includes('pmfby')) {
-    return "प्रधानमंत्री फसल बीमा योजना (PMFBY) के तहत अपनी फसल का बीमा करवाने के लिए अंतिम तिथि से पहले बैंक या CSC सेंटर से संपर्क करें।";
+    return "✅ प्रधानमंत्री फसल बीमा योजना (PMFBY) के तहत अपनी फसल का बीमा करवाने के लिए ज़रूरी दस्तावेज़: आधार कार्ड, बैंक कॉपी, ज़मीन की जमाबंदी (फर्द) और फसल बुवाई प्रमाण पत्र। अंतिम तिथि से पहले बैंक या CSC सेंटर जाएं।";
+  }
+  if (lowerMsg.includes('ब्यौरा') || lowerMsg.includes('byora') || lowerMsg.includes('रजिस्ट्रेशन') || lowerMsg.includes('मंडी')) {
+    return "✅ मंडी में अपनी फसल (गेहूं, सरसों, धान आदि) सरकारी रेट पर बेचने के लिए 'मेरी फसल मेरा ब्यौरा' पोर्टल पर रजिस्ट्रेशन ज़रूरी है। ज़रूरी दस्तावेज़: फैमिली ID (PPP), आधार कार्ड, बैंक पासबुक और ज़मीन की फर्द (जमाबंदी)।";
+  }
+  if (lowerMsg.includes('मिट्टी') || lowerMsg.includes('mitti') || lowerMsg.includes('जांच')) {
+    return "✅ खेत की मिट्टी जांच (Soil Testing) के लिए अपने खेत से मिट्टी का सैंपल लें और उसे नज़दीकी कृषि विज्ञान केंद्र (KVK) या कृषि विभाग के कार्यालय में जमा करवाएं। इससे पता चलेगा कि खेत में कौन सी खाद चाहिए।";
   }
   if (lowerMsg.includes('मौसम') || lowerMsg.includes('mausam') || lowerMsg.includes('बारिश') || lowerMsg.includes('barish')) {
-    return "मौसम की ताज़ा जानकारी के लिए आप इसी पेज पर ऊपर दिए गए 'मौसम अपडेट' सेक्शन को देख सकते हैं।";
+    return "✅ मौसम की ताज़ा जानकारी के लिए आप इसी पेज पर ऊपर दिए गए 'मौसम अपडेट' सेक्शन को देख सकते हैं। यह हर दिन अपडेट होता है।";
   }
 
-  return "मैं अभी नया कृषि सहायक हूँ। कृपया अपने सवाल को और स्पष्ट रूप से लिखें या अधिक जानकारी के लिए किसान कृषि विज्ञान केंद्र से संपर्क करें।";
+  return "मैं अभी नया कृषि सहायक हूँ। कृपया फसल (जैसे: गेहूं, सरसों), खाद, बीमा या ब्यौरा के बारे में अपना सवाल स्पष्ट रूप से लिखें।";
 }
 
 function askFasal(q) { document.getElementById('fasalInp').value = q; sendFasal(); }
@@ -1736,7 +1777,8 @@ function appendFasalMsg(text, type) {
   const box = document.getElementById('fasalMsgs');
   const div = document.createElement('div');
   div.style.cssText = 'max-width:85%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;' + (type==='bot' ? 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;align-self:flex-start;border-bottom-left-radius:3px;' : 'background:#2e7d32;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;');
-  div.textContent = text; box.appendChild(div); box.scrollTop = box.scrollHeight;
+  div.innerHTML = text; // Changed to innerHTML to support bolding ✅
+  box.appendChild(div); box.scrollTop = box.scrollHeight;
 }
 function appendFasalLoading() {
   const box = document.getElementById('fasalMsgs'); const id = 'fl' + Date.now();
