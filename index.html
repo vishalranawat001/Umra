@@ -1445,8 +1445,7 @@ async function loadAutoNews() {
     var colors = ['var(--saffron)','#1565C0','#2e7d32','#7b1fa2'];
     var items = text.split('---').filter(function(s){ return s.trim().length > 20; });
     var html = items.slice(0,4).map(function(item, i) {
-      var lines = item.trim().split('
-').filter(function(l){ return l.trim(); });
+      var lines = item.trim().split('\n').filter(function(l){ return l.trim(); });
       var title = lines[0].replace(/\*\*/g,'').replace(/^[0-9]+\.\s*/,'').trim();
       var body = lines.slice(1).join(' ').replace(/\*\*/g,'').trim();
       return '<div style="border-left:3px solid ' + colors[i%4] + ';padding:10px 12px;margin-bottom:10px;border-radius:0 10px 10px 0;background:#fafafa;">' +
