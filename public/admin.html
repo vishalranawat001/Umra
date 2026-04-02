@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — उमरा गांव</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1A4D2E;--green2:#2d6a4f;--gold:#F4C430;--saffron:#E8650A;--red:#C0392B;--cream:#F4F6F9;--card:#fff;--border:#e2e8f0;--text:#1a1a2e;--muted:#64748b;--shadow:0 2px 12px rgba(0,0,0,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans Devanagari',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--green),var(--green2));padding:20px;}
+.login-box{background:#fff;border-radius:20px;padding:32px 24px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.2);text-align:center;}
+.login-icon{font-size:52px;margin-bottom:12px;}
+.login-box h1{font-family:'Tiro Devanagari Hindi',serif;font-size:22px;color:var(--green);margin-bottom:4px;}
+.login-box p{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.login-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 16px;font-size:18px;text-align:center;letter-spacing:6px;font-family:monospace;outline:none;transition:border .2s;margin-bottom:14px;background:#f8fafc;}
+.login-input:focus{border-color:var(--green);background:#fff;}
+.login-input.error{border-color:var(--red);animation:shake .3s ease;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.login-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:50px;padding:14px;font-size:15px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;}
+.login-hint{font-size:11px;color:var(--muted);margin-top:16px;}
+.login-err{font-size:12px;color:var(--red);font-weight:700;margin-top:8px;min-height:18px;}
+#adminApp{display:none;}
+.admin-header{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 3px 16px rgba(0,0,0,0.2);}
+.admin-header h1{font-family:'Tiro Devanagari Hindi',serif;font-size:18px;}
+.admin-header small{font-size:10px;color:var(--gold);display:block;}
+.logout-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;}
+.admin-tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:62px;z-index:99;}
+.a-tab{flex:1;padding:12px 8px;text-align:center;font-size:13px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;font-family:'Noto Sans Devanagari',sans-serif;}
+.a-tab.active{color:var(--green);border-bottom-color:var(--green);}
+.admin-content{padding:16px;padding-bottom:40px;}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.stat-card{background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--shadow);text-align:center;border-top:4px solid var(--green);}
+.stat-card.orange{border-top-color:var(--saffron);}
+.stat-num{font-size:28px;font-weight:900;color:var(--green);}
+.stat-card.orange .stat-num{color:var(--saffron);}
+.stat-label{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px;}
+.sec-title{font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--green);margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+.sec-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--green),transparent);border-radius:2px;}
+.form-card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px;margin-bottom:20px;border:1px solid var(--border);}
+.form-card h3{font-size:15px;font-weight:700;color:var(--green);margin-bottom:14px;}
+.f-label{font-size:12px;font-weight:700;color:var(--green);margin-bottom:5px;display:block;}
+.f-input,.f-select,.f-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;font-size:13px;font-family:'Noto Sans Devanagari',sans-serif;background:#f8fafc;outline:none;color:var(--text);margin-bottom:12px;transition:border .2s;}
+.f-input:focus,.f-select:focus,.f-textarea:focus{border-color:var(--green);background:#fff;}
+.f-textarea{min-height:90px;resize:vertical;}
+.f-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:50px;padding:13px;font-size:14px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;}
+.f-btn:disabled{background:#9ca3af;cursor:not-allowed;}
+.f-btn-cancel{width:100%;background:#f1f5f9;color:var(--muted);border:none;border-radius:50px;padding:11px;font-size:13px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;margin-top:8px;}
+.admin-news-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);margin-bottom:10px;border-left:4px solid var(--saffron);animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.anc-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
+.anc-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;background:var(--saffron);color:#fff;white-space:nowrap;}
+.anc-tag.green{background:var(--green)}.anc-tag.red{background:var(--red)}.anc-tag.blue{background:#1565C0}
+.anc-title{font-size:14px;font-weight:700;flex:1;line-height:1.4;}
+.anc-body{font-size:12px;color:#4b5563;line-height:1.5;margin-bottom:10px;}
+.anc-time{font-size:10px;color:#9ca3af;margin-bottom:10px;}
+.anc-actions{display:flex;gap:8px;}
+.btn-edit{flex:1;background:#eff6ff;color:#1565C0;border:1.5px solid #93c5fd;border-radius:8px;padding:8px;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;}
+.btn-del{flex:1;background:#fef2f2;color:var(--red);border:1.5px solid #fca5a5;border-radius:8px;padding:8px;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;}
+.admin-complaint-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);margin-bottom:10px;border-left:4px solid var(--saffron);animation:fadeIn .3s ease;}
+.admin-complaint-card.solved{border-left-color:#16a34a;opacity:.75;}
+.ac-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.ac-cat{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--saffron);color:#fff;}
+.ac-cat.road{background:#b45309}.ac-cat.water{background:#1d4ed8}.ac-cat.school{background:#7c3aed}.ac-cat.health{background:#dc2626}.ac-cat.other{background:#374151}
+.ac-status{margin-left:auto;}
+.status-toggle{font-size:10px;font-weight:700;padding:4px 10px;border-radius:10px;border:none;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;}
+.status-toggle.pending{background:#fff7ed;color:#9a3412;border:1px solid #fdba74;}
+.status-toggle.solved{background:#dcfce7;color:#166534;border:1px solid #86efac;}
+.ac-name{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.ac-text{font-size:13px;line-height:1.5;margin-bottom:4px;}
+.ac-time{font-size:10px;color:#9ca3af;}
+.loading-state{text-align:center;padding:30px;}
+.spinner{width:34px;height:34px;border:3px solid #e5e7eb;border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-state p{font-size:13px;color:var(--muted);}
+.no-data{text-align:center;padding:30px;color:var(--muted);font-size:13px;line-height:1.7;}
+.no-data span{font-size:36px;display:block;margin-bottom:8px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:50px;font-size:12px;font-weight:600;opacity:0;transition:all .3s;z-index:300;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.admin-panel{display:none;}
+.admin-panel.active{display:block;}
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <h1>Admin Panel</h1>
+    <p>उमरा गांव — डिजिटल सेवा केंद्र</p>
+    <input class="login-input" id="pwInput" type="password" placeholder="पासवर्ड दर्ज करें" maxlength="20" onkeypress="if(event.key==='Enter')doLogin()" />
+    <div class="login-err" id="loginErr"></div>
+    <button class="login-btn" onclick="doLogin()">🔓 लॉगिन करें</button>
+    <p class="login-hint">केवल अधिकृत व्यक्ति ही लॉगिन करें</p>
+  </div>
+</div>
+
+<div id="adminApp">
+  <div class="admin-header">
+    <div><h1>⚙️ Admin Panel</h1><small>उमरा गांव — डिजिटल सेवा केंद्र</small></div>
+    <button class="logout-btn" onclick="doLogout()">🚪 लॉगआउट</button>
+  </div>
+  <div class="admin-tabs">
+    <div class="a-tab active" onclick="showPanel('dashboard',this)">📊 डैशबोर्ड</div>
+    <div class="a-tab" onclick="showPanel('news',this)">📰 समाचार</div>
+    <div class="a-tab" onclick="showPanel('complaints',this)">📋 शिकायतें</div>
+  </div>
+  <div class="admin-content">
+
+    <div class="admin-panel active" id="panel-dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="statNews">—</div><div class="stat-label">📰 कुल समाचार</div></div>
+        <div class="stat-card orange"><div class="stat-num" id="statComplaints">—</div><div class="stat-label">📋 कुल शिकायतें</div></div>
+        <div class="stat-card" style="border-top-color:#f59e0b"><div class="stat-num" id="statPending" style="color:#b45309">—</div><div class="stat-label">⏳ लंबित शिकायतें</div></div>
+        <div class="stat-card" style="border-top-color:#16a34a"><div class="stat-num" id="statSolved" style="color:#16a34a">—</div><div class="stat-label">✅ हल हुई शिकायतें</div></div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">🔗 त्वरित लिंक</div>
+        <a href="index.html" target="_blank" style="display:block;text-decoration:none;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px;margin-bottom:8px;font-size:13px;font-weight:700;color:var(--green);">🏠 User App देखें →</a>
+        <div style="background:#fff7ed;border:1px solid #fdba74;border-radius:10px;padding:12px;font-size:12px;color:#9a3412;">💡 समाचार add करते ही User App में realtime दिखेगा।</div>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="panel-news">
+      <div class="form-card">
+        <h3 id="formHeading">➕ नया समाचार जोड़ें</h3>
+        <input type="hidden" id="editDocId" />
+        <label class="f-label">शीर्षक *</label>
+        <input class="f-input" id="nTitle" placeholder="जैसे: गांव में नया हैंडपंप लगेगा" />
+        <label class="f-label">श्रेणी *</label>
+        <select class="f-select" id="nCat">
+          <option value="">— श्रेणी चुनें —</option>
+          <option value="ghoshna">📢 घोषणा</option>
+          <option value="krishi">🌾 कृषि</option>
+          <option value="swasthya">🏥 स्वास्थ्य</option>
+          <option value="shiksha">🏫 शिक्षा</option>
+          <option value="vikas">🏗️ विकास कार्य</option>
+          <option value="other">📌 अन्य</option>
+        </select>
+        <label class="f-label">विवरण *</label>
+        <textarea class="f-textarea" id="nDesc" placeholder="समाचार का पूरा विवरण लिखें..."></textarea>
+        <button class="f-btn" id="newsSubmitBtn" onclick="submitNews()">📢 समाचार प्रकाशित करें</button>
+        <button class="f-btn-cancel" id="newsCancelBtn" onclick="cancelEdit()" style="display:none">✕ रद्द करें</button>
+      </div>
+      <div class="sec-title">📰 प्रकाशित समाचार</div>
+      <div id="adminNewsList"><div class="loading-state"><div class="spinner"></div><p>लोड हो रहा है...</p></div></div>
+    </div>
+
+    <div class="admin-panel" id="panel-complaints">
+      <div class="sec-title">📋 सभी शिकायतें</div>
+      <div id="adminComplaintList"><div class="loading-state"><div class="spinner"></div><p>लोड हो रहा है...</p></div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// FIRESTORE REST API — No CDN needed!
+// ══════════════════════════════════════════
+const PROJECT_ID = "village-umra";
+const API_KEY    = "AIzaSyApqlpXxd647XDdn8y2G_JX0oF5LcaM0no";
+const BASE_URL   = "https://firestore.googleapis.com/v1/projects/" + PROJECT_ID + "/databases/(default)/documents";
+
+async function fsGet(col) {
+  const url = BASE_URL + "/" + col + "?key=" + API_KEY + "&pageSize=100";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("GET " + res.status);
+  const data = await res.json();
+  return (data.documents || []).map(parseDoc).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+}
+
+async function fsAdd(col, obj) {
+  const url = BASE_URL + "/" + col + "?key=" + API_KEY;
+  obj.createdAt = Date.now();
+  const res = await fetch(url, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:toFields(obj)})});
+  if (!res.ok) throw new Error("ADD " + await res.text());
+}
+
+async function fsUpdate(col, id, obj) {
+  const mask = Object.keys(obj).map(k=>"updateMask.fieldPaths="+encodeURIComponent(k)).join("&");
+  const url = BASE_URL + "/" + col + "/" + id + "?key=" + API_KEY + "&" + mask;
+  const res = await fetch(url, {method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:toFields(obj)})});
+  if (!res.ok) throw new Error("UPDATE " + await res.text());
+}
+
+async function fsDelete(col, id) {
+  const url = BASE_URL + "/" + col + "/" + id + "?key=" + API_KEY;
+  const res = await fetch(url, {method:"DELETE"});
+  if (!res.ok) throw new Error("DELETE " + await res.text());
+}
+
+function parseDoc(doc) {
+  const id = doc.name.split("/").pop();
+  const obj = {_id: id};
+  for (const [k,v] of Object.entries(doc.fields||{})) {
+    if (v.stringValue!==undefined) obj[k]=v.stringValue;
+    else if (v.integerValue!==undefined) obj[k]=parseInt(v.integerValue);
+    else if (v.timestampValue!==undefined) obj[k]=new Date(v.timestampValue).getTime();
+    else if (v.booleanValue!==undefined) obj[k]=v.booleanValue;
+  }
+  return obj;
+}
+
+function toFields(obj) {
+  const f = {};
+  for (const [k,v] of Object.entries(obj)) {
+    if (typeof v==="string") f[k]={stringValue:v};
+    else if (typeof v==="number") f[k]={integerValue:String(v)};
+    else if (typeof v==="boolean") f[k]={booleanValue:v};
+  }
+  return f;
+}
+
+// ══════════════════════════════════════════
+// APP LOGIC
+// ══════════════════════════════════════════
+const ADMIN_PASSWORD = "umra2024"; // ← password yahan change karo
+
+function doLogin() {
+  const pw = document.getElementById("pwInput").value;
+  const errEl = document.getElementById("loginErr");
+  const inp = document.getElementById("pwInput");
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminApp").style.display = "block";
+    errEl.textContent = "";
+    loadNews(); loadComplaints();
+  } else {
+    errEl.textContent = "❌ गलत पासवर्ड! दोबारा कोशिश करें।";
+    inp.classList.add("error");
+    inp.value = "";
+    setTimeout(()=>inp.classList.remove("error"), 500);
+  }
+}
+
+function doLogout() {
+  if (!confirm("क्या आप लॉगआउट करना चाहते हैं?")) return;
+  document.getElementById("adminApp").style.display = "none";
+  document.getElementById("loginScreen").style.display = "flex";
+  document.getElementById("pwInput").value = "";
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2800);
+}
+
+function showPanel(name, tab) {
+  document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".a-tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("panel-"+name).classList.add("active");
+  tab.classList.add("active");
+  if (name==="news") loadNews();
+  if (name==="complaints") loadComplaints();
+}
+
+function escHtml(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function fmtTime(ts) {
+  if (!ts) return "अभी";
+  return new Date(Number(ts)).toLocaleString("hi-IN");
+}
+
+const NEWS_CATS={ghoshna:"📢 घोषणा",krishi:"🌾 कृषि",swasthya:"🏥 स्वास्थ्य",shiksha:"🏫 शिक्षा",vikas:"🏗️ विकास",other:"📌 अन्य"};
+const NEWS_TC={ghoshna:"",krishi:"green",swasthya:"red",shiksha:"blue",vikas:"",other:""};
+const CAT_LABELS={road:"🛣️ सड़क",water:"💧 पानी",light:"💡 बिजली",school:"🏫 स्कूल",health:"🏥 स्वास्थ्य",other:"📌 अन्य"};
+
+// ── NEWS ──
+let newsData = [];
+
+async function loadNews() {
+  const list = document.getElementById("adminNewsList");
+  list.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>लोड हो रहा है...</p></div>';
+  try {
+    newsData = await fsGet("news");
+    document.getElementById("statNews").textContent = newsData.length;
+    renderAdminNews();
+  } catch(e) {
+    console.error(e);
+    list.innerHTML = '<div class="no-data"><span>⚠️</span>लोड नहीं हुआ।<br>इंटरनेट जांचें।</div>';
+  }
+}
+
+function renderAdminNews() {
+  const list = document.getElementById("adminNewsList");
+  if (!newsData.length) { list.innerHTML = '<div class="no-data"><span>📰</span>अभी कोई समाचार नहीं है।<br>ऊपर फॉर्म भरकर जोड़ें।</div>'; return; }
+  list.innerHTML = newsData.map(n=>`
+    <div class="admin-news-card">
+      <div class="anc-top">
+        <span class="anc-tag ${NEWS_TC[n.category]||""}">${NEWS_CATS[n.category]||n.category}</span>
+        <div class="anc-title">${escHtml(n.title)}</div>
+      </div>
+      <div class="anc-body">${escHtml(n.description)}</div>
+      <div class="anc-time">🕐 ${fmtTime(n.createdAt)}</div>
+      <div class="anc-actions">
+        <button class="btn-edit" onclick='startEdit(${JSON.stringify(JSON.stringify(n))})'>✏️ संपादित करें</button>
+        <button class="btn-del" onclick="deleteNews('${n._id}')">🗑️ हटाएं</button>
+      </div>
+    </div>`).join("");
+}
+
+async function submitNews() {
+  const title = document.getElementById("nTitle").value.trim();
+  const cat   = document.getElementById("nCat").value;
+  const desc  = document.getElementById("nDesc").value.trim();
+  const editId= document.getElementById("editDocId").value;
+  if (!title){showToast("❌ शीर्षक लिखें");return;}
+  if (!cat)  {showToast("❌ श्रेणी चुनें");return;}
+  if (!desc) {showToast("❌ विवरण लिखें");return;}
+  const btn = document.getElementById("newsSubmitBtn");
+  btn.disabled = true; btn.textContent = "⏳ सहेजा जा रहा है...";
+  try {
+    if (editId) {
+      await fsUpdate("news", editId, {title, category:cat, description:desc});
+      showToast("✅ समाचार अपडेट हो गया!"); cancelEdit();
+    } else {
+      await fsAdd("news", {title, category:cat, description:desc});
+      showToast("✅ समाचार प्रकाशित हो गया!"); clearForm();
+    }
+    await loadNews();
+  } catch(e) { console.error(e); showToast("❌ Error: " + e.message); }
+  btn.disabled = false;
+  btn.textContent = document.getElementById("editDocId").value ? "💾 अपडेट करें" : "📢 समाचार प्रकाशित करें";
+}
+
+function startEdit(js) {
+  const n = JSON.parse(JSON.parse(js));
+  document.getElementById("editDocId").value = n._id;
+  document.getElementById("nTitle").value = n.title||"";
+  document.getElementById("nCat").value   = n.category||"";
+  document.getElementById("nDesc").value  = n.description||"";
+  document.getElementById("formHeading").textContent = "✏️ समाचार संपादित करें";
+  document.getElementById("newsSubmitBtn").textContent = "💾 अपडेट करें";
+  document.getElementById("newsCancelBtn").style.display = "block";
+  document.getElementById("panel-news").scrollIntoView({behavior:"smooth"});
+}
+
+function cancelEdit() {
+  clearForm();
+  document.getElementById("editDocId").value = "";
+  document.getElementById("formHeading").textContent = "➕ नया समाचार जोड़ें";
+  document.getElementById("newsSubmitBtn").textContent = "📢 समाचार प्रकाशित करें";
+  document.getElementById("newsCancelBtn").style.display = "none";
+}
+
+function clearForm() {
+  document.getElementById("nTitle").value = "";
+  document.getElementById("nCat").value   = "";
+  document.getElementById("nDesc").value  = "";
+}
+
+async function deleteNews(id) {
+  if (!confirm("क्या आप यह समाचार हटाना चाहते हैं?")) return;
+  try { await fsDelete("news", id); showToast("🗑️ समाचार हटा दिया गया।"); await loadNews(); }
+  catch(e) { showToast("❌ हटाने में समस्या।"); }
+}
+
+// ── COMPLAINTS ──
+let complaintsData = [];
+
+async function loadComplaints() {
+  const list = document.getElementById("adminComplaintList");
+  list.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>लोड हो रहा है...</p></div>';
+  try {
+    complaintsData = await fsGet("complaints");
+    const pending = complaintsData.filter(c=>c.status!=="solved").length;
+    const solved  = complaintsData.length - pending;
+    document.getElementById("statComplaints").textContent = complaintsData.length;
+    document.getElementById("statPending").textContent    = pending;
+    document.getElementById("statSolved").textContent     = solved;
+    renderComplaints();
+  } catch(e) {
+    console.error(e);
+    list.innerHTML = '<div class="no-data"><span>⚠️</span>लोड नहीं हुआ।<br>इंटरनेट जांचें।</div>';
+  }
+}
+
+function renderComplaints() {
+  const list = document.getElementById("adminComplaintList");
+  if (!complaintsData.length) { list.innerHTML = '<div class="no-data"><span>📋</span>अभी कोई शिकायत नहीं है।</div>'; return; }
+  list.innerHTML = complaintsData.map(c=>{
+    const s = c.status==="solved";
+    return `<div class="admin-complaint-card ${s?"solved":""}">
+      <div class="ac-top">
+        <span class="ac-cat ${c.category}">${CAT_LABELS[c.category]||c.category}</span>
+        <div class="ac-status">
+          <button class="status-toggle ${c.status||"pending"}" onclick="toggleStatus('${c._id}','${c.status||"pending"}')">
+            ${s?"✅ हल हुई":"⏳ लंबित — हल करें"}
+          </button>
+        </div>
+      </div>
+      <div class="ac-name">👤 ${escHtml(c.name)}</div>
+      <div class="ac-text">${escHtml(c.description)}</div>
+      <div class="ac-time">🕐 ${fmtTime(c.createdAt)}</div>
+    </div>`;
+  }).join("");
+}
+
+async function toggleStatus(id, cur) {
+  const ns = cur==="solved" ? "pending" : "solved";
+  try {
+    await fsUpdate("complaints", id, {status:ns});
+    showToast(ns==="solved" ? "✅ शिकायत हल मार्क की गई!" : "⏳ शिकायत लंबित की गई।");
+    await loadComplaints();
+  } catch(e) { showToast("❌ अपडेट नहीं हुआ।"); }
+}
+</script>
+</body>
+</html>
