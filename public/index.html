@@ -9,19 +9,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
+  /* Brand Colors */
   --saffron: #E8650A;
   --green: #1A4D2E;
   --green2: #2d6a4f;
   --gold: #F4C430;
-  --cream: #FFF9F2;
   --red: #C0392B;
   --blue: #1565C0;
+  
+  /* Light Theme (Default) */
+  --cream: #FFF9F2;
   --card-bg: #ffffff;
   --border: #E8E0D8;
   --text: #1a1109;
   --muted: #6b5e52;
   --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --card-tint: rgba(0,0,0,0.02);
 }
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --cream: #0f172a;
+  --card-bg: #1e293b;
+  --border: #334155;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --shadow: 0 4px 15px rgba(0,0,0,0.4);
+  --card-tint: rgba(255,255,255,0.05);
+}
+
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Noto Sans Devanagari', sans-serif;
@@ -29,7 +45,30 @@ body {
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
+
+/* Dark Mode Overrides for Specific Elements */
+[data-theme="dark"] .bg-white-override, 
+[data-theme="dark"] div[style*="background:#fff"], 
+[data-theme="dark"] div[style*="background:#ffffff"],
+[data-theme="dark"] a[style*="background:#fff"] {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] div[style*="color:#1a1a1a"], 
+[data-theme="dark"] div[style*="color:#666"], 
+[data-theme="dark"] div[style*="color:#555"],
+[data-theme="dark"] div[style*="color:#374151"] {
+  color: var(--text) !important;
+}
+[data-theme="dark"] .ai-inp-area { background: var(--card-bg) !important; border-top-color: var(--border) !important; }
+[data-theme="dark"] .ai-inp { background: var(--cream) !important; color: var(--text); border-color: var(--border) !important; }
+[data-theme="dark"] .form-input, [data-theme="dark"] .form-select, [data-theme="dark"] .form-textarea { background: var(--cream); color: var(--text); border-color: var(--border); }
+[data-theme="dark"] .modal-sheet { background: var(--card-bg); }
+[data-theme="dark"] .app-footer p { color: var(--muted); }
+[data-theme="dark"] .footer-links a { color: #60a5fa !important; }
 
 /* HEADER */
 header {
@@ -48,7 +87,10 @@ header {
 }
 .logo-text h1 { font-family:'Tiro Devanagari Hindi',serif; font-size:20px; line-height:1.1; }
 .logo-text small { font-size:10px; color:var(--gold); letter-spacing:1px; font-weight:600; }
+.hdr-actions { display:flex; align-items:center; gap:8px; }
 .hdr-date { font-size:11px; background:rgba(255,255,255,0.15); padding:4px 10px; border-radius:20px; }
+.theme-btn { background:rgba(255,255,255,0.15); border:none; color:#fff; font-size:14px; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.2s; }
+.theme-btn:hover { transform:scale(1.1); }
 
 /* NAV TABS */
 .nav-tabs { display:flex; overflow-x:auto; scrollbar-width:none; background:rgba(0,0,0,0.18); }
@@ -64,7 +106,7 @@ header {
 .nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); background:rgba(255,255,255,0.07); }
 
 /* SECTIONS */
-.section { display:none; padding:14px 14px 90px; animation:fadeIn .25s ease; }
+.section { display:none; padding:14px 14px 90px; animation:fadeIn .25s ease; transition:background 0.3s; }
 .section.active { display:block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
@@ -74,7 +116,9 @@ header {
   font-size:16px; font-weight:700; color:var(--green);
   margin:14px 0 10px; display:flex; align-items:center; gap:8px;
 }
+[data-theme="dark"] .sec-title { color: #4ade80; }
 .sec-title::after { content:''; flex:1; height:2px; background:linear-gradient(90deg,var(--green),transparent); border-radius:2px; }
+[data-theme="dark"] .sec-title::after { background:linear-gradient(90deg,#4ade80,transparent); }
 
 /* HERO */
 .hero {
@@ -94,16 +138,16 @@ header {
   border:1.5px solid transparent; transition:transform .2s, box-shadow .2s;
 }
 .qcard:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.13); }
-.qcard.g { border-color:#86efac; background:#f0fdf4; }
-.qcard.o { border-color:#fdba74; background:#fff7ed; }
-.qcard.r { border-color:#fca5a5; background:#fef2f2; }
-.qcard.b { border-color:#93c5fd; background:#eff6ff; }
+.qcard.g { border-color:#86efac; background:var(--card-bg); }
+.qcard.o { border-color:#fdba74; background:var(--card-bg); }
+.qcard.r { border-color:#fca5a5; background:var(--card-bg); }
+.qcard.b { border-color:#93c5fd; background:var(--card-bg); }
 .qcard-icon { font-size:28px; margin-bottom:5px; }
-.qcard-title { font-size:12px; font-weight:700; }
+.qcard-title { font-size:12px; font-weight:700; color:var(--text); }
 .qcard-sub { font-size:10px; color:var(--muted); margin-top:2px; }
 
 /* AI BOX */
-.ai-box { background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow); margin-bottom:14px; border:1px solid rgba(26,77,46,.1); overflow:hidden; }
+.ai-box { background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow); margin-bottom:14px; border:1px solid var(--border); overflow:hidden; }
 .ai-hdr { background:linear-gradient(90deg,var(--green),var(--green2)); color:#fff; padding:11px 14px; display:flex; align-items:center; gap:8px; }
 .ai-dot { width:9px; height:9px; background:#4ade80; border-radius:50%; animation:pulse 1.5s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
@@ -112,18 +156,19 @@ header {
 .ai-msgs { padding:10px; min-height:130px; max-height:200px; overflow-y:auto; display:flex; flex-direction:column; gap:7px; }
 .msg { max-width:85%; padding:9px 13px; border-radius:14px; font-size:12.5px; line-height:1.5; animation:msgIn .2s ease; }
 @keyframes msgIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
-.msg.bot { background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; align-self:flex-start; border-bottom-left-radius:3px; }
+.msg.bot { background:var(--card-tint); border:1px solid var(--border); color:var(--text); align-self:flex-start; border-bottom-left-radius:3px; }
 .msg.user { background:var(--green); color:#fff; align-self:flex-end; border-bottom-right-radius:3px; }
-.msg.loading { background:#f0fdf4; border:1px solid #bbf7d0; align-self:flex-start; }
+.msg.loading { background:var(--card-tint); border:1px solid var(--border); align-self:flex-start; }
 .ldots span { display:inline-block; width:7px; height:7px; background:var(--green); border-radius:50%; margin:0 2px; animation:bounce 1s infinite; }
 .ldots span:nth-child(2){animation-delay:.2s} .ldots span:nth-child(3){animation-delay:.4s}
 @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 .ai-quick { display:flex; gap:6px; padding:0 10px 8px; overflow-x:auto; scrollbar-width:none; }
 .ai-quick::-webkit-scrollbar { display:none; }
-.aq { white-space:nowrap; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:20px; padding:4px 11px; font-size:10.5px; color:var(--green); cursor:pointer; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; transition:all .2s; flex-shrink:0; }
+.aq { white-space:nowrap; background:var(--card-tint); border:1px solid var(--green); border-radius:20px; padding:4px 11px; font-size:10.5px; color:var(--green); cursor:pointer; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; transition:all .2s; flex-shrink:0; }
+[data-theme="dark"] .aq { color:#4ade80; border-color:#4ade80; }
 .aq:hover { background:var(--green); color:#fff; }
-.ai-inp-area { display:flex; gap:7px; padding:8px 10px; border-top:1px solid #e5e7eb; background:#fafafa; }
-.ai-inp { flex:1; border:1.5px solid #d1d5db; border-radius:24px; padding:9px 14px; font-size:12.5px; font-family:'Noto Sans Devanagari',sans-serif; background:#fff; outline:none; transition:border .2s; }
+.ai-inp-area { display:flex; gap:7px; padding:8px 10px; border-top:1px solid var(--border); background:var(--card-bg); }
+.ai-inp { flex:1; border:1.5px solid var(--border); border-radius:24px; padding:9px 14px; font-size:12.5px; font-family:'Noto Sans Devanagari',sans-serif; background:var(--cream); outline:none; transition:border .2s; color:var(--text); }
 .ai-inp:focus { border-color:var(--green); }
 .send-btn { width:40px; height:40px; background:var(--saffron); border:none; border-radius:50%; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
 .send-btn:hover { background:#c05200; }
@@ -137,6 +182,7 @@ header {
 .cc-role { font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.5px; text-transform:uppercase; }
 .cc-name { font-size:13px; font-weight:700; margin:3px 0; }
 .cc-num { font-size:16px; font-weight:900; color:var(--green); letter-spacing:.5px; margin-bottom:7px; }
+[data-theme="dark"] .cc-num { color:#4ade80; }
 .contact-card.sarpanch .cc-num { color:var(--saffron); }
 .call-btn { display:block; background:var(--green); color:#fff; border:none; border-radius:50px; padding:8px; width:100%; font-size:12px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; text-decoration:none; transition:background .2s; }
 .contact-card.sarpanch .call-btn { background:var(--saffron); }
@@ -145,7 +191,8 @@ header {
 /* COMPLAINT FORM */
 .complaint-form { background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow); padding:16px; margin-bottom:14px; border:1px solid var(--border); }
 .form-label { font-size:12px; font-weight:700; color:var(--green); margin-bottom:5px; display:block; }
-.form-input, .form-select, .form-textarea { width:100%; border:1.5px solid var(--border); border-radius:10px; padding:10px 12px; font-size:13px; font-family:'Noto Sans Devanagari',sans-serif; background:#fff; outline:none; color:var(--text); margin-bottom:11px; transition:border .2s; }
+[data-theme="dark"] .form-label { color:#4ade80; }
+.form-input, .form-select, .form-textarea { width:100%; border:1.5px solid var(--border); border-radius:10px; padding:10px 12px; font-size:13px; font-family:'Noto Sans Devanagari',sans-serif; background:var(--cream); outline:none; color:var(--text); margin-bottom:11px; transition:border .2s; }
 .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--green); }
 .form-textarea { min-height:90px; resize:vertical; }
 .submit-btn { width:100%; background:var(--green); color:#fff; border:none; border-radius:50px; padding:13px; font-size:14px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; transition:background .2s; }
@@ -159,34 +206,34 @@ header {
 .cc-cat { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:var(--saffron); color:#fff; }
 .cc-cat.road{background:#b45309} .cc-cat.water{background:#1d4ed8} .cc-cat.light{background:#b45309} .cc-cat.school{background:#7c3aed} .cc-cat.health{background:#dc2626} .cc-cat.other{background:#374151}
 .cc-status { margin-left:auto; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; }
-.cc-status.pending { background:#fff7ed; color:#9a3412; }
-.cc-status.solved { background:#dcfce7; color:#166534; }
+.cc-status.pending { background:var(--card-tint); color:#e65100; border:1px solid #e65100; }
+.cc-status.solved { background:var(--card-tint); color:#16a34a; border:1px solid #16a34a;}
 .cc-name-txt { font-size:11px; color:var(--muted); }
 .cc-text { font-size:13px; line-height:1.5; margin-bottom:4px; }
-.cc-time { font-size:10px; color:#9ca3af; }
+.cc-time { font-size:10px; color:var(--muted); }
 
 /* NEWS CARD */
 .news-card { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); margin-bottom:10px; border-left:4px solid var(--saffron); animation:fadeIn .3s ease; }
 .news-tag { display:inline-block; background:var(--saffron); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-bottom:6px; }
 .news-tag.green{background:var(--green)} .news-tag.red{background:var(--red)} .news-tag.blue{background:var(--blue)}
-.news-title { font-size:14px; font-weight:700; margin-bottom:4px; line-height:1.4; }
-.news-body { font-size:12px; color:#4b5563; line-height:1.5; }
-.news-time { font-size:10px; color:#9ca3af; margin-top:5px; }
+.news-title { font-size:14px; font-weight:700; margin-bottom:4px; line-height:1.4; color:var(--text); }
+.news-body { font-size:12px; color:var(--muted); line-height:1.5; }
+.news-time { font-size:10px; color:var(--muted); margin-top:5px; }
 
 /* SCHEME CARD */
 .scheme-card { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); margin-bottom:10px; display:flex; align-items:flex-start; gap:11px; cursor:pointer; transition:transform .2s; border:1.5px solid var(--border); }
 .scheme-card:hover { transform:translateX(3px); border-color:var(--green); }
-.sc-icon { width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-.sc-info h3 { font-size:13px; font-weight:700; margin-bottom:3px; }
+.sc-icon { width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; background:var(--card-tint); }
+.sc-info h3 { font-size:13px; font-weight:700; margin-bottom:3px; color:var(--text); }
 .sc-info p { font-size:11px; color:var(--muted); line-height:1.4; }
-.sc-badge { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:8px; margin-top:4px; }
+.sc-badge { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:8px; margin-top:4px; border:1px solid var(--border); }
 
 /* EMERGENCY */
 .emergency-banner { background:linear-gradient(135deg,#dc2626,#991b1b); color:#fff; border-radius:16px; padding:16px; margin-bottom:14px; text-align:center; }
 .emergency-banner h2 { font-family:'Tiro Devanagari Hindi',serif; font-size:19px; margin-bottom:4px; }
 .emergency-banner p { font-size:12px; opacity:.85; }
 .helpline-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
-.hcard { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); text-align:center; text-decoration:none; display:block; transition:transform .2s; }
+.hcard { background:var(--card-bg); border-radius:14px; padding:13px; box-shadow:var(--shadow); text-align:center; text-decoration:none; display:block; transition:transform .2s; border:1px solid var(--border); }
 .hcard:hover { transform:scale(1.03); }
 .hcard-icon { font-size:26px; margin-bottom:4px; }
 .hcard-num { font-size:20px; font-weight:900; letter-spacing:1px; }
@@ -195,24 +242,26 @@ header {
 
 /* LOADING & EMPTY STATES */
 .loading-state { text-align:center; padding:30px 16px; }
-.spinner { width:36px; height:36px; border:3px solid #e5e7eb; border-top-color:var(--green); border-radius:50%; animation:spin .7s linear infinite; margin:0 auto 12px; }
+.spinner { width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--green); border-radius:50%; animation:spin .7s linear infinite; margin:0 auto 12px; }
 @keyframes spin { to{transform:rotate(360deg)} }
 .loading-state p { font-size:13px; color:var(--muted); }
 .no-data { text-align:center; padding:30px 16px; color:var(--muted); font-size:13px; line-height:1.7; }
 .no-data span { font-size:36px; display:block; margin-bottom:8px; }
 
 /* LIVE BADGE */
-.live-badge { display:inline-flex; align-items:center; gap:5px; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:20px; padding:3px 10px; font-size:10px; font-weight:700; color:var(--green); margin-left:auto; }
+.live-badge { display:inline-flex; align-items:center; gap:5px; background:var(--card-tint); border:1px solid var(--green); border-radius:20px; padding:3px 10px; font-size:10px; font-weight:700; color:var(--green); margin-left:auto; }
+[data-theme="dark"] .live-badge { color:#4ade80; border-color:#4ade80; }
 .live-dot { width:7px; height:7px; background:#16a34a; border-radius:50%; animation:pulse 1.5s infinite; }
 
 /* MODAL */
-.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; display:none; align-items:flex-end; }
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:200; display:none; align-items:flex-end; }
 .modal-overlay.open { display:flex; }
-.modal-sheet { background:#fff; border-radius:20px 20px 0 0; padding:18px; width:100%; animation:slideUp .3s ease; max-height:82vh; overflow-y:auto; }
+.modal-sheet { background:var(--card-bg); border-radius:20px 20px 0 0; padding:18px; width:100%; animation:slideUp .3s ease; max-height:85vh; overflow-y:auto; border-top:1px solid var(--border); }
 @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
-.modal-handle { width:38px; height:4px; background:#d1d5db; border-radius:2px; margin:0 auto 14px; }
+.modal-handle { width:38px; height:4px; background:var(--muted); opacity:0.5; border-radius:2px; margin:0 auto 14px; }
 .modal-title { font-family:'Tiro Devanagari Hindi',serif; font-size:17px; font-weight:700; color:var(--green); margin-bottom:10px; }
-.modal-body { font-size:13px; color:#374151; line-height:1.7; }
+[data-theme="dark"] .modal-title { color:#4ade80; }
+.modal-body { font-size:13px; color:var(--text); line-height:1.7; }
 .close-modal { background:var(--saffron); color:#fff; border:none; border-radius:50px; padding:11px; width:100%; font-size:13px; font-weight:700; font-family:'Noto Sans Devanagari',sans-serif; cursor:pointer; margin-top:14px; }
 
 /* TOAST */
@@ -220,19 +269,27 @@ header {
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
 /* BOTTOM NAV */
-.bnav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; display:flex; box-shadow:0 -3px 14px rgba(0,0,0,0.07); z-index:100; justify-content:space-around; }
-.bn-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:9px 4px 7px; cursor:pointer; font-size:10px; color:#9ca3af; font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; gap:2px; transition:color .2s; }
+.bnav { position:fixed; bottom:0; left:0; right:0; background:var(--card-bg); border-top:1px solid var(--border); display:flex; box-shadow:0 -3px 14px rgba(0,0,0,0.07); z-index:100; justify-content:space-around; }
+.bn-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:9px 4px 7px; cursor:pointer; font-size:10px; color:var(--muted); font-family:'Noto Sans Devanagari',sans-serif; font-weight:700; gap:2px; transition:color .2s; }
 .bn-item .bni { font-size:20px; transition:transform .2s; }
 .bn-item.active { color:var(--green); }
+[data-theme="dark"] .bn-item.active { color:#4ade80; }
 .bn-item.active .bni { transform:scale(1.15); }
-.sos-btn { background:var(--red); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; margin-top:-18px; border:3px solid #fff; box-shadow:0 3px 14px rgba(192,57,43,.5); animation:sosG 2s infinite; }
+.sos-btn { background:var(--red); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; margin-top:-18px; border:3px solid var(--card-bg); box-shadow:0 3px 14px rgba(192,57,43,.5); animation:sosG 2s infinite; }
 @keyframes sosG { 0%,100%{box-shadow:0 3px 14px rgba(192,57,43,.5)} 50%{box-shadow:0 3px 22px rgba(192,57,43,.85)} }
 
 /* ABOUT & POLICY FOOTER FOR ADSENSE */
-.app-footer { margin-top: 30px; background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 20px; text-align: left; border-top: 4px solid var(--green); border-bottom: 4px solid var(--saffron); }
+.app-footer { margin-top: 30px; background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; text-align: left; border-top: 4px solid var(--green); border-bottom: 4px solid var(--saffron); }
 .app-footer h3 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 14px; color: var(--green); margin-bottom: 6px; margin-top: 14px; }
+[data-theme="dark"] .app-footer h3 { color:#4ade80; }
 .app-footer h3:first-child { margin-top: 0; }
-.app-footer p { font-size: 11px; color: #4b5563; line-height: 1.6; margin-bottom: 10px; }
+.app-footer p { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+
+/* FOOTER MENU LINKS */
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.footer-links a { color: var(--blue); font-size: 12px; font-weight: 700; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.footer-links a:hover { text-decoration: underline; }
+
 </style>
 
 <!-- Google AdSense Code -->
@@ -251,7 +308,11 @@ header {
         <small>डिजिटल सेवा केंद्र</small>
       </div>
     </div>
-    <div class="hdr-date" id="dateChip">...</div>
+    <div class="hdr-actions">
+      <div class="hdr-date" id="dateChip">...</div>
+      <!-- Theme Toggle Button -->
+      <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+    </div>
   </div>
   <nav class="nav-tabs">
     <div class="nav-tab active"  onclick="goTab('home',0)">🏠 होम</div>
@@ -321,23 +382,23 @@ header {
       <div class="qcard-sub">हेल्पलाइन</div>
     </div>
     <!-- Bus Timings & Panchayat Members -->
-    <div class="qcard" style="border-color:#d8b4fe; background:#faf5ff;" onclick="window.open('https://timetable.hrtransport.org/#/timetable', '_blank')">
+    <div class="qcard" style="border-color:#d8b4fe;" onclick="window.open('https://timetable.hrtransport.org/#/timetable', '_blank')">
       <div class="qcard-icon">🚌</div>
       <div class="qcard-title">बस समय सारिणी</div>
       <div class="qcard-sub">रोडवेज लाइव टाइम</div>
     </div>
-    <div class="qcard" style="border-color:#fde047; background:#fffbeb;" onclick="openModal('panchayat')">
+    <div class="qcard" style="border-color:#fde047;" onclick="openModal('panchayat')">
       <div class="qcard-icon">🤝</div>
       <div class="qcard-title">पंचायत सदस्य</div>
       <div class="qcard-sub">सरपंच व पंच लिस्ट</div>
     </div>
     <!-- Jobs & Services link -->
-    <div class="qcard" style="border-color:#3b82f6; background:#eff6ff;" onclick="goTab('jobs',7)">
+    <div class="qcard" style="border-color:#3b82f6; grid-column: span 2;" onclick="goTab('jobs',7)">
       <div class="qcard-icon">🎯</div>
       <div class="qcard-title">रोजगार व भर्ती</div>
       <div class="qcard-sub">नौकरी व रैली</div>
     </div>
-    <div class="qcard" style="border-color:#10b981; background:#f0fdf4;" onclick="goTab('services',8)">
+    <div class="qcard" style="border-color:#10b981;" onclick="goTab('services',8)">
       <div class="qcard-icon">🛠️</div>
       <div class="qcard-title">गांव की सुविधाएं</div>
       <div class="qcard-sub">डायरी, बिल, फॉर्म</div>
@@ -368,21 +429,17 @@ header {
   </div>
 
   <!-- ABOUT US & PRIVACY POLICY FOOTER FOR ADSENSE -->
-  <div class="app-footer">
-    <h3>🏢 About Us (हमारे बारे में)</h3>
-    <p>Umra Gaon Digital Seva is a platform to provide village services, news, and contact information in one place. Our aim is to make village services digital and easy to access. यह वेबसाइट उमरा गांव (हिसार) के निवासियों की सुविधा के लिए बनाई गई है।</p>
-    
-    <h3>🔒 Privacy Policy (प्राइवेसी पॉलिसी)</h3>
-    <p>This website (Umra Gaon Digital Seva - village-umra.web.app) does not collect any personal data directly. We may use third-party services like Google AdSense which may use cookies to serve ads based on a user's prior visits. By using our website, you agree to this policy.</p>
+  <div class="app-footer" style="text-align: center; padding: 24px 16px;">
+    <!-- FOOTER MENU LINKS -->
+    <div class="footer-links" style="border-top: none; padding-top: 0; margin-top: 0; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
+      <a onclick="openModal('aboutPage')">About Us</a>
+      <a onclick="openModal('privacyPage')">Privacy Policy</a>
+      <a onclick="openModal('disclaimerPage')">Disclaimer</a>
+      <a onclick="openModal('contactPage')">Contact Us</a>
+    </div>
 
-    <h3>⚠️ Disclaimer (अस्वीकरण)</h3>
-    <p>All information on this website is published in good faith and for general information purpose only. This is not an official government website and is not affiliated with any government authority. We do not make any warranties about the completeness, reliability, and accuracy of this government scheme information. Please verify with official government websites.</p>
-    
-    <h3>📞 Contact Us</h3>
-    <p>For any queries, suggestions, or issues, please use the "शिकायत (Complaints)" section of this app to reach out to the Gram Panchayat directly.</p>
-
-    <div style="font-size:10px; color:#9ca3af; border-top:1px solid var(--border); padding-top:10px; margin-top:10px; text-align:center;">
-      &copy; 2026 Umra Gaon Digital Seva (village-umra.web.app). All rights reserved.
+    <div style="font-size:11px; color:var(--muted); border-top:1px solid var(--border); padding-top:16px;">
+      &copy; 2026 उमरा गांव डिजिटल सेवा केंद्र (village-umra.web.app). All rights reserved.
     </div>
   </div>
 
@@ -419,13 +476,13 @@ header {
 <div class="section" id="news">
 
   <!-- Haryana News -->
-  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+  <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:15px;">📰</span>
       <span style="font-size:14px;font-weight:700;">हरियाणा के प्रमुख अखबार</span>
     </div>
     <div id="autoNewsList" style="padding:12px;">
-      <div style="text-align:center;padding:16px;font-size:12px;color:#666;">
+      <div style="text-align:center;padding:16px;font-size:12px;color:var(--muted);">
         लोड हो रहा है...
       </div>
     </div>
@@ -444,32 +501,32 @@ header {
 <div class="section" id="schemes">
   <div class="sec-title">📋 सरकारी योजनाएं</div>
   <div class="scheme-card" onclick="openModal('pmkisan')">
-    <div class="sc-icon" style="background:#dcfce7">🌾</div>
-    <div class="sc-info"><h3>पीएम किसान सम्मान निधि</h3><p>हर साल ₹6,000 सीधे किसान के खाते में</p><span class="sc-badge" style="background:#dcfce7;color:#166534">कृषि योजना</span></div>
+    <div class="sc-icon">🌾</div>
+    <div class="sc-info"><h3>पीएम किसान सम्मान निधि</h3><p>हर साल ₹6,000 सीधे किसान के खाते में</p><span class="sc-badge">कृषि योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('ayushman')">
-    <div class="sc-icon" style="background:#fef3c7">🏥</div>
-    <div class="sc-info"><h3>आयुष्मान भारत योजना</h3><p>₹5 लाख तक का मुफ्त इलाज</p><span class="sc-badge" style="background:#fef3c7;color:#92400e">स्वास्थ्य योजना</span></div>
+    <div class="sc-icon">🏥</div>
+    <div class="sc-info"><h3>आयुष्मान भारत योजना</h3><p>₹5 लाख तक का मुफ्त इलाज</p><span class="sc-badge">स्वास्थ्य योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('ration')">
-    <div class="sc-icon" style="background:#ffe4e6">🍚</div>
-    <div class="sc-info"><h3>राशन कार्ड / मुफ्त अनाज</h3><p>PMGKAY – गरीब परिवारों को मुफ्त राशन</p><span class="sc-badge" style="background:#ffe4e6;color:#9f1239">खाद्य योजना</span></div>
+    <div class="sc-icon">🍚</div>
+    <div class="sc-info"><h3>राशन कार्ड / मुफ्त अनाज</h3><p>PMGKAY – गरीब परिवारों को मुफ्त राशन</p><span class="sc-badge">खाद्य योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('ujjwala')">
-    <div class="sc-icon" style="background:#fff7ed">🔥</div>
-    <div class="sc-info"><h3>उज्ज्वला योजना</h3><p>BPL परिवारों को मुफ्त LPG कनेक्शन</p><span class="sc-badge" style="background:#fff7ed;color:#9a3412">ऊर्जा योजना</span></div>
+    <div class="sc-icon">🔥</div>
+    <div class="sc-info"><h3>उज्ज्वला योजना</h3><p>BPL परिवारों को मुफ्त LPG कनेक्शन</p><span class="sc-badge">ऊर्जा योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('awas')">
-    <div class="sc-icon" style="background:#eff6ff">🏠</div>
-    <div class="sc-info"><h3>प्रधानमंत्री आवास योजना</h3><p>गरीबों को पक्का मकान बनाने के लिए सहायता</p><span class="sc-badge" style="background:#eff6ff;color:#1e40af">आवास योजना</span></div>
+    <div class="sc-icon">🏠</div>
+    <div class="sc-info"><h3>प्रधानमंत्री आवास योजना</h3><p>गरीबों को पक्का मकान बनाने के लिए सहायता</p><span class="sc-badge">आवास योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('beti')">
-    <div class="sc-icon" style="background:#fdf4ff">👧</div>
-    <div class="sc-info"><h3>बेटी बचाओ, बेटी पढ़ाओ</h3><p>बेटियों की शिक्षा और सुरक्षा के लिए</p><span class="sc-badge" style="background:#fdf4ff;color:#7e22ce">महिला योजना</span></div>
+    <div class="sc-icon">👧</div>
+    <div class="sc-info"><h3>बेटी बचाओ, बेटी पढ़ाओ</h3><p>बेटियों की शिक्षा और सुरक्षा के लिए</p><span class="sc-badge">महिला योजना</span></div>
   </div>
   <div class="scheme-card" onclick="openModal('mudra')">
-    <div class="sc-icon" style="background:#ecfdf5">💼</div>
-    <div class="sc-info"><h3>पीएम मुद्रा योजना</h3><p>छोटे व्यापार के लिए ₹10 लाख तक का लोन</p><span class="sc-badge" style="background:#ecfdf5;color:#065f46">रोजगार योजना</span></div>
+    <div class="sc-icon">💼</div>
+    <div class="sc-info"><h3>पीएम मुद्रा योजना</h3><p>छोटे व्यापार के लिए ₹10 लाख तक का लोन</p><span class="sc-badge">रोजगार योजना</span></div>
   </div>
 </div>
 
@@ -501,357 +558,281 @@ header {
     <div style="font-size:12px;opacity:.85;">eGramSwaraj के अनुसार — सरकारी आंकड़े</div>
   </div>
 
-  <div style="background:#fff8e1;border:1.5px solid #ffe082;border-radius:14px;padding:14px;margin-bottom:14px;">
-    <div style="font-size:13px;font-weight:700;color:#e65100;margin-bottom:6px;">💡 यह क्या है?</div>
-    <div style="font-size:12px;color:#5d4037;line-height:1.7;">सरकार हमारे गांव को हर साल पैसे देती है — सड़क, पानी, बिजली और अन्य कामों के लिए। यहाँ आप देख सकते हैं कि <b>कितने पैसे आए, कितने खर्च हुए</b> और कितने बचे।</div>
+  <div class="bg-white-override" style="background:#fff8e1;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:var(--saffron);margin-bottom:6px;">💡 यह क्या है?</div>
+    <div style="font-size:12px;color:var(--text);line-height:1.7;">सरकार हमारे गांव को हर साल पैसे देती है — सड़क, पानी, बिजली और अन्य कामों के लिए। यहाँ आप देख सकते हैं कि <b>कितने पैसे आए, कितने खर्च हुए</b> और कितने बचे।</div>
   </div>
 
   <!-- YEAR SELECTOR -->
   <div style="overflow-x:auto;white-space:nowrap;margin-bottom:14px;padding-bottom:4px;">
     <button onclick="showBudgetYear('2526')" id="btn2526" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #1A4D2E;background:#1A4D2E;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2025-26 ✓</button>
-    <button onclick="showBudgetYear('2425')" id="btn2425" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2024-25</button>
-    <button onclick="showBudgetYear('2324')" id="btn2324" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2023-24</button>
-    <button onclick="showBudgetYear('2223')" id="btn2223" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2022-23</button>
-    <button onclick="showBudgetYear('2122')" id="btn2122" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2021-22</button>
-    <button onclick="showBudgetYear('2021')" id="btn2021" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2020-21</button>
-    <button onclick="showBudgetYear('1920')" id="btn1920" style="display:inline-block;padding:9px 14px;border-radius:10px;border:2px solid #e0e0e0;background:#fff;color:#666;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2019-20</button>
+    <button onclick="showBudgetYear('2425')" id="btn2425" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2024-25</button>
+    <button onclick="showBudgetYear('2324')" id="btn2324" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2023-24</button>
+    <button onclick="showBudgetYear('2223')" id="btn2223" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2022-23</button>
+    <button onclick="showBudgetYear('2122')" id="btn2122" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2021-22</button>
+    <button onclick="showBudgetYear('2021')" id="btn2021" style="display:inline-block;margin-right:6px;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2020-21</button>
+    <button onclick="showBudgetYear('1920')" id="btn1920" style="display:inline-block;padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">2019-20</button>
   </div>
 
   <!-- BUDGET DATA 2526 -->
   <div id="budget2526">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:14px;border-top:4px solid #1A4D2E;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1A4D2E;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:14px;border-top:4px solid #1A4D2E;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--green);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
         <span style="font-size:20px;">🏦</span> पंचायत के वर्तमान बैंक खाते (2025-26)
       </div>
-      <div style="background:#f0fdf4;padding:14px;border-radius:12px;text-align:center;margin-bottom:14px;">
-        <div style="font-size:12px;color:#14532d;font-weight:700;margin-bottom:4px;">कुल जमा राशि (Total Balance)</div>
-        <div style="font-size:24px;font-weight:900;color:#1A4D2E;letter-spacing:0.5px;">₹28,65,308</div>
+      <div style="background:var(--card-tint);padding:14px;border-radius:12px;text-align:center;margin-bottom:14px;border:1px solid var(--border);">
+        <div style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:4px;">कुल जमा राशि (Total Balance)</div>
+        <div style="font-size:24px;font-weight:900;color:var(--green);letter-spacing:0.5px;">₹28,65,308</div>
       </div>
       <div style="display:grid;gap:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****3338</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">IDBI Bank (Hansi)</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****3338</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹22,53,834</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2715</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">IDBI Bank (Hansi)</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****2715</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹4,14,598</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">Punjab National Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2268</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">Punjab National Bank</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****2268</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,48,953</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0363</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">HDFC Bank</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****0363</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹34,912</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****6756</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">IDBI Bank (Hansi)</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****6756</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹8,346</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">State Bank of India (Umra)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ***0815</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">State Bank of India (Umra)</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ***0815</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹2,983</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0610</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">HDFC Bank</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****0610</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,016</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****7691</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--cream);">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">IDBI Bank (Hansi)</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">खाता: ****7691</div></div>
           <div style="font-size:14px;font-weight:800;color:#16a34a;">₹666</div>
         </div>
       </div>
-      <div style="font-size:11.5px;color:#d97706;text-align:center;margin-top:14px;font-weight:700;padding-top:10px;border-top:1px dashed #fcd34d;">
+      <div style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px;font-weight:700;padding-top:10px;border-top:1px dashed var(--border);">
         ⏳ पिछले सालों के खाते भी जल्द ही जोड़े जाएंगे
       </div>
     </div>
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1A4D2E;margin-bottom:12px;">📊 कुल सारांश — 2025-26</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--green);margin-bottom:12px;">📊 कुल सारांश — 2025-26</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#1A4D2E;">₹65,54,270</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹65,54,270</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹14,86,051</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,38,418</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹19,38,418</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹31,95,278</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹31,95,278</div>
         </div>
       </div>
     </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+    <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
       <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission — Center Schemes</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">XV Finance Commission — Center Schemes</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹14,86,051</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,78,216</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹27,35,082</b></div>
+        <div style="font-size:12px;color:var(--muted);">🎯 अपेक्षित: <b style="color:var(--text);">₹37,44,160</b></div>
+        <div style="font-size:12px;color:var(--muted);">✅ प्राप्त: <b style="color:#2e7d32;">₹14,86,051</b></div>
+        <div style="font-size:12px;color:var(--muted);">🔄 पिछला शेष: <b style="color:var(--saffron);">₹16,78,216</b></div>
+        <div style="font-size:12px;color:var(--muted);">💸 व्यय: <b style="color:var(--red);">₹27,35,082</b></div>
       </div>
     </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+    <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
       <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">XV Finance Commission [1769]</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹2,60,202</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹4,60,196</b></div>
+        <div style="font-size:12px;color:var(--muted);">🎯 अपेक्षित: <b style="color:var(--text);">₹24,96,110</b></div>
+        <div style="font-size:12px;color:var(--muted);">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:var(--muted);">🔄 पिछला शेष: <b style="color:var(--saffron);">₹2,60,202</b></div>
+        <div style="font-size:12px;color:var(--muted);">💸 व्यय: <b style="color:var(--red);">₹4,60,196</b></div>
       </div>
     </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+    <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
       <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">Own Funds — स्थानीय आय</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹3,14,000</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+        <div style="font-size:12px;color:var(--muted);">🎯 अपेक्षित: <b style="color:var(--text);">₹3,14,000</b></div>
+        <div style="font-size:12px;color:var(--muted);">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:var(--muted);">🔄 पिछला शेष: <b style="color:var(--saffron);">₹0</b></div>
+        <div style="font-size:12px;color:var(--muted);">💸 व्यय: <b style="color:var(--red);">₹0</b></div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
 
   <!-- BUDGET DATA 2425 -->
   <div id="budget2425" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:14px;border-top:4px solid #2e7d32;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-        <span style="font-size:20px;">🏦</span> पंचायत के बैंक खाते (2024-25)
-      </div>
-      <div style="background:#e8f5e9;padding:14px;border-radius:12px;text-align:center;margin-bottom:14px;">
-        <div style="font-size:12px;color:#1b5e20;font-weight:700;margin-bottom:4px;">कुल जमा राशि (Total Balance)</div>
-        <div style="font-size:24px;font-weight:900;color:#2e7d32;letter-spacing:0.5px;">₹25,49,892</div>
-      </div>
-      <div style="display:grid;gap:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****3338</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹19,38,418</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2715</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹4,14,598</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">Punjab National Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2268</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,48,953</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0363</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹34,912</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****6756</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹8,346</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">State Bank of India (Umra)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ***0815</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹2,983</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0610</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,016</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****7691</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹666</div>
-        </div>
-      </div>
-      <div style="font-size:11.5px;color:#d97706;text-align:center;margin-top:14px;font-weight:700;padding-top:10px;border-top:1px dashed #fcd34d;">
-        ⏳ पिछले सालों के खाते भी जल्द ही जोड़े जाएंगे
-      </div>
-    </div>
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #2e7d32;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;">📊 कुल सारांश — 2024-25</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #2e7d32;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--green);margin-bottom:12px;">📊 कुल सारांश — 2024-25</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹77,40,270</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹77,40,270</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹95,33,196</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,87,801</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹19,87,801</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹1,00,82,579</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹1,00,82,579</div>
         </div>
       </div>
     </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
-      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Center Schemes / Grants</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹54,62,749</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,25,053</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹59,09,586</b></div>
-      </div>
-    </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
-      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹40,70,447</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹3,62,748</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹41,72,993</b></div>
-      </div>
-    </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
-      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹15,00,000</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
-      </div>
-    </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
   
   <!-- BUDGET DATA 2324 -->
   <div id="budget2324" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #00695c;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#00695c;margin-bottom:12px;">📊 कुल सारांश — 2023-24</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #00695c;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--green);margin-bottom:12px;">📊 कुल सारांश — 2023-24</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#00695c;">₹68,40,270</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹68,40,270</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹45,75,350</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹63,37,364</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹63,37,364</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹89,24,913</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹89,24,913</div>
         </div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
   
   <!-- BUDGET DATA 2223 -->
   <div id="budget2223" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1565C0;margin-bottom:12px;">📊 कुल सारांश — 2022-23</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--blue);margin-bottom:12px;">📊 कुल सारांश — 2022-23</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#1565C0;">₹96,70,270</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹96,70,270</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹35,82,770</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹32,45,986</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹32,45,986</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹4,29,697</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹4,29,697</div>
         </div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
   
   <!-- BUDGET DATA 2122 -->
   <div id="budget2122" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #e65100;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#e65100;margin-bottom:12px;">📊 कुल सारांश — 2021-22</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #e65100;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--saffron);margin-bottom:12px;">📊 कुल सारांश — 2021-22</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹81,10,483</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹81,10,483</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹41,03,825</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹5,93,976</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹5,93,976</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹11,01,146</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹11,01,146</div>
         </div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
   
   <!-- BUDGET DATA 2021 -->
   <div id="budget2021" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #7b1fa2;">
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #7b1fa2;">
       <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#7b1fa2;margin-bottom:12px;">📊 कुल सारांश — 2020-21</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#7b1fa2;">₹2,78,08,377</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹2,78,08,377</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹80,16,112</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹0</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹0</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹1,17,45,766</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹1,17,45,766</div>
         </div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
   
   <!-- BUDGET DATA 1920 -->
   <div id="budget1920" style="display:none;">
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1565C0;margin-bottom:12px;">📊 कुल सारांश — 2019-20</div>
+    <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1565C0;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:var(--blue);margin-bottom:12px;">📊 कुल सारांश — 2019-20</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#1565C0;">₹1,80,17,281</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:var(--text);">₹1,80,17,281</div>
         </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
           <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹1,73,32,931</div>
         </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹22,75,550</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:var(--saffron);">₹22,75,550</div>
         </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹1,76,85,673</div>
+        <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red);">₹1,76,85,673</div>
         </div>
       </div>
     </div>
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
+    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--green);border-radius:12px;padding:12px;text-decoration:none;color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
   </div>
 
-  <div style="text-align:center;font-size:11px;color:#9ca3af;padding-bottom:10px;">
+  <div style="text-align:center;font-size:11px;color:var(--muted);padding-bottom:10px;">
     📅 अंतिम अपडेट: मार्च 2026 | स्रोत: eGramSwaraj / Meri Panchayat App
   </div>
 
@@ -869,7 +850,7 @@ header {
   </div>
 
   <!-- WEATHER -->
-  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+  <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#1565C0,#1976d2);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">🌦️</span>
       <span style="font-size:14px;font-weight:700;">मौसम अपडेट — हांसी (उमरा)</span>
@@ -878,68 +859,68 @@ header {
     <div id="weatherBox" style="padding:16px;">
       <div style="text-align:center;padding:20px;">
         <div class="spinner" style="border-top-color:#1565C0;"></div>
-        <div style="font-size:12px;color:#666;">मौसम लोड हो रहा है...</div>
+        <div style="font-size:12px;color:var(--muted);">मौसम लोड हो रहा है...</div>
       </div>
     </div>
   </div>
 
   <!-- MANDI BHAV -->
-  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+  <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#e65100,#f57c00);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">💸</span>
       <span style="font-size:14px;font-weight:700;">हांसी मंडी भाव (लाइव)</span>
     </div>
     <div style="padding:14px;">
-      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px;margin-bottom:12px;font-size:12px;color:#e65100;text-align:center;">
+      <div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:12px;font-size:12px;color:var(--saffron);text-align:center;">
         ✅ <b>लाइव भाव (Live Price)</b> देखने के लिए अपनी फसल पर क्लिक करें।
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-        <a href="https://www.google.com/search?q=hansi+mandi+gehu+bhav+today" target="_blank" style="background:#fff;border:1.5px solid #d1d5db;border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
+        <a href="https://www.google.com/search?q=hansi+mandi+gehu+bhav+today" target="_blank" style="background:var(--card-bg);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
           <div style="font-size:28px;margin-bottom:6px;">🌾</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;">गेहूं (Wheat)</div>
-          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:#eff6ff;padding:4px;border-radius:6px;">आज का भाव →</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">गेहूं (Wheat)</div>
+          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:var(--card-tint);border:1px solid var(--border);padding:4px;border-radius:6px;">आज का भाव →</div>
         </a>
-        <a href="https://www.google.com/search?q=hansi+mandi+sarso+bhav+today" target="_blank" style="background:#fff;border:1.5px solid #d1d5db;border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
+        <a href="https://www.google.com/search?q=hansi+mandi+sarso+bhav+today" target="_blank" style="background:var(--card-bg);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
           <div style="font-size:28px;margin-bottom:6px;">🌱</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;">सरसों (Mustard)</div>
-          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:#eff6ff;padding:4px;border-radius:6px;">आज का भाव →</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">सरसों (Mustard)</div>
+          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:var(--card-tint);border:1px solid var(--border);padding:4px;border-radius:6px;">आज का भाव →</div>
         </a>
-        <a href="https://www.google.com/search?q=hansi+mandi+dhaan+bhav+today" target="_blank" style="background:#fff;border:1.5px solid #d1d5db;border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
+        <a href="https://www.google.com/search?q=hansi+mandi+dhaan+bhav+today" target="_blank" style="background:var(--card-bg);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
           <div style="font-size:28px;margin-bottom:6px;">🍚</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;">धान (Paddy)</div>
-          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:#eff6ff;padding:4px;border-radius:6px;">आज का भाव →</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">धान (Paddy)</div>
+          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:var(--card-tint);border:1px solid var(--border);padding:4px;border-radius:6px;">आज का भाव →</div>
         </a>
-        <a href="https://www.google.com/search?q=hansi+mandi+narma+kapas+bhav+today" target="_blank" style="background:#fff;border:1.5px solid #d1d5db;border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
+        <a href="https://www.google.com/search?q=hansi+mandi+narma+kapas+bhav+today" target="_blank" style="background:var(--card-bg);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;text-decoration:none;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.05);transition:all 0.2s;">
           <div style="font-size:28px;margin-bottom:6px;">☁️</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;">नरमा / कपास</div>
-          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:#eff6ff;padding:4px;border-radius:6px;">आज का भाव →</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">नरमा / कपास</div>
+          <div style="font-size:11px;color:#1565C0;margin-top:6px;font-weight:700;background:var(--card-tint);border:1px solid var(--border);padding:4px;border-radius:6px;">आज का भाव →</div>
         </a>
       </div>
-      <a href="https://mandibhavtoday.net/haryana/hansi-mandi-bhav" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff3e0;border:1.5px solid #ffcc80;border-radius:12px;padding:11px;text-decoration:none;color:#e65100;font-size:12px;font-weight:700;">
+      <a href="https://mandibhavtoday.net/haryana/hansi-mandi-bhav" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card-tint);border:1.5px solid var(--saffron);border-radius:12px;padding:11px;text-decoration:none;color:var(--saffron);font-size:12px;font-weight:700;">
         🔗 मंडी वेबसाइट पर जाएं →
       </a>
     </div>
   </div>
 
   <!-- FASAL SALAH -->
-  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
+  <div class="bg-white-override" style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:14px;">
     <div style="background:linear-gradient(90deg,#2e7d32,#388e3c);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">🌱</span>
       <span style="font-size:14px;font-weight:700;">फसल सलाहकार</span>
     </div>
     <div id="fasalMsgs" style="padding:12px;min-height:120px;max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:14px;border-bottom-left-radius:3px;padding:10px 13px;font-size:12.5px;line-height:1.5;max-width:85%;align-self:flex-start;">
+      <div style="background:var(--card-tint);border:1px solid var(--border);color:var(--text);border-radius:14px;border-bottom-left-radius:3px;padding:10px 13px;font-size:12.5px;line-height:1.5;max-width:85%;align-self:flex-start;">
         🙏 नमस्ते किसान भाई! फसल की बीमारी, खाद, सिंचाई, या खेती से जुड़ा कोई भी सवाल पूछें।
       </div>
     </div>
     <div style="display:flex;gap:6px;padding:0 10px 8px;overflow-x:auto;scrollbar-width:none;">
-      <div onclick="askFasal('गेहूं में पीलापन क्यों आता है?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌾 गेहूं में पीलापन</div>
-      <div onclick="askFasal('सरसों की फसल में कौन सी खाद डालें?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">🌱 सरसों में खाद</div>
-      <div onclick="askFasal('मेरी फसल मेरा ब्यौरा कैसे भरें?')" style="white-space:nowrap;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 11px;font-size:10.5px;color:#166534;cursor:pointer;font-weight:700;flex-shrink:0;">📝 फसल ब्यौरा</div>
+      <div class="aq" onclick="askFasal('गेहूं में पीलापन क्यों आता है?')">🌾 गेहूं में पीलापन</div>
+      <div class="aq" onclick="askFasal('सरसों की फसल में कौन सी खाद डालें?')">🌱 सरसों में खाद</div>
+      <div class="aq" onclick="askFasal('मेरी फसल मेरा ब्यौरा कैसे भरें?')">📝 फसल ब्यौरा</div>
     </div>
-    <div style="display:flex;gap:7px;padding:8px 10px;border-top:1px solid #e5e7eb;background:#fafafa;">
-      <input id="fasalInp" style="flex:1;border:1.5px solid #d1d5db;border-radius:24px;padding:9px 14px;font-size:12.5px;font-family:'Noto Sans Devanagari',sans-serif;background:#fff;outline:none;" placeholder="खेती का सवाल पूछें..." />
-      <button onclick="sendFasal()" style="width:40px;height:40px;background:#2e7d32;border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">➤</button>
+    <div class="ai-inp-area">
+      <input id="fasalInp" class="ai-inp" placeholder="खेती का सवाल पूछें..." />
+      <button onclick="sendFasal()" class="send-btn">➤</button>
     </div>
   </div>
 </div>
@@ -952,37 +933,37 @@ header {
   </div>
 
   <div class="sec-title">🪖 आर्मी व पुलिस भर्ती (Defense Jobs)</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
+  <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
     <div style="padding:14px;border-bottom:1px solid var(--border);">
-      <div style="font-size:14px;font-weight:700;color:#1e3a8a;margin-bottom:4px;">भारतीय सेना (Agniveer)</div>
-      <div style="font-size:12px;color:#555;line-height:1.5;">हिसार एआरओ (ARO Hisar) के तहत अग्निवीर भर्ती रैलियां होती हैं। 10वीं/12वीं पास युवा आवेदन कर सकते हैं।</div>
-      <a href="https://joinindianarmy.nic.in" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:#1e3a8a;padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">आधिकारिक वेबसाइट →</a>
+      <div style="font-size:14px;font-weight:700;color:var(--blue);margin-bottom:4px;">भारतीय सेना (Agniveer)</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5;">हिसार एआरओ (ARO Hisar) के तहत अग्निवीर भर्ती रैलियां होती हैं। 10वीं/12वीं पास युवा आवेदन कर सकते हैं।</div>
+      <a href="https://joinindianarmy.nic.in" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:var(--blue);padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">आधिकारिक वेबसाइट →</a>
     </div>
     <div style="padding:14px;">
-      <div style="font-size:14px;font-weight:700;color:#1e3a8a;margin-bottom:4px;">हरियाणा पुलिस (HSSC)</div>
-      <div style="font-size:12px;color:#555;line-height:1.5;">सिपाही (Constable) व सब-इंस्पेक्टर (SI) की भर्ती के लिए हरियाणा CET (Common Eligibility Test) पास होना अनिवार्य है।</div>
-      <a href="https://hssc.gov.in" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:#1e3a8a;padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">HSSC वेबसाइट →</a>
+      <div style="font-size:14px;font-weight:700;color:var(--blue);margin-bottom:4px;">हरियाणा पुलिस (HSSC)</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5;">सिपाही (Constable) व सब-इंस्पेक्टर (SI) की भर्ती के लिए हरियाणा CET (Common Eligibility Test) पास होना अनिवार्य है।</div>
+      <a href="https://hssc.gov.in" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:var(--blue);padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">HSSC वेबसाइट →</a>
     </div>
   </div>
 
   <div class="sec-title">🏢 हरियाणा सरकारी नौकरी (Haryana Govt)</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
+  <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
     <div style="padding:14px;border-bottom:1px solid var(--border);border-left:4px solid var(--saffron);">
-      <div style="font-size:14px;font-weight:700;color:#E8650A;margin-bottom:4px;">हरियाणा कौशल रोजगार निगम (HKRN)</div>
-      <div style="font-size:12px;color:#555;line-height:1.5;">हरियाणा में अनुबंध (Contract) आधारित नौकरियों के लिए यहाँ रजिस्ट्रेशन करें। इसके लिए फैमिली आईडी (PPP) अनिवार्य है।</div>
-      <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:#E8650A;padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">HKRN पोर्टल →</a>
+      <div style="font-size:14px;font-weight:700;color:var(--saffron);margin-bottom:4px;">हरियाणा कौशल रोजगार निगम (HKRN)</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5;">हरियाणा में अनुबंध (Contract) आधारित नौकरियों के लिए यहाँ रजिस्ट्रेशन करें। इसके लिए फैमिली आईडी (PPP) अनिवार्य है।</div>
+      <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" style="display:inline-block;margin-top:8px;font-size:11px;color:#fff;background:var(--saffron);padding:5px 12px;border-radius:20px;text-decoration:none;font-weight:700;">HKRN पोर्टल →</a>
     </div>
     <div style="padding:14px;border-left:4px solid var(--saffron);">
-      <div style="font-size:14px;font-weight:700;color:#E8650A;margin-bottom:4px;">HPSC व HSSC भर्तियां</div>
-      <div style="font-size:12px;color:#555;line-height:1.5;">ग्रुप C और D की नौकरियों के लिए समय-समय पर फॉर्म निकलते हैं। अपने दस्तावेज़ (जाति, डोमिसाइल, आधार) हमेशा तैयार रखें।</div>
+      <div style="font-size:14px;font-weight:700;color:var(--saffron);margin-bottom:4px;">HPSC व HSSC भर्तियां</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5;">ग्रुप C और D की नौकरियों के लिए समय-समय पर फॉर्म निकलते हैं। अपने दस्तावेज़ (जाति, डोमिसाइल, आधार) हमेशा तैयार रखें।</div>
     </div>
   </div>
 
   <div class="sec-title">🌾 गांव में रोजगार (Local Work)</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid var(--green);">
+  <div class="bg-white-override" style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid var(--green);">
     <div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:4px;">मनरेगा (MGNREGA)</div>
-    <div style="font-size:12px;color:#555;line-height:1.5;margin-bottom:8px;">ग्रामीण स्तर पर 100 दिन के सुनिश्चित रोज़गार के लिए मनरेगा जॉब कार्ड बनवाएं। यह कार्ड सरपंच या ग्राम सचिव के माध्यम से बनवाया जा सकता है।</div>
-    <div style="background:#f0fdf4;padding:8px;border-radius:8px;font-size:11px;color:#166534;font-weight:700;">
+    <div style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px;">ग्रामीण स्तर पर 100 दिन के सुनिश्चित रोज़गार के लिए मनरेगा जॉब कार्ड बनवाएं। यह कार्ड सरपंच या ग्राम सचिव के माध्यम से बनवाया जा सकता है।</div>
+    <div style="background:var(--card-tint);border:1px solid var(--border);padding:8px;border-radius:8px;font-size:11px;color:var(--text);font-weight:700;">
       📌 आवश्यक दस्तावेज़: फैमिली आईडी, आधार कार्ड, बैंक खाता व पासपोर्ट फोटो।
     </div>
   </div>
@@ -998,65 +979,65 @@ header {
   <!-- Village Directory -->
   <div class="sec-title">📞 गांव की डायरी (Local Directory)</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow);">
       <div style="font-size:24px;margin-bottom:4px;">💡</div>
-      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">बिजली मिस्त्री</div>
-      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text);">बिजली मिस्त्री</div>
+      <div style="font-size:10px;color:var(--saffron);font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
     </div>
-    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow);">
       <div style="font-size:24px;margin-bottom:4px;">🚰</div>
-      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">प्लंबर</div>
-      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text);">प्लंबर</div>
+      <div style="font-size:10px;color:var(--saffron);font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
     </div>
-    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow);">
       <div style="font-size:24px;margin-bottom:4px;">⛺</div>
-      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">टेंट हाउस</div>
-      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text);">टेंट हाउस</div>
+      <div style="font-size:10px;color:var(--saffron);font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
     </div>
-    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow);">
       <div style="font-size:24px;margin-bottom:4px;">🚜</div>
-      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">मैकेनिक</div>
-      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text);">मैकेनिक</div>
+      <div style="font-size:10px;color:var(--saffron);font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
     </div>
   </div>
 
   <!-- Bill Payments -->
   <div class="sec-title">💳 ऑनलाइन बिल भुगतान (Bill Payments)</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;">
-    <a href="https://epayment.dhbvn.org.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:#fefce8;border:1px solid #fef08a;border-radius:10px;text-decoration:none;margin-bottom:8px;color:#1a1a1a;">
+  <div style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border);padding:14px;margin-bottom:14px;">
+    <a href="https://epayment.dhbvn.org.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:var(--card-tint);border:1px solid var(--border);border-radius:10px;text-decoration:none;margin-bottom:8px;color:var(--text);">
       <div style="font-size:24px;">⚡</div>
-      <div><div style="font-size:13px;font-weight:700;">बिजली का बिल भरें</div><div style="font-size:11px;color:#666;">DHBVN ऑनलाइन पोर्टल</div></div>
-      <div style="margin-left:auto;color:#ca8a04;">→</div>
+      <div><div style="font-size:13px;font-weight:700;">बिजली का बिल भरें</div><div style="font-size:11px;color:var(--muted);">DHBVN ऑनलाइन पोर्टल</div></div>
+      <div style="margin-left:auto;color:var(--gold);">→</div>
     </a>
-    <a href="https://phedharyana.gov.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;text-decoration:none;color:#1a1a1a;">
+    <a href="https://phedharyana.gov.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:var(--card-tint);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);">
       <div style="font-size:24px;">🚰</div>
-      <div><div style="font-size:13px;font-weight:700;">पानी का बिल भरें</div><div style="font-size:11px;color:#666;">जन स्वास्थ्य अभियांत्रिकी विभाग</div></div>
-      <div style="margin-left:auto;color:#3b82f6;">→</div>
+      <div><div style="font-size:13px;font-weight:700;">पानी का बिल भरें</div><div style="font-size:11px;color:var(--muted);">जन स्वास्थ्य विभाग</div></div>
+      <div style="margin-left:auto;color:var(--blue);">→</div>
     </a>
   </div>
 
   <!-- Market -->
   <div class="sec-title">🛒 खरीदें और बेचें (Local Market)</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid #E8650A;">
-    <div style="font-size:14px;font-weight:700;color:#E8650A;margin-bottom:4px;">उमरा ऑनलाइन बाज़ार</div>
-    <div style="font-size:12px;color:#555;line-height:1.5;margin-bottom:10px;">पशु, पुराना ट्रैक्टर या कोई भी कृषि यंत्र खरीदने या बेचने के लिए व्हाट्सएप ग्रुप से जुड़ें।</div>
-    <button onclick="showToast('व्हाट्सएप ग्रुप का लिंक जल्द ही जोड़ा जाएगा!')" style="width:100%;background:#E8650A;color:#fff;border:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">💬 व्हाट्सएप ग्रुप से जुड़ें</button>
+  <div style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid var(--saffron);">
+    <div style="font-size:14px;font-weight:700;color:var(--saffron);margin-bottom:4px;">उमरा ऑनलाइन बाज़ार</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px;">पशु, पुराना ट्रैक्टर या कोई भी कृषि यंत्र खरीदने या बेचने के लिए व्हाट्सएप ग्रुप से जुड़ें।</div>
+    <button onclick="showToast('व्हाट्सएप ग्रुप का लिंक जल्द ही जोड़ा जाएगा!')" style="width:100%;background:var(--saffron);color:#fff;border:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">💬 व्हाट्सएप ग्रुप से जुड़ें</button>
   </div>
 
   <!-- Forms -->
   <div class="sec-title">📄 ज़रूरी फॉर्म डाउनलोड</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;">
+  <div style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border);padding:14px;margin-bottom:14px;">
     <div style="display:grid;gap:8px;">
-      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;">
-        <span style="font-size:13px;font-weight:600;color:#374151;">📜 जाति प्रमाण पत्र (Caste Form)</span>
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:var(--card-tint);border:1px solid var(--border);padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;color:var(--text);">
+        <span style="font-size:13px;font-weight:600;">📜 जाति प्रमाण पत्र (Caste Form)</span>
         <span style="font-size:16px;">⬇️</span>
       </button>
-      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;">
-        <span style="font-size:13px;font-weight:600;color:#374151;">🏡 मूल निवास (Domicile Form)</span>
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:var(--card-tint);border:1px solid var(--border);padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;color:var(--text);">
+        <span style="font-size:13px;font-weight:600;">🏡 मूल निवास (Domicile Form)</span>
         <span style="font-size:16px;">⬇️</span>
       </button>
-      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;">
-        <span style="font-size:13px;font-weight:600;color:#374151;">👴 बुढ़ापा पेंशन (Pension Form)</span>
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:var(--card-tint);border:1px solid var(--border);padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;color:var(--text);">
+        <span style="font-size:13px;font-weight:600;">👴 बुढ़ापा पेंशन (Pension Form)</span>
         <span style="font-size:16px;">⬇️</span>
       </button>
     </div>
@@ -1064,19 +1045,19 @@ header {
 
   <!-- Health & Anganwadi -->
   <div class="sec-title">🏥 स्वास्थ्य और आंगनवाड़ी</div>
-  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid #ef4444;">
-    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;border-bottom:1px solid #f3f4f6;padding-bottom:12px;">
+  <div style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid var(--red);">
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:12px;">
       <div style="font-size:28px;">👩‍⚕️</div>
       <div>
-        <div style="font-size:13px;font-weight:700;color:#1a1a1a;">आशा वर्कर / आंगनवाड़ी</div>
-        <div style="font-size:11px;color:#E8650A;margin-top:4px;font-weight:700;">⏳ नाम व नंबर जल्द जोड़े जाएंगे</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);">आशा वर्कर / आंगनवाड़ी</div>
+        <div style="font-size:11px;color:var(--saffron);margin-top:4px;font-weight:700;">⏳ नाम व नंबर जल्द जोड़े जाएंगे</div>
       </div>
     </div>
     <div style="display:flex;align-items:flex-start;gap:12px;">
       <div style="font-size:28px;">🏥</div>
       <div>
-        <div style="font-size:13px;font-weight:700;color:#1a1a1a;">गांव की डिस्पेंसरी</div>
-        <div style="font-size:11px;color:#E8650A;margin-top:4px;font-weight:700;">⏳ समय जल्द अपडेट किया जाएगा</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);">गांव की डिस्पेंसरी</div>
+        <div style="font-size:11px;color:var(--saffron);margin-top:4px;font-weight:700;">⏳ समय जल्द अपडेट किया जाएगा</div>
       </div>
     </div>
   </div>
@@ -1148,11 +1129,28 @@ function toFields(obj) {
   return f;
 }
 
-// DATE
+// DATE & THEME
 const DAYS=['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
 const MONTHS=['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
 const nd = new Date();
 document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
+
+function toggleTheme() {
+  const html = document.documentElement;
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    document.getElementById('themeToggle').textContent = '🌙';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('themeToggle').textContent = '☀️';
+  }
+}
+if(localStorage.getItem('theme') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = '☀️';
+}
 
 // NAV
 const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency','jobs','services'];
@@ -1172,6 +1170,7 @@ function goTab(id, idx) {
     if (bnEl) bnEl.classList.add('active');
   }
   
+  window.scrollTo({top: 0, behavior: 'smooth'});
   if (id === 'news') { loadNews(); loadAutoNews(); }
   if (id === 'complaints') loadComplaints();
   if (id === 'kisan') loadWeather();
@@ -1198,26 +1197,26 @@ function loadAutoNews() {
   if (!box) return;
 
   var html = `
-    <div style="font-size:12px;color:#666;padding:0 0 10px 0;margin-bottom:4px;">ताज़ा हरियाणा समाचार पढ़ने के लिए नीचे क्लिक करें:</div>
-    <a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bbf7d0;">
+    <div style="font-size:12px;color:var(--muted);padding:0 0 10px 0;margin-bottom:4px;">ताज़ा हरियाणा समाचार पढ़ने के लिए नीचे क्लिक करें:</div>
+    <a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--card-tint);border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid var(--border);">
       <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#1A4D2E;">दैनिक भास्कर</div><div style="font-size:11px;color:#666;">हरियाणा की ताज़ा खबरें</div></div>
-      <span style="margin-left:auto;color:#1A4D2E;font-size:18px;">→</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:var(--text);">दैनिक भास्कर</div><div style="font-size:11px;color:var(--muted);">हरियाणा की ताज़ा खबरें</div></div>
+      <span style="margin-left:auto;color:var(--text);font-size:18px;">→</span>
     </a>
-    <a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #fed7aa;">
+    <a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--card-tint);border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid var(--border);">
       <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#e65100;">दैनिक जागरण</div><div style="font-size:11px;color:#666;">हरियाणा न्यूज़</div></div>
-      <span style="margin-left:auto;color:#e65100;font-size:18px;">→</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:var(--text);">दैनिक जागरण</div><div style="font-size:11px;color:var(--muted);">हरियाणा न्यूज़</div></div>
+      <span style="margin-left:auto;color:var(--text);font-size:18px;">→</span>
     </a>
-    <a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#eff6ff;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bfdbfe;">
+    <a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--card-tint);border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid var(--border);">
       <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#1565C0;">अमर उजाला</div><div style="font-size:11px;color:#666;">हरियाणा और देश की खबरें</div></div>
-      <span style="margin-left:auto;color:#1565C0;font-size:18px;">→</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:var(--text);">अमर उजाला</div><div style="font-size:11px;color:var(--muted);">हरियाणा और देश की खबरें</div></div>
+      <span style="margin-left:auto;color:var(--text);font-size:18px;">→</span>
     </a>
-    <a href="https://www.punjabkesari.in/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fce4ec;border-radius:10px;text-decoration:none;border:1px solid #fbcfe8;">
+    <a href="https://www.punjabkesari.in/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--card-tint);border-radius:10px;text-decoration:none;border:1px solid var(--border);">
       <span style="font-size:22px;">📰</span>
-      <div><div style="font-size:13.5px;font-weight:700;color:#c2185b;">पंजाब केसरी</div><div style="font-size:11px;color:#666;">हिसार और हरियाणा</div></div>
-      <span style="margin-left:auto;color:#c2185b;font-size:18px;">→</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:var(--text);">पंजाब केसरी</div><div style="font-size:11px;color:var(--muted);">हिसार और हरियाणा</div></div>
+      <span style="margin-left:auto;color:var(--text);font-size:18px;">→</span>
     </a>
   `;
   box.innerHTML = html;
@@ -1310,7 +1309,7 @@ async function submitComplaint() {
   btn.disabled = false; btn.textContent = '✅ शिकायत दर्ज करें';
 }
 
-// SCHEME MODALS
+// SCHEME MODALS & FOOTER PAGES
 const SCHEMES = {
   pmkisan: { title:'🌾 पीएम किसान सम्मान निधि', body:`<b>लाभ:</b> प्रति वर्ष ₹6,000 — तीन किस्तों में सीधे बैंक खाते में।<br><br><b>पात्रता:</b> 2 हेक्टेयर तक की जमीन वाले किसान।<br><br><b>दस्तावेज़:</b> आधार, बैंक पासबुक, ज़मीन की फर्द (जमाबंदी), मोबाइल नंबर।<br><br><b>आवेदन:</b> pmkisan.gov.in या CSC केंद्र` },
   ayushman:{ title:'🏥 आयुष्मान / चिरायु भारत योजना',    body:`<b>लाभ:</b> ₹5 लाख तक का मुफ्त इलाज हर साल।<br><br><b>पात्रता:</b> जिनकी फैमिली ID में आय 1.80 लाख (या चिरायु के लिए 3 लाख) से कम है।<br><br><b>दस्तावेज़:</b> फैमिली ID (PPP), आधार कार्ड।<br><br><b>आवेदन:</b> pmjay.gov.in या सरकारी अस्पताल / CSC` },
@@ -1319,7 +1318,12 @@ const SCHEMES = {
   awas:    { title:'🏠 पीएम आवास योजना',           body:`<b>लाभ:</b> पक्का मकान बनाने के लिए ₹1.20 लाख।<br><br><b>पात्रता:</b> बेघर या कच्चे मकान में रहने वाले BPL परिवार।<br><br><b>दस्तावेज़:</b> फैमिली ID, आधार, बैंक खाता, ज़मीन के कागज़, नरेगा जॉब कार्ड।<br><br><b>आवेदन:</b> ग्राम पंचायत (सरपंच/सचिव) या pmayg.nic.in` },
   beti:    { title:'👧 बेटी बचाओ, बेटी पढ़ाओ / सुकन्या',   body:`<b>लाभ:</b> बेटियों की पढ़ाई और शादी के लिए आर्थिक मदद। सुकन्या समृद्धि में 8.2% ब्याज।<br><br><b>दस्तावेज़:</b> बेटी का जन्म प्रमाण पत्र, फैमिली ID, माता-पिता का आधार और फोटो।<br><br><b>आवेदन:</b> नज़दीकी बैंक या पोस्ट ऑफिस` },
   mudra:   { title:'💼 पीएम मुद्रा योजना',          body:`<b>लाभ:</b> छोटे व्यापार के लिए ₹10 लाख तक का लोन — बिना गारंटी।<br><br><b>प्रकार:</b> शिशु (₹50K), किशोर (₹5L), तरुण (₹10L)।<br><br><b>दस्तावेज़:</b> आधार, PAN कार्ड, व्यापार का प्रमाण, बैंक पासबुक।<br><br><b>आवेदन:</b> नज़दीकी बैंक शाखा या udyamimitra.in` },
-  panchayat: { title:'🤝 ग्राम पंचायत सदस्य (उमरा)', body:`<div style="display:grid;gap:8px;"><div style="background:#fff7ed;padding:10px;border-radius:8px;border:1px solid #fdba74;"><b>सरपंच:</b> श्री विनोद मलिक <br><a href="tel:9991990099" style="color:#E8650A;text-decoration:none;font-weight:700;">📞 99919-90099</a></div><div style="background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #86efac;"><b>ग्राम सचिव:</b> श्री धर्मेंद्र <br><a href="tel:9729077257" style="color:#166534;text-decoration:none;font-weight:700;">📞 97290-77257</a></div><div style="background:#eff6ff;padding:10px;border-radius:8px;border:1px solid #93c5fd;"><b>CPLO:</b> श्री बिरजू राणावत <br><a href="tel:7015581388" style="color:#1e3a8a;text-decoration:none;font-weight:700;">📞 70155-81388</a></div><div style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;color:#666;"><b>वार्ड पंच:</b> <br><span style="font-size:11px;">(सभी पंचों के नाम व नंबर जल्द अपडेट किए जाएंगे)</span></div></div>` }
+  panchayat: { title:'🤝 ग्राम पंचायत सदस्य (उमरा)', body:`<div style="display:grid;gap:8px;"><div style="background:var(--card-tint);padding:10px;border-radius:8px;border:1px solid var(--border);"><b>सरपंच:</b> श्री विनोद मलिक <br><a href="tel:9991990099" style="color:var(--text);text-decoration:none;font-weight:700;">📞 99919-90099</a></div><div style="background:var(--card-tint);padding:10px;border-radius:8px;border:1px solid var(--border);"><b>ग्राम सचिव:</b> श्री धर्मेंद्र <br><a href="tel:9729077257" style="color:var(--text);text-decoration:none;font-weight:700;">📞 97290-77257</a></div><div style="background:var(--card-tint);padding:10px;border-radius:8px;border:1px solid var(--border);"><b>CPLO:</b> श्री बिरजू राणावत <br><a href="tel:7015581388" style="color:var(--text);text-decoration:none;font-weight:700;">📞 70155-81388</a></div><div style="padding:10px;border:1px solid var(--border);border-radius:8px;color:var(--muted);"><b>वार्ड पंच:</b> <br><span style="font-size:11px;">(सभी पंचों के नाम व नंबर जल्द अपडेट किए जाएंगे)</span></div></div>` },
+  
+  aboutPage: { title: '🏢 About Us', body: 'Umra Gaon Digital Seva is a comprehensive platform built to provide essential village services, local news updates, and important contact information all in one place.<br><br>Our main objective is to make village administrative services digital, transparent, and easy to access for every resident.<br><br><i>यह वेबसाइट उमरा गांव (हिसार) के निवासियों की सुविधा और सहायता के लिए बनाई गई है।</i>' },
+  privacyPage: { title: '🔒 Privacy Policy', body: 'This privacy policy outlines how we handle your information on the Umra Gaon Digital Seva website.<br><br><b>1. Data Collection:</b> We do not collect any personal or sensitive user data directly. The complaints submitted are visible to the panchayat strictly for resolution purposes.<br><br><b>2. Third-Party Services:</b> We may use third-party services like Google AdSense which use cookies to serve advertisements based on your prior visits to this or other websites.<br><br><b>3. Consent:</b> By using our website, you hereby consent to our Privacy Policy and agree to its terms.' },
+  disclaimerPage: { title: '⚠️ Disclaimer', body: '<div style="color:var(--text); font-size:13px; line-height:1.6;">All information on this website is published in good faith and for general information purpose only. <b>This is not an official government website and is not affiliated with any government authority.</b> We do not make any warranties about the completeness, reliability, and accuracy of this government scheme information. Please verify with official government websites.</div>' },
+  contactPage: { title: '📞 Contact Us', body: '<div style="color:var(--text); font-size:13px; line-height:1.6; margin-bottom:14px;">We value your feedback and are always looking to improve <b>उमरा गांव डिजिटल सेवा केंद्र</b>. If you have any questions, suggestions for new schemes, or notice any incorrect information, please do not hesitate to contact us.</div><div style="background:var(--card-tint); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:14px;"><div style="margin-bottom:8px;">📧 <b>Email:</b> <a href="mailto:contact.vranawat@gmail.com" style="color:var(--blue);text-decoration:none;">contact.vranawat@gmail.com</a></div><div>📍 <b>Address:</b> Hisar, Haryana, India - 125001</div></div><div style="font-size:11px; color:var(--muted); line-height:1.5;">Please note: We do not process government applications directly. Do not share your sensitive personal documents with us over email.</div>' }
 };
 
 function openModal(key) {
@@ -1384,7 +1388,7 @@ document.getElementById('aiInp').addEventListener('keypress', e => { if (e.key =
 
 // BUDGET TOGGLE
 var budgetYears = ['2526','2425','2324','2223','2122','2021','1920'];
-var budgetColors = {'2526':'#1A4D2E','2425':'#2e7d32','2324':'#00695c','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2','1920':'#1565C0'};
+var budgetColors = {'2526':'var(--green)','2425':'#2e7d32','2324':'#00695c','2223':'#1565C0','2122':'#e65100','2021':'#7b1fa2','1920':'#1565C0'};
 function showBudgetYear(year) {
   budgetYears.forEach(function(y) {
     var d = document.getElementById('budget'+y);
@@ -1394,7 +1398,7 @@ function showBudgetYear(year) {
       if (y===year) {
         b.style.background=budgetColors[y]; b.style.color='#fff'; b.style.borderColor=budgetColors[y];
       } else {
-        b.style.background='#fff'; b.style.color='#666'; b.style.borderColor='#e0e0e0';
+        b.style.background='var(--card-bg)'; b.style.color='var(--text)'; b.style.borderColor='var(--border)';
       }
     }
   });
@@ -1427,7 +1431,7 @@ async function loadWeather() {
       const fIcon = iconMap[f.weather[0].main] || '🌤️';
       const fAmPm = fHour >= 12 ? 'PM' : 'AM';
       const fHour12 = fHour % 12 || 12;
-      return '<div style="text-align:center;flex:1;"><div style="font-size:10px;color:#666;">' + fHour12 + fAmPm + '</div><div style="font-size:18px;">' + fIcon + '</div><div style="font-size:12px;font-weight:700;color:#1565C0;">' + Math.round(f.main.temp) + '°</div></div>';
+      return '<div style="text-align:center;flex:1;"><div style="font-size:10px;color:var(--muted);">' + fHour12 + fAmPm + '</div><div style="font-size:18px;">' + fIcon + '</div><div style="font-size:12px;font-weight:700;color:var(--blue);">' + Math.round(f.main.temp) + '°</div></div>';
     }).join('');
     var kisanTip = '';
     if (icon === 'Rain' || icon === 'Drizzle') kisanTip = '⚠️ बारिश है — खेत में पानी न भरने दें।';
@@ -1436,10 +1440,10 @@ async function loadWeather() {
     else kisanTip = '✅ मौसम सामान्य — खेती कार्य जारी रखें।';
     const now = new Date();
     if (timeEl) timeEl.textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
-    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:#1565C0;line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:#555;margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:#888;margin-top:2px;">हांसी, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:#e3f2fd;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:#1565C0;">' + humidity + '%</div><div style="font-size:10px;color:#666;">नमी</div></div><div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:#2e7d32;">' + wind + ' km/h</div><div style="font-size:10px;color:#666;">हवा</div></div><div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:#e65100;">' + feels + '°C</div><div style="font-size:10px;color:#666;">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;font-size:12px;color:#166534;"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
+    box.innerHTML = '<div style="display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px;"><div style="font-size:64px;line-height:1;">' + wIcon + '</div><div><div style="font-size:42px;font-weight:900;color:var(--blue);line-height:1;">' + temp + '<span style="font-size:20px;">°C</span></div><div style="font-size:14px;color:var(--muted);margin-top:2px;">' + desc + '</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">हांसी, हरियाणा</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;"><div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💧</div><div style="font-size:14px;font-weight:700;color:var(--blue);">' + humidity + '%</div><div style="font-size:10px;color:var(--muted);">नमी</div></div><div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">💨</div><div style="font-size:14px;font-weight:700;color:var(--green);">' + wind + ' km/h</div><div style="font-size:10px;color:var(--muted);">हवा</div></div><div style="background:var(--card-tint);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;"><div style="font-size:18px;">🌡️</div><div style="font-size:14px;font-weight:700;color:var(--saffron);">' + feels + '°C</div><div style="font-size:10px;color:var(--muted);">महसूस</div></div></div><div style="display:flex;justify-content:space-between;margin-bottom:14px;">' + forecasts + '</div><div style="background:var(--card-tint);border:1px solid var(--green);border-radius:10px;padding:10px;font-size:12px;color:var(--green);"><b>🌾 किसान सलाह:</b> ' + kisanTip + '</div>';
   } catch(e) {
     console.error(e);
-    box.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:32px;margin-bottom:8px;">⚠️</div><div style="font-size:13px;color:#666;">मौसम लोड नहीं हुआ।<br>इंटरनेट जांचें।</div><button onclick="loadWeather()" style="margin-top:10px;background:#1565C0;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:sans-serif;">🔄 दोबारा कोशिश</button></div>';
+    box.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:32px;margin-bottom:8px;">⚠️</div><div style="font-size:13px;color:var(--muted);">मौसम लोड नहीं हुआ।<br>इंटरनेट जांचें।</div><button onclick="loadWeather()" style="margin-top:10px;background:var(--blue);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:sans-serif;">🔄 दोबारा कोशिश</button></div>';
   }
 }
 
@@ -1473,14 +1477,14 @@ function sendFasal() {
 function appendFasalMsg(text, type) {
   const box = document.getElementById('fasalMsgs');
   const div = document.createElement('div');
-  div.style.cssText = 'max-width:85%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;' + (type==='bot' ? 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;align-self:flex-start;border-bottom-left-radius:3px;' : 'background:#2e7d32;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;');
+  div.style.cssText = 'max-width:85%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;' + (type==='bot' ? 'background:var(--card-tint);border:1px solid var(--border);color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;' : 'background:var(--green);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;');
   div.innerHTML = text; 
   box.appendChild(div); box.scrollTop = box.scrollHeight;
 }
 function appendFasalLoading() {
   const box = document.getElementById('fasalMsgs'); const id = 'fl' + Date.now();
   const div = document.createElement('div'); div.id = id;
-  div.style.cssText = 'background:#f0fdf4;border:1px solid #bbf7d0;align-self:flex-start;padding:10px 14px;border-radius:14px;border-bottom-left-radius:3px;';
+  div.style.cssText = 'background:var(--card-tint);border:1px solid var(--border);align-self:flex-start;padding:10px 14px;border-radius:14px;border-bottom-left-radius:3px;';
   div.innerHTML = '<div class="ldots"><span></span><span></span><span></span></div>';
   box.appendChild(div); box.scrollTop = box.scrollHeight; return id;
 }
