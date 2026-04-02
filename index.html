@@ -250,6 +250,7 @@ header {
     <div class="nav-tab" onclick="goTab('schemes',5)">📋 योजनाएं</div>
     <div class="nav-tab" onclick="goTab('emergency',6)">🆘 आपातकाल</div>
     <div class="nav-tab" onclick="goTab('jobs',7)">🎯 रोजगार व भर्ती</div>
+    <div class="nav-tab" onclick="goTab('services',8)">🛠️ सुविधाएं</div>
   </nav>
 </header>
 
@@ -318,11 +319,16 @@ header {
       <div class="qcard-title">पंचायत सदस्य</div>
       <div class="qcard-sub">सरपंच व पंच लिस्ट</div>
     </div>
-    <!-- NEW: Jobs & Rallies link -->
-    <div class="qcard" style="border-color:#3b82f6; background:#eff6ff; grid-column: span 2;" onclick="goTab('jobs',7)">
-      <div class="qcard-icon" style="font-size:32px;">🎯</div>
-      <div class="qcard-title" style="font-size:14px;color:#1e3a8a;">रोजगार व आर्मी भर्ती</div>
-      <div class="qcard-sub">सरकारी नौकरी, नरेगा व पुलिस/आर्मी रैली</div>
+    <!-- Jobs & Services link -->
+    <div class="qcard" style="border-color:#3b82f6; background:#eff6ff;" onclick="goTab('jobs',7)">
+      <div class="qcard-icon">🎯</div>
+      <div class="qcard-title">रोजगार व भर्ती</div>
+      <div class="qcard-sub">नौकरी व रैली</div>
+    </div>
+    <div class="qcard" style="border-color:#10b981; background:#f0fdf4;" onclick="goTab('services',8)">
+      <div class="qcard-icon">🛠️</div>
+      <div class="qcard-title">गांव की सुविधाएं</div>
+      <div class="qcard-sub">डायरी, बिल, फॉर्म</div>
     </div>
   </div>
 
@@ -493,9 +499,147 @@ header {
       </div>
 
       <div style="display:grid;gap:8px;">
+        <!-- Account 1 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****3338</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹22,53,834</div>
+        </div>
+        <!-- Account 2 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2715</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹4,14,598</div>
+        </div>
+        <!-- Account 3 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">Punjab National Bank</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2268</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,48,953</div>
+        </div>
+        <!-- Account 4 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0363</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹34,912</div>
+        </div>
+        <!-- Account 5 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****6756</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹8,346</div>
+        </div>
+        <!-- Account 6 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">State Bank of India (Umra)</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ***0815</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹2,983</div>
+        </div>
+        <!-- Account 7 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">HDFC Bank</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****0610</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹1,016</div>
+        </div>
+        <!-- Account 8 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****7691</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹666</div>
+        </div>
+      </div>
+
+      <div style="font-size:11.5px;color:#d97706;text-align:center;margin-top:14px;font-weight:700;padding-top:10px;border-top:1px dashed #fcd34d;">
+        ⏳ पिछले सालों के खाते भी जल्द ही जोड़े जाएंगे
+      </div>
+    </div>
+    <!-- END BANK ACCOUNTS -->
+
+    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1A4D2E;margin-bottom:12px;">📊 कुल सारांश — 2025-26</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
+          <div style="font-size:14px;font-weight:900;color:#1A4D2E;">₹65,54,270</div>
+          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
+        </div>
+        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
+          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹14,86,051</div>
+          <div style="font-size:10px;color:#888;">(मिली)</div>
+        </div>
+        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
+          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,38,418</div>
+          <div style="font-size:10px;color:#888;">(बचा था)</div>
+        </div>
+        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
+          <div style="font-size:14px;font-weight:900;color:#c62828;">₹31,95,278</div>
+          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
+        </div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission — Center Schemes</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹14,86,051</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,78,216</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹27,35,082</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹2,60,202</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹4,60,196</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹3,14,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
+  <div id="budget2425" style="display:none;">
+
+    <!-- PANCHAYAT BANK ACCOUNTS 2024-25 -->
+    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:14px;border-top:4px solid #2e7d32;">
+      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span style="font-size:20px;">🏦</span> पंचायत के बैंक खाते (2024-25)
+      </div>
+      
+      <div style="background:#e8f5e9;padding:14px;border-radius:12px;text-align:center;margin-bottom:14px;">
+        <div style="font-size:12px;color:#1b5e20;font-weight:700;margin-bottom:4px;">कुल जमा राशि (Total Balance)</div>
+        <div style="font-size:24px;font-weight:900;color:#2e7d32;letter-spacing:0.5px;">₹25,49,892</div>
+      </div>
+
+      <div style="display:grid;gap:8px;">
         <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
           <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****3338</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹22,53,834</div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹19,38,418</div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
           <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2715</div></div>
@@ -531,74 +675,6 @@ header {
         ⏳ पिछले सालों के खाते भी जल्द ही जोड़े जाएंगे
       </div>
     </div>
-
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #1A4D2E;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#1A4D2E;margin-bottom:12px;">📊 कुल सारांश — 2025-26</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="background:#f0fdf4;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🎯 अपेक्षित निधि</div>
-          <div style="font-size:14px;font-weight:900;color:#1A4D2E;">₹65,54,270</div>
-          <div style="font-size:10px;color:#888;">(मिलनी थी)</div>
-        </div>
-        <div style="background:#e8f5e9;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">✅ प्राप्त</div>
-          <div style="font-size:14px;font-weight:900;color:#2e7d32;">₹14,86,051</div>
-          <div style="font-size:10px;color:#888;">(मिली)</div>
-        </div>
-        <div style="background:#fff3e0;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">🔄 पिछला शेष</div>
-          <div style="font-size:14px;font-weight:900;color:#e65100;">₹19,38,418</div>
-          <div style="font-size:10px;color:#888;">(बचा था)</div>
-        </div>
-        <div style="background:#fce4ec;border-radius:10px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:#666;font-weight:700;margin-bottom:3px;">💸 व्यय</div>
-          <div style="font-size:14px;font-weight:900;color:#c62828;">₹31,95,278</div>
-          <div style="font-size:10px;color:#888;">(खर्च हुआ)</div>
-        </div>
-      </div>
-    </div>
-    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
-      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
-      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission — Center Schemes</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
-        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹14,86,051</b></div>
-        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,78,216</b></div>
-        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹27,35,082</b></div>
-      </div>
-    </div>
-    <!-- ... other 2526 cards (omitted for brevity but kept in layout design) ... -->
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
-  </div>
-  
-  <div id="budget2425" style="display:none;">
-
-    <!-- PANCHAYAT BANK ACCOUNTS 2024-25 -->
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:14px;border-top:4px solid #2e7d32;">
-      <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-        <span style="font-size:20px;">🏦</span> पंचायत के बैंक खाते (2024-25)
-      </div>
-      
-      <div style="background:#e8f5e9;padding:14px;border-radius:12px;text-align:center;margin-bottom:14px;">
-        <div style="font-size:12px;color:#1b5e20;font-weight:700;margin-bottom:4px;">कुल जमा राशि (Total Balance)</div>
-        <div style="font-size:24px;font-weight:900;color:#2e7d32;letter-spacing:0.5px;">₹25,49,892</div>
-      </div>
-
-      <div style="display:grid;gap:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****3338</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹19,38,418</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fafafa;">
-          <div><div style="font-size:13px;font-weight:700;color:#1a1a1a;">IDBI Bank (Hansi)</div><div style="font-size:11px;color:#666;margin-top:2px;">खाता: ****2715</div></div>
-          <div style="font-size:14px;font-weight:800;color:#16a34a;">₹4,14,598</div>
-        </div>
-        <!-- ... other bank cards ... -->
-      </div>
-      <div style="font-size:11.5px;color:#d97706;text-align:center;margin-top:14px;font-weight:700;padding-top:10px;border-top:1px dashed #fcd34d;">
-        ⏳ पिछले सालों के खाते भी जल्द ही जोड़े जाएंगे
-      </div>
-    </div>
     
     <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #2e7d32;">
       <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700;color:#2e7d32;margin-bottom:12px;">📊 कुल सारांश — 2024-25</div>
@@ -621,9 +697,34 @@ header {
         </div>
       </div>
     </div>
-    <!-- ... other 2425 cards ... -->
-    <a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a>
-  </div>
+    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #1565C0;">
+      <div style="margin-bottom:8px;"><span style="background:#1565C0;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🇮🇳 केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Center Schemes / Grants</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#1565C0;">₹37,44,160</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹54,62,749</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹16,25,053</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹59,09,586</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #7b1fa2;">
+      <div style="margin-bottom:8px;"><span style="background:#7b1fa2;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏛️ केंद्र सरकार</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">XV Finance Commission [1769]</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#7b1fa2;">₹24,96,110</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹40,70,447</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹3,62,748</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹41,72,993</b></div>
+      </div>
+    </div><div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px;margin-bottom:10px;border-left:4px solid #E8650A;">
+      <div style="margin-bottom:8px;"><span style="background:#E8650A;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">🏘️ पंचायत के अपने फंड</span></div>
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Own Funds — स्थानीय आय</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="font-size:12px;color:#555;">🎯 अपेक्षित: <b style="color:#E8650A;">₹15,00,000</b></div>
+        <div style="font-size:12px;color:#555;">✅ प्राप्त: <b style="color:#2e7d32;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">🔄 पिछला शेष: <b style="color:#e65100;">₹0</b></div>
+        <div style="font-size:12px;color:#555;">💸 व्यय: <b style="color:#c62828;">₹0</b></div>
+      </div>
+    </div><a href="https://egramswaraj.gov.in" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px;text-decoration:none;color:#1A4D2E;font-size:12px;font-weight:700;margin-bottom:14px;">🔗 eGramSwaraj पर पूरा विवरण देखें →</a></div>
   
   <div id="budget2324" style="display:none;">
     <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:16px;margin-bottom:12px;border-top:4px solid #00695c;">
@@ -935,6 +1036,107 @@ header {
   </div>
 </div>
 
+<!-- ══ SERVICES (सुविधाएं) - NEW SECTION ══ -->
+<div class="section" id="services">
+  <div class="hero" style="background:linear-gradient(135deg, #10b981, #047857);">
+    <h2>🛠️ गांव की डिजिटल सुविधाएं</h2>
+    <p>डायरी, ऑनलाइन बिल, फार्म और गांव का ऑनलाइन बाज़ार।</p>
+  </div>
+
+  <!-- 1. Village Directory -->
+  <div class="sec-title">📞 गांव की डायरी (Local Directory)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="font-size:24px;margin-bottom:4px;">💡</div>
+      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">बिजली मिस्त्री</div>
+      <div style="font-size:10px;color:#666;margin-bottom:6px;">(Electrician)</div>
+      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="font-size:24px;margin-bottom:4px;">🚰</div>
+      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">प्लंबर</div>
+      <div style="font-size:10px;color:#666;margin-bottom:6px;">(Plumber)</div>
+      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="font-size:24px;margin-bottom:4px;">⛺</div>
+      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">टेंट हाउस</div>
+      <div style="font-size:10px;color:#666;margin-bottom:6px;">टेंट व लाइट सर्विस</div>
+      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="font-size:24px;margin-bottom:4px;">🚜</div>
+      <div style="font-size:12px;font-weight:700;color:#1a1a1a;">मैकेनिक</div>
+      <div style="font-size:10px;color:#666;margin-bottom:6px;">ट्रैक्टर व बाइक रिपेयर</div>
+      <div style="font-size:10px;color:#E8650A;font-weight:700;padding:4px 0;">⏳ जल्द जोड़े जाएंगे</div>
+    </div>
+  </div>
+
+  <!-- 2. Bill Payments -->
+  <div class="sec-title">💳 ऑनलाइन बिल भुगतान (Bill Payments)</div>
+  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;">
+    <a href="https://epayment.dhbvn.org.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:#fefce8;border:1px solid #fef08a;border-radius:10px;text-decoration:none;margin-bottom:8px;color:#1a1a1a;">
+      <div style="font-size:24px;">⚡</div>
+      <div><div style="font-size:13px;font-weight:700;">बिजली का बिल भरें</div><div style="font-size:11px;color:#666;">DHBVN ऑनलाइन पोर्टल</div></div>
+      <div style="margin-left:auto;color:#ca8a04;">→</div>
+    </a>
+    <a href="https://phedharyana.gov.in/" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;text-decoration:none;color:#1a1a1a;">
+      <div style="font-size:24px;">🚰</div>
+      <div><div style="font-size:13px;font-weight:700;">पानी का बिल भरें</div><div style="font-size:11px;color:#666;">जन स्वास्थ्य अभियांत्रिकी विभाग</div></div>
+      <div style="margin-left:auto;color:#3b82f6;">→</div>
+    </a>
+  </div>
+
+  <!-- 3. Local Marketplace -->
+  <div class="sec-title">🛒 खरीदें और बेचें (Local Market)</div>
+  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid #E8650A;">
+    <div style="font-size:14px;font-weight:700;color:#E8650A;margin-bottom:4px;">उमरा ऑनलाइन बाज़ार</div>
+    <div style="font-size:12px;color:#555;line-height:1.5;margin-bottom:10px;">अगर आप गाय, भैंस, पुराना ट्रैक्टर या कोई भी कृषि यंत्र खरीदना या बेचना चाहते हैं, तो गांव के व्हाट्सएप ग्रुप से जुड़ें।</div>
+    <button onclick="showToast('व्हाट्सएप ग्रुप का लिंक जल्द ही जोड़ा जाएगा!')" style="width:100%;background:#E8650A;color:#fff;border:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;">💬 व्हाट्सएप ग्रुप से जुड़ें</button>
+  </div>
+
+  <!-- 4. E-Disha Forms -->
+  <div class="sec-title">📄 ज़रूरी फॉर्म डाउनलोड</div>
+  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;">
+    <div style="font-size:11px;color:#666;margin-bottom:10px;">कॉमन सर्विस सेंटर (CSC) जाने से पहले यहां से फॉर्म डाउनलोड कर सकते हैं:</div>
+    <div style="display:grid;gap:8px;">
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;text-align:left;">
+        <span style="font-size:13px;font-weight:600;color:#374151;">📜 जाति प्रमाण पत्र (Caste Form)</span>
+        <span style="font-size:16px;">⬇️</span>
+      </button>
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;text-align:left;">
+        <span style="font-size:13px;font-weight:600;color:#374151;">🏡 मूल निवास (Domicile Form)</span>
+        <span style="font-size:16px;">⬇️</span>
+      </button>
+      <button onclick="showToast('फॉर्म जल्द ही PDF में जोड़े जाएंगे!')" style="display:flex;align-items:center;justify-content:space-between;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;font-family:'Noto Sans Devanagari',sans-serif;cursor:pointer;text-align:left;">
+        <span style="font-size:13px;font-weight:600;color:#374151;">👴 बुढ़ापा पेंशन (Pension Form)</span>
+        <span style="font-size:16px;">⬇️</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 5. Health & Anganwadi -->
+  <div class="sec-title">🏥 स्वास्थ्य और आंगनवाड़ी</div>
+  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px;border-left:4px solid #ef4444;">
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;border-bottom:1px solid #f3f4f6;padding-bottom:12px;">
+      <div style="font-size:28px;">👩‍⚕️</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#1a1a1a;">आशा वर्कर / आंगनवाड़ी</div>
+        <div style="font-size:11px;color:#666;margin-top:2px;">गांव की स्वास्थ्य कर्मियों की लिस्ट</div>
+        <div style="font-size:11px;color:#E8650A;margin-top:4px;font-weight:700;">⏳ नाम व नंबर जल्द जोड़े जाएंगे</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="font-size:28px;">🏥</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#1a1a1a;">गांव की डिस्पेंसरी</div>
+        <div style="font-size:11px;color:#666;margin-top:2px;">टीकाकरण व ओपीडी की जानकारी</div>
+        <div style="font-size:11px;color:#E8650A;margin-top:4px;font-weight:700;">⏳ समय जल्द अपडेट किया जाएगा</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <div class="bn-item active" id="bn0" onclick="goTab('home',0)"><span class="bni">🏠</span>होम</div>
@@ -1009,7 +1211,7 @@ const nd = new Date();
 document.getElementById('dateChip').textContent = DAYS[nd.getDay()] + ', ' + nd.getDate() + ' ' + MONTHS[nd.getMonth()];
 
 // ── NAV ──
-const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency','jobs'];
+const SECTIONS = ['home','complaints','news','kisan','budget','schemes','emergency','jobs','services'];
 const BN_MAP = {0:'bn0',2:'bn2',3:'bn3',4:'bn4',6:'bn6'};
 
 function goTab(id, idx) {
