@@ -1172,7 +1172,7 @@ function goTab(id, idx) {
     if (bnEl) bnEl.classList.add('active');
   }
   
-  if (id === 'news') { loadNews(); }
+  if (id === 'news') { loadNews(); loadAutoNews(); }
   if (id === 'complaints') loadComplaints();
   if (id === 'kisan') loadWeather();
 }
@@ -1192,6 +1192,37 @@ function fmtTime(ts) {
   return new Date(Number(ts)).toLocaleString('hi-IN');
 }
 
+// STATIC NEWS LINKS
+function loadAutoNews() {
+  var box = document.getElementById('autoNewsList');
+  if (!box) return;
+
+  var html = `
+    <div style="font-size:12px;color:#666;padding:0 0 10px 0;margin-bottom:4px;">ताज़ा हरियाणा समाचार पढ़ने के लिए नीचे क्लिक करें:</div>
+    <a href="https://www.bhaskar.com/local/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bbf7d0;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#1A4D2E;">दैनिक भास्कर</div><div style="font-size:11px;color:#666;">हरियाणा की ताज़ा खबरें</div></div>
+      <span style="margin-left:auto;color:#1A4D2E;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.jagran.com/haryana/" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fff3e0;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #fed7aa;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#e65100;">दैनिक जागरण</div><div style="font-size:11px;color:#666;">हरियाणा न्यूज़</div></div>
+      <span style="margin-left:auto;color:#e65100;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.amarujala.com/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#eff6ff;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #bfdbfe;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#1565C0;">अमर उजाला</div><div style="font-size:11px;color:#666;">हरियाणा और देश की खबरें</div></div>
+      <span style="margin-left:auto;color:#1565C0;font-size:18px;">→</span>
+    </a>
+    <a href="https://www.punjabkesari.in/haryana" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px;background:#fce4ec;border-radius:10px;text-decoration:none;border:1px solid #fbcfe8;">
+      <span style="font-size:22px;">📰</span>
+      <div><div style="font-size:13.5px;font-weight:700;color:#c2185b;">पंजाब केसरी</div><div style="font-size:11px;color:#666;">हिसार और हरियाणा</div></div>
+      <span style="margin-left:auto;color:#c2185b;font-size:18px;">→</span>
+    </a>
+  `;
+  box.innerHTML = html;
+}
+
 // NEWS API
 const NEWS_CATS = {ghoshna:'📢 घोषणा',krishi:'🌾 कृषि',swasthya:'🏥 स्वास्थ्य',shiksha:'🏫 शिक्षा',vikas:'🏗️ विकास',other:'📌 अन्य'};
 const NEWS_TAG_CLASS = {ghoshna:'',krishi:'green',swasthya:'red',shiksha:'blue',vikas:'',other:''};
@@ -1202,6 +1233,8 @@ async function loadNews() {
   newsList.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>समाचार लोड हो रहे हैं...</p></div>';
   try {
     const docs = await fsGet('news');
+    const newsCount = document.getElementById('newsCount');
+    if (newsCount) newsCount.textContent = docs.length + ' खबरें';
     if (!docs.length) {
       newsList.innerHTML = '<div class="no-data"><span>📰</span>अभी कोई समाचार नहीं है।<br>जल्द ही गांव की खबरें यहाँ आएंगी।</div>';
       return;
@@ -1230,6 +1263,8 @@ async function loadComplaints() {
   list.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>शिकायतें लोड हो रही हैं...</p></div>';
   try {
     const docs = await fsGet('complaints');
+    const countEl = document.getElementById('complaintCount');
+    if (countEl) countEl.textContent = docs.length + ' शिकायतें';
     if (!docs.length) {
       list.innerHTML = '<div class="no-data"><span>📋</span>अभी कोई शिकायत नहीं है।<br>ऊपर फॉर्म भरकर शिकायत दर्ज करें।</div>';
       return;
