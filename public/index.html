@@ -227,9 +227,10 @@ header {
 @keyframes sosG { 0%,100%{box-shadow:0 3px 14px rgba(192,57,43,.5)} 50%{box-shadow:0 3px 22px rgba(192,57,43,.85)} }
 
 /* ABOUT & POLICY FOOTER */
-.app-footer { margin-top: 30px; background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; text-align: center; border-top: 4px solid var(--gold); }
-.app-footer h3 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 16px; color: var(--green); margin-bottom: 8px; }
-.app-footer p { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.app-footer { margin-top: 30px; background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 20px; text-align: left; border-top: 4px solid var(--green); border-bottom: 4px solid var(--saffron); }
+.app-footer h3 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 14px; color: var(--green); margin-bottom: 6px; margin-top: 14px; }
+.app-footer h3:first-child { margin-top: 0; }
+.app-footer p { font-size: 11px; color: #4b5563; line-height: 1.6; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -360,16 +361,22 @@ header {
     </div>
   </div>
 
-  <!-- ABOUT US & PRIVACY POLICY FOOTER -->
+  <!-- ABOUT US & PRIVACY POLICY FOOTER FOR ADSENSE -->
   <div class="app-footer">
-    <h3>About Us</h3>
-    <p>Umra Gaon Digital Seva is a platform to provide village services, news, and contact information in one place. Our aim is to make village services digital and easy to access.</p>
+    <h3>🏢 About Us (हमारे बारे में)</h3>
+    <p>Umra Gaon Digital Seva is a platform to provide village services, news, and contact information in one place. Our aim is to make village services digital and easy to access. यह वेबसाइट उमरा गांव (हिसार) के निवासियों की सुविधा के लिए बनाई गई है।</p>
     
-    <h3>Privacy Policy</h3>
-    <p>This website (Umra Gaon Digital Seva) does not collect any personal data directly. We may use third-party services like Google AdSense which may use cookies to show ads. By using our website, you agree to this policy.</p>
+    <h3>🔒 Privacy Policy (प्राइवेसी पॉलिसी)</h3>
+    <p>This website (Umra Gaon Digital Seva - village-umra.web.app) does not collect any personal data directly. We may use third-party services like Google AdSense which may use cookies to serve ads based on a user's prior visits. By using our website, you agree to this policy.</p>
+
+    <h3>⚠️ Disclaimer (अस्वीकरण)</h3>
+    <p>All information on this website is published in good faith and for general information purpose only. We do not make any warranties about the completeness, reliability, and accuracy of this government scheme information. Please verify with official government websites.</p>
     
-    <div style="font-size:10px; color:#9ca3af; border-top:1px solid var(--border); padding-top:10px; margin-top:10px;">
-      &copy; 2026 Umra Gaon Digital Seva
+    <h3>📞 Contact Us</h3>
+    <p>For any queries, suggestions, or issues, please use the "शिकायत (Complaints)" section of this app to reach out to the Gram Panchayat directly.</p>
+
+    <div style="font-size:10px; color:#9ca3af; border-top:1px solid var(--border); padding-top:10px; margin-top:10px; text-align:center;">
+      &copy; 2026 Umra Gaon Digital Seva (village-umra.web.app). All rights reserved.
     </div>
   </div>
 
@@ -1392,7 +1399,7 @@ function escHtml(str) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// STATIC NEWS LINKS (Replaced AI API for now)
+// STATIC NEWS LINKS
 function loadAutoNews() {
   var box = document.getElementById('autoNewsList');
   if (!box) return;
